@@ -13,13 +13,12 @@ public class LoginView {
 	
 	public LoginView(LoginViewController parent, final Display disp){
 		final LoginViewController papa = parent;
-		//FIXME: wird das Ding eigentlich je irgendwo gebraucht/benutzt?!
-		final boolean[] response = new boolean[1];
-		response[0] = false;
+		final boolean[] _isLoggedIn = new boolean[1];
+		_isLoggedIn[0] = false;
 		
 //		final Display disp = new Display();
 		// kann minimiert & geschlossen werden, aber nicht vergrößert/verkleinert
-		Shell shell = new Shell(disp, SWT.CLOSE | SWT.TITLE | SWT.MIN);
+		final Shell shell = new Shell(disp, SWT.CLOSE | SWT.TITLE | SWT.MIN);
 		shell.setText("Login");
 		
 		GridLayout gridLayout = new GridLayout();
@@ -50,7 +49,7 @@ public class LoginView {
 		final Text textPassword = new Text(shell, SWT.NONE);
 		textPassword.setEchoChar('*');
 		//FIXME: debug falsches PW!
-		textPassword.setText("marius");
+		textPassword.setText("marius_pw");
 //		text2.setBounds(70,50,200,20);
 //		text2.setText("Password");
 		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);
@@ -81,28 +80,35 @@ public class LoginView {
 					if (!papa.checkUserCredentials(textUser.getText(), textPassword.getText())) {
 						// FIXME: wo soll das später sonst ausgegeben werden?!
 						System.out.println("falsche Benutzerangaben");
+						textUser.setText("");
 						textPassword.setText("");
 						return;
 					}
-					disp.dispose();
+					else {
+						_isLoggedIn[0] = true;
+						shell.dispose();
+					}
 				}
+				
 			}
 		};
 
 		Listener buttonListener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == btn_ok) {
-					response[0] = true;
+					_isLoggedIn[0] = true;
 					if (!papa.checkUserCredentials(textUser.getText(), textPassword.getText())) {
 						// FIXME: wo soll das später sonst ausgegeben werden?!
 						System.out.println("falsche Benutzerangaben");
+						textUser.setText("");
 						textPassword.setText("");
 						return;
 					}
-				} else {
-					response[0] = false;
+					else {
+						_isLoggedIn[0] = true;
+					}
 				}
-				disp.dispose();
+				shell.dispose();
 			}
 		};
 		    
@@ -123,7 +129,9 @@ public class LoginView {
 		}
 		shell.dispose();
 		
-		parent.switchToFcState();
+		if (_isLoggedIn[0]) {
+			parent.switchToFcState();
+		}
 	}
 	
 }

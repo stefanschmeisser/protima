@@ -46,7 +46,7 @@ public class Application {
 	}
 	
 	public void switchToFcState() {
-		setCurrentState(new FrontController());
+		setCurrentState(new FrontController(this.disp));
 	}
 	
 	

@@ -38,11 +38,7 @@ public class LoginController implements IApplicationState {
 			//FIXME: AccessLevel (Editor, TeamLeader etc) auch notwendig!! 
 			//TODO: Und davon abhängig den korrekten Benutzer anlegen!
 			String[] userTemp = this.datenWerk.getUserData(userPreData);
-			
 			app.setCurrentUser(new User(Integer.parseInt(userTemp[0]), userTemp[1]));
-			//FIXME: unmöglich von hier mit dem State Pattern auf ein neues Display zu wechseln!
-//			app.switchToFcState();
-//			app.setCurrentState(new FrontController());
 			
 			return true;
 		}
