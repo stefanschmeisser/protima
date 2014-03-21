@@ -1,17 +1,21 @@
 package loginManager;
 
+import org.eclipse.swt.widgets.Display;
+
 public class LoginViewController {
 	
 	private LoginController papa;
 	private LoginView lv;
+	private Display disp;
 	
-	public LoginViewController(LoginController papa) {
+	public LoginViewController(LoginController papa, Display disp) {
 		//TODO: implementieren
 		this.papa = papa;
+		this.disp = disp;
 	}
 
 	public void show() {
-		this.lv = new LoginView(this);
+		this.lv = new LoginView(this, disp);
 	}
 	
 	public boolean checkUserCredentials(String user, String password) {

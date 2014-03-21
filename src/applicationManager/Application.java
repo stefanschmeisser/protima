@@ -2,6 +2,8 @@ package applicationManager;
 
 import java.util.Vector;
 
+import org.eclipse.swt.widgets.Display;
+
 import loginManager.LoginController;
 import userManager.User;
 import frontController.FrontController;
@@ -18,11 +20,15 @@ public class Application {
 	//FIXME: wozu brauch ich den Vector?
 	private Vector<IApplicationState> states;
 	private IApplicationState currentState;
+	private Display disp;
 	
 	public Application(){
 		//TODO: LoginController (state-abhängig) aufrufen - siehe show()
 		// Standardwert für den Start
-		setCurrentState(new LoginController(this));
+		//FIXME: So kommt leider "GUI" Kram in den Controller, aber ohne gemeinsames Display (mainThread für die GUI) leider nahe zu unmöglich die Shells zu wechseln!
+		disp = new Display();
+		System.out.println(disp);
+		setCurrentState(new LoginController(this, disp));
 //		setCurrentState(new FrontController());
 		this.show();
 	}

@@ -11,13 +11,13 @@ public class LoginView {
 	//TODO: EventListener für die Buttons -> bei Cancel Programm beenden
 	//FIXME: was hats mit response auf sich? Brauch ich das?
 	
-	public LoginView(LoginViewController parent){
+	public LoginView(LoginViewController parent, final Display disp){
 		final LoginViewController papa = parent;
 		//FIXME: wird das Ding eigentlich je irgendwo gebraucht/benutzt?!
 		final boolean[] response = new boolean[1];
 		response[0] = false;
 		
-		final Display disp = new Display();
+//		final Display disp = new Display();
 		// kann minimiert & geschlossen werden, aber nicht vergrößert/verkleinert
 		Shell shell = new Shell(disp, SWT.CLOSE | SWT.TITLE | SWT.MIN);
 		shell.setText("Login");
@@ -121,9 +121,9 @@ public class LoginView {
 			if (!disp.readAndDispatch())
 				disp.sleep();
 		}
-		disp.dispose();
+		shell.dispose();
 		
-//		parent.switchToFcState();
+		parent.switchToFcState();
 	}
 	
 }

@@ -21,13 +21,13 @@ public class FrontController implements IApplicationState {
 	
 	public Listener listener;
 	
-	public FrontController(){
+	public FrontController(Display disp){
 		svc = new StartViewController();
 		pvc = new ProjectViewController();
 		tc = new TicketController();
 //		tvc = new TeamViewController();
 
-		this.disp = new Display();
+		this.disp = disp;
 		
 		shell = new Shell(this.disp);
 		
@@ -95,7 +95,7 @@ public class FrontController implements IApplicationState {
          if (!this.disp.readAndDispatch())
           this.disp.sleep();
         }
-		
+		shell.dispose();
 	}
 	
 
