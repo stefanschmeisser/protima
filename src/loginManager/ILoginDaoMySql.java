@@ -16,6 +16,11 @@ public class ILoginDaoMySql implements ILoginDao {
 		_user = "sag";
 		_password = "Jr22HhUSLMz9Nu3m";
 		
+		openConnection(_user, _password);
+		
+	}
+	
+	private void openConnection(String user, String password) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String conString = "jdbc:mysql://games.thm.de/sag";
@@ -41,28 +46,40 @@ public class ILoginDaoMySql implements ILoginDao {
 			}
 			System.out.println(qryStr);
 			try {
+				openConnection(_user, _password);
 				Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(qryStr);
 				
+				// sollte genau einen Benutzer zurückgeben!
 				while (rs.next()) {
 					// Name
-					System.out.println(rs.getString(1));
+//					System.out.println(rs.getString(1));
+					userPreData[0] = rs.getString(1);
 					// PW
-					System.out.println(rs.getString(2));
+//					System.out.println(rs.getString(2));
+					userPreData[1] = rs.getString(2);
 				}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-		// ??
-		return new String[0];
+		return userPreData;
 		}
 		return null;
 	}
 	
-	public void getUserData() {
+	public String[] getUserData(String[] userPredata) {
+		//TODO: die Methode muss noch bissi aufgeblasen werden, damit die Benutzerrolle korrekt gesetzt werden kann!
+//		[0] = name
+//		[1] = pw
 		
+		// nur das erste Array übernehmen, da ja auch nur ein Benutzer da sein sollte == ein Datensatz (Rest sollte eh leer sein)
+		String[] rsArr = select("*", "user", "name='"+ userPredata[0] +"' AND password='"+ userPredata[1] +"'")[0];
+		
+		for (int i = 0; i < rsArr.length; i++) {
+			System.out.println("Wert["+i+"]: " + rsArr[i]);
+		}
+		return rsArr;
 	}
 	
 	public String[][] select(String column, String table, String condition) {
@@ -73,9 +90,10 @@ public class ILoginDaoMySql implements ILoginDao {
 		if (column != null && column != "" && table != null && table != "") {
 			qryStr = "SELECT "+ column +" FROM " + table;
 			if (condition != null && condition != "") {
-				qryStr += "WHERE "+ condition;
+				qryStr += " WHERE "+ condition;
 			}
 			try {
+				openConnection(_user, _password);
 				Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(qryStr);
 				rs.last();
@@ -111,4 +129,5 @@ public class ILoginDaoMySql implements ILoginDao {
 		//FIXME: sinnvoll ersetzen!
 		return rsArr;
 	}
+
 }

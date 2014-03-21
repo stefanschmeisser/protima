@@ -9,6 +9,7 @@ public class LoginView {
 	//TODO: hoffentlich mit Layout erledigt: schöne Abstände um alles
 	//TODO: Werteweitergabe an Controller
 	//TODO: EventListener für die Buttons -> bei Cancel Programm beenden
+	//FIXME: was hats mit response auf sich? Brauch ich das?
 	
 	public LoginView(LoginViewController parent){
 		final LoginViewController papa = parent;
@@ -34,6 +35,8 @@ public class LoginView {
 //		text1.setText("");
 //		text1.setBounds(70,10,200,20);
 		textUser.setTextLimit(30);
+		//FIXME: debug richtiger Benutzer!
+		textUser.setText("marius");
 		GridData gd1 = new GridData(GridData.FILL_HORIZONTAL);
 		gd1.widthHint = 150;
 		gd1.horizontalSpan = 2;
@@ -46,6 +49,8 @@ public class LoginView {
 		
 		final Text textPassword = new Text(shell, SWT.NONE);
 		textPassword.setEchoChar('*');
+		//FIXME: debug falsches PW!
+		textPassword.setText("marius");
 //		text2.setBounds(70,50,200,20);
 //		text2.setText("Password");
 		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);
@@ -72,7 +77,7 @@ public class LoginView {
 			@Override
 			public void handleEvent(Event event) {
 				if (event.detail == SWT.TRAVERSE_RETURN) {
-					System.out.println("Enter pressed");
+//					System.out.println("Enter pressed");
 					if (!papa.checkUserCredentials(textUser.getText(), textPassword.getText())) {
 						// FIXME: wo soll das später sonst ausgegeben werden?!
 						System.out.println("falsche Benutzerangaben");
@@ -88,8 +93,7 @@ public class LoginView {
 			public void handleEvent(Event event) {
 				if (event.widget == btn_ok) {
 					response[0] = true;
-					if (!papa.checkUserCredentials(textUser.getText(),
-							textPassword.getText())) {
+					if (!papa.checkUserCredentials(textUser.getText(), textPassword.getText())) {
 						// FIXME: wo soll das später sonst ausgegeben werden?!
 						System.out.println("falsche Benutzerangaben");
 						textPassword.setText("");
@@ -118,7 +122,8 @@ public class LoginView {
 				disp.sleep();
 		}
 		disp.dispose();
+		
+//		parent.switchToFcState();
 	}
 	
-
 }

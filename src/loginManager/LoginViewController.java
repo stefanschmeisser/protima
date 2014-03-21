@@ -17,5 +17,9 @@ public class LoginViewController {
 	public boolean checkUserCredentials(String user, String password) {
 		return this.papa.checkUserCredentials(user, password);
 	}
+	
+	public void switchToFcState() {
+		this.papa.switchToFcState();
+	}
 
 }

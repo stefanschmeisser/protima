@@ -1,6 +1,6 @@
 package userManager;
 
-public class Editor {
+public class Editor extends User {
 	
 	public Editor() {
 		//TODO: implementieren

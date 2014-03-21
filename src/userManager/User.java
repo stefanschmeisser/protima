@@ -1,5 +1,6 @@
 package userManager;
 
+//FIXME: abstract Class macht Sinn an der Stelle, wie im Klassendiagramm darstellen?!
 public class User {
 	
 	private int id;
@@ -13,6 +14,11 @@ public class User {
 
 	public User() {
 		//TODO: implementieren
+	}
+	
+	public User(int id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 	
 	//FIXME: wenn teams nen ObjectArray is.. warum gibts dann hier ne ID und kein Objekt?
