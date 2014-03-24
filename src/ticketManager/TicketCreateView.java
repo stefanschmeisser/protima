@@ -16,7 +16,7 @@ public class TicketCreateView {
 		blankLabel.setText("Ticket Create View");
 //		blankLabel.setBounds(0, 0, 200, 200);
 		
-		Color col = new Color (Display.getCurrent(), 0, 128, 128);
+		Color col = new Color (Display.getCurrent(), 0, 170, 170);
 		blankLabel.setBackground(col);	
 		//shell.pack();
 	}
