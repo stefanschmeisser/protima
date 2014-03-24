@@ -22,20 +22,20 @@ public class FrontController implements IApplicationState {
 	public Listener listener;
 	
 	public FrontController(Display disp){
-		svc = new StartViewController();
-		pvc = new ProjectViewController();
-		tc = new TicketController();
-//		tvc = new TeamViewController();
-
-		this.disp = disp;
 		
+		this.disp = disp;
 		shell = new Shell(this.disp);
 		
-		Composite blankComp = new Composite(shell, SWT.NONE);
+		svc = new StartViewController();
+		pvc = new ProjectViewController();
+		tc = new TicketController(this.shell);
+//		tvc = new TeamViewController();
+
+		Composite blankComp = this.tc.getComposite();//new Composite(shell, SWT.NONE);
 		GridLayout blankCompLayout = new GridLayout();
 		blankComp.setLayout(blankCompLayout);
 		
-		//TODO: untere Composite (blankComp) kontextsensitiv ändern
+		//TODO: untere Composite (blankComp) kontextsensitiv aendern
 		listener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == vd.btnStart) {
@@ -61,15 +61,16 @@ public class FrontController implements IApplicationState {
 			}
 		};
 		
-		Label blankLabel = new Label(blankComp, SWT.NONE);
-		blankLabel.setText("Mystery");
+		//Label blankLabel = new Label(blankComp, SWT.NONE);
+		//blankLabel.setText("Mystery");
 //		blankLabel.setBounds(0, 0, 200, 200);
 		
-		Color red = new Color (Display.getCurrent(), 255, 0, 0);
-		blankLabel.setBackground(red);
-		blankComp.setBackground(red);
+		//Color red = new Color (Display.getCurrent(), 255, 0, 0);
+		//blankLabel.setBackground(red);
+		//blankComp.setBackground(red);
 		
 //		shell.pack();
+		
 		
 		
 		GridLayout uberLayout = new GridLayout(1, false);
