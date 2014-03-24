@@ -77,6 +77,7 @@ public class LoginView {
 			public void handleEvent(Event event) {
 				if (event.detail == SWT.TRAVERSE_RETURN) {
 //					System.out.println("Enter pressed");
+					System.out.println("Benutzer: " + textUser.getText() +"\tPassword: "+ textPassword.getText());
 					if (!papa.checkUserCredentials(textUser.getText(), textPassword.getText())) {
 						// FIXME: wo soll das später sonst ausgegeben werden?!
 						System.out.println("falsche Benutzerangaben");
@@ -96,7 +97,7 @@ public class LoginView {
 		Listener buttonListener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == btn_ok) {
-					_isLoggedIn[0] = true;
+					System.out.println("Benutzer: " + textUser.getText() +"\tPassword: "+ textPassword.getText());
 					if (!papa.checkUserCredentials(textUser.getText(), textPassword.getText())) {
 						// FIXME: wo soll das später sonst ausgegeben werden?!
 						System.out.println("falsche Benutzerangaben");

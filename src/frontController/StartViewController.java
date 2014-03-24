@@ -1,6 +1,5 @@
 package frontController;
 
-import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.*;
 
