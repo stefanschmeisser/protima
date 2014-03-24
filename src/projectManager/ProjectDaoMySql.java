@@ -2,8 +2,9 @@ package projectManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import applicationManager.AbstractDaoMySql;
 
-public class ProjectDaoMySql implements IProjectDAO {
+public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 
 	private Project project;
 	private List<Project> projectList;
