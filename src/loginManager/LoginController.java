@@ -2,7 +2,7 @@ package loginManager;
 
 import org.eclipse.swt.widgets.Display;
 
-import frontController.FrontController;
+import userManager.Editor;
 import userManager.User;
 import applicationManager.Application;
 import applicationManager.IApplicationState;
@@ -10,13 +10,13 @@ import applicationManager.IApplicationState;
 public class LoginController implements IApplicationState {
 
 	private LoginViewController lvc;
-	private ILoginDaoMySql datenWerk;
+	private LoginDaoMySql datenWerk;
 	private Application app;
 	private Display disp;
 	
 	
 	public LoginController(Application app, Display disp) {
-		this.datenWerk = new ILoginDaoMySql();
+		this.datenWerk = new LoginDaoMySql();
 		this.app = app;
 		this.disp = disp;
 	}
@@ -33,12 +33,14 @@ public class LoginController implements IApplicationState {
 		String[] userPreData = this.datenWerk.getAccess(user, password);
 //		System.out.println(userPreData);
 		if (userPreData[0] != null) {
+			for (int i=0; i < userPreData.length; i++)
+				System.out.println("Wert["+i+"]: " + userPreData[i]);
 			//TODO: User anlegen und in Application currentUser setzen!
 			// Minimum ID & Name
 			//FIXME: AccessLevel (Editor, TeamLeader etc) auch notwendig!! 
 			//TODO: Und davon abhängig den korrekten Benutzer anlegen!
 			String[] userTemp = this.datenWerk.getUserData(userPreData);
-			app.setCurrentUser(new User(Integer.parseInt(userTemp[0]), userTemp[1]));
+			app.setCurrentUser(new Editor(Integer.parseInt(userTemp[0]), userTemp[1]));
 			
 			return true;
 		}

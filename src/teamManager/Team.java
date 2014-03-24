@@ -1,11 +1,13 @@
 package teamManager;
 
+import java.util.List;
+
 public class Team {
 	
 	private int teamId;
 	private int teamLeader;
-	private int teamMembers;
-	// teamMembers= List?
+	private List<int[]> teamMembers;
+
 	
 
 }
