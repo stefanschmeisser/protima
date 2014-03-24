@@ -19,8 +19,8 @@ public class TicketDetailView {
 		blankLabel.setText("TicketDetailView");
 //		blankLabel.setBounds(0, 0, 200, 200);
 		
-		Color red = new Color (Display.getCurrent(), 255, 0, 0);
-		blankLabel.setBackground(red);	
+		Color col = new Color (Display.getCurrent(), 128, 128, 255);
+		blankLabel.setBackground(col);	
 		//shell.pack();
 	}
 	

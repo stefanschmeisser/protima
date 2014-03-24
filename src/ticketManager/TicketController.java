@@ -9,11 +9,17 @@ import frontController.IContentState;
 public class TicketController implements IContentState {
 
 	private TicketListViewController tlvc;
+	private TicketDetailViewController tdvc;
+	private TicketEditViewController tevc;
+	private TicketCreateViewController tcvc;
 	
 	public TicketController(Shell shell){
 		
 		// forward the shell parent object to the current/default TicketViewController
-		tlvc = new TicketListViewController(shell);
+		//tlvc = new TicketListViewController(shell);
+		//tdvc = new TicketDetailViewController(shell);
+//		tevc = new TicketEditViewController(shell);
+		tcvc = new TicketCreateViewController(shell);
 	}
 	
 	@Override
@@ -30,14 +36,21 @@ public class TicketController implements IContentState {
 		
 		// get the composite from the current TicketViewController
 		//this.tlvc.composite = comp;
-		this.tlvc.setComposite(comp);
+		//this.tlvc.setComposite(comp);
+		//this.tdvc.setComposite(comp);
+		//this.tevc.setComposite(comp);
+		this.tdvc.setComposite(comp);
 	}
 
 	@Override
 	public Composite getComposite() {
 		
 		// get the composite from the current TicketViewController
-		return this.tlvc.getComposite();
+		//return this.tlvc.getComposite();
+		//return this.tdvc.getComposite();
+		//return this.tevc.getComposite();
+		return this.tcvc.getComposite();
+		
 	}
 	
 	
