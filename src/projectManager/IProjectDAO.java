@@ -1,8 +1,7 @@
 package projectManager;
+import java.util.List;
 
 public interface IProjectDAO {
-	
-	//getProjectList()
-	//getProject()
-
+	public List<Project> getProjectList();
+	public Project getProject();
 }
