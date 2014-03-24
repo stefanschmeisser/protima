@@ -5,14 +5,14 @@ import java.util.List;
 
 public class TeamController {
 
-	private ArrayList<Team> allTeamsList;
+	private ArrayList<int[]> allTeamsList;
 
 	public void show() {
 		
 	}
 	
-	public List<Team> getAllTeams(){
-		this.allTeamsList=new ArrayList<Team>();
+	public List<int[]> getAllTeams(){
+		this.allTeamsList=new ArrayList<int[]>();
 		
 		
 		return this.allTeamsList;

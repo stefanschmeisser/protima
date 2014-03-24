@@ -5,6 +5,7 @@ import java.util.List;
 
 public class TeamDaoMySql implements ITeamDAO {
 	private List<Team> teamList;
+	private Team team;
 
 	public void createTeam(){
 		
@@ -29,4 +30,9 @@ public class TeamDaoMySql implements ITeamDAO {
 		return this.teamList;
 	}
 	
+	public Team getTeam(){
+		this.team=new Team();
+		
+		return this.team;
+		}
 }
