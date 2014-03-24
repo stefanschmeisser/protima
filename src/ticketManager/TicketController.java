@@ -14,7 +14,6 @@ public class TicketController implements IContentState {
 		
 		// forward the shell parent object to the current/default TicketViewController
 		tlvc = new TicketListViewController(shell);
-		
 	}
 	
 	@Override
@@ -40,5 +39,23 @@ public class TicketController implements IContentState {
 		// get the composite from the current TicketViewController
 		return this.tlvc.getComposite();
 	}
-
+	
+	
+	public void createTicket(){
+		
+	}
+	
+	public void editTicket(){
+		
+	}
+	
+	public void removeTicket(){
+		
+	}
+	
+	public void readTicket(){
+		
+	}
+	
+	
 }
