@@ -4,6 +4,7 @@ import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import frontController.IContentState;
@@ -11,31 +12,40 @@ import frontController.IContentState;
 
 public class TicketController implements IContentState {
 
+	private TicketListViewController tlvc;
 	private Composite composite;
+	
+	public TicketController(Shell shell){
+		
+		// forward the shell parent object to the current/default TicketViewController
+		tlvc = new TicketListViewController(shell);
+		
+	}
+	
+	
 	
 	@Override
 	public void setCurrentView(IContentState pCurrentState) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void setComposite(Composite comp) {
-		this.composite = comp;
-		Color blue = new Color (Display.getCurrent(), 0, 0, 255);
-		this.composite.setBackground(blue);
 		
+		// get the composite from the current TicketViewController
+		//this.tlvc.composite = comp;
+		this.tlvc.setComposite(comp);
 	}
 
 	@Override
 	public Composite getComposite() {
-		// TODO Auto-generated method stub
-		return this.composite;
+		
+		// get the composite from the current TicketViewController
+		return this.tlvc.getComposite();
 	}
 
 }
