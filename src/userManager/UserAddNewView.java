@@ -1,7 +1,12 @@
 package userManager;
 
-import userRights.User;
 
-public class UserAddNewView extends User{
+public class UserAddNewView implements IUserState{
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

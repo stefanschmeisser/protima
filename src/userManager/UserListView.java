@@ -1,7 +1,13 @@
 package userManager;
 
-import userRights.User;
 
-public class UserListView extends User{
+
+public class UserListView implements IUserState{
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
