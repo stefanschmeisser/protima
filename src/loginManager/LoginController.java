@@ -3,7 +3,7 @@ package loginManager;
 import org.eclipse.swt.widgets.Display;
 
 import frontController.FrontController;
-import userManager.User;
+import userRights.User;
 import applicationManager.Application;
 import applicationManager.IApplicationState;
 

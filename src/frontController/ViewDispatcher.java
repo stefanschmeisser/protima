@@ -11,7 +11,7 @@ public class ViewDispatcher {
 	private Composite menu;
 	private Label label;
 	private Shell shell;
-	public Button btnStart, btnProject, btnTicket, btnTeam;
+	public Button btnStart, btnProject, btnTicket, btnTeam, btnUser;
 	
 	public ViewDispatcher(FrontController pFC, Shell parent){
 		this.frontController = pFC;
@@ -23,7 +23,7 @@ public class ViewDispatcher {
 		
         // content.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout gridLayout = new GridLayout(1, false);
-        gridLayout.numColumns = 5;
+        gridLayout.numColumns = 6;
 		gridLayout.marginWidth = 5;
 		gridLayout.marginHeight = 5;
 		gridLayout.verticalSpacing = 0;
@@ -42,6 +42,10 @@ public class ViewDispatcher {
         btnStart.setText("Start");
         btnStart.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         
+        btnUser = new Button(menu,SWT.PUSH);
+        btnUser.setText("User");
+        btnUser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        
         btnProject = new Button(menu, SWT.PUSH);
         btnProject.setText("Project");
         btnProject.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -55,6 +59,7 @@ public class ViewDispatcher {
         btnTeam.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         
 	    btnStart.addListener(SWT.Selection, this.frontController.getListener());
+	    btnUser.addListener(SWT.Selection, this.frontController.getListener());
 	    btnProject.addListener(SWT.Selection, this.frontController.getListener());
 	    btnTicket.addListener(SWT.Selection, this.frontController.getListener());
 	    btnTeam.addListener(SWT.Selection, this.frontController.getListener());

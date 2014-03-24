@@ -1,3 +1,5 @@
-/ticketManager
-/applicationManager
 /frontController
+/userManager
+/applicationManager
+/loginManager
+/userRights

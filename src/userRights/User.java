@@ -1,4 +1,4 @@
-package userManager;
+package userRights;
 
 //FIXME: abstract Class macht Sinn an der Stelle, wie im Klassendiagramm darstellen?!
 public class User {
