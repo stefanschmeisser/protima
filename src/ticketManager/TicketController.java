@@ -37,10 +37,8 @@ public class TicketController implements IContentState {
 	public void setComposite(Composite comp) {
 		
 		// get the composite from the current TicketViewController
-		this.tlvc.composite = comp;
-		Color blue = new Color (Display.getCurrent(), 0, 0, 255);
-		this.tlvc.composite.setBackground(blue);
-		
+		//this.tlvc.composite = comp;
+		this.tlvc.setComposite(comp);
 	}
 
 	@Override

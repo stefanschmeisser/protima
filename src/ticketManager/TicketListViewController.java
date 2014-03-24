@@ -9,33 +9,22 @@ import org.eclipse.swt.widgets.Shell;
 
 public class TicketListViewController implements ITicketState, ITicketObserver {
 
-	public Composite composite;
+	private TicketListView tlv;
+	private Composite composite;
 	
 	public TicketListViewController(Shell shell){
 		
-		composite = new Composite(shell, SWT.NONE);
+		tlv = new TicketListView(shell);
 		
-		
-		Label blankLabel = new Label(composite, SWT.NONE);
-		blankLabel.setText("ticketListViewcontroller");
-//		blankLabel.setBounds(0, 0, 200, 200);
-		
-		Color red = new Color (Display.getCurrent(), 255, 0, 0);
-		blankLabel.setBackground(red);	
-		//shell.pack();
+		//composite = new Composite(shell, SWT.NONE);
 	}
 
-	
 	public void setComposite(Composite comp) {
-		this.composite = comp;
-		Color blue = new Color (Display.getCurrent(), 0, 0, 255);
-		this.composite.setBackground(blue);
-		
+		this.tlv.setComposite(comp);
 	}
 
 	public Composite getComposite() {
-		
-		return this.composite;
+		return this.tlv.getComposite();
 	}
 	
 }
