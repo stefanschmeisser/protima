@@ -29,7 +29,7 @@ public class Application {
 		disp = new Display();
 		System.out.println(disp);
 		setCurrentState(new LoginController(this, disp));
-//		setCurrentState(new FrontController());
+//		setCurrentState(new FrontController(disp));
 		this.show();
 	}
 	
