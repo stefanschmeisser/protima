@@ -1,10 +1,12 @@
 package userManager;
 
+
+
 public interface IUserDAO {
 	
 	public void getUser(int id);
 	
-	public void getUserList();
+	public int[] getUserList();
 	
 	public void getUsersByProject(String projectName);
 	
