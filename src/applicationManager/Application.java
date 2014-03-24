@@ -28,7 +28,7 @@ public class Application {
 		//FIXME: So kommt leider "GUI" Kram in den Controller, aber ohne gemeinsames Display (mainThread für die GUI) leider nahe zu unmöglich die Shells zu wechseln!
 		disp = new Display();
 		setCurrentState(new LoginController(this, disp));
-//		setCurrentState(new FrontController());
+//		setCurrentState(new FrontController(disp));
 		this.show();
 	}
 	
