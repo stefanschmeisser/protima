@@ -1,7 +1,6 @@
 package userManager;
 
-//FIXME: abstract Class macht Sinn an der Stelle, wie im Klassendiagramm darstellen?!
-public class User {
+public abstract class User {
 	
 	private int id;
 	private String name;
@@ -12,13 +11,10 @@ public class User {
 		EDITOR, TEAMLEADER, PROJECTMANAGER
 	}
 
-	public User() {
-		//TODO: implementieren
-	}
-	
-	public User(int id, String name) {
+	protected User(int id, String name) {
 		this.id = id;
 		this.name = name;
+		//TODO: implementieren
 	}
 	
 	//FIXME: wenn teams nen ObjectArray is.. warum gibts dann hier ne ID und kein Objekt?
