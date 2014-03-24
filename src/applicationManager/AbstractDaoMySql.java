@@ -8,8 +8,8 @@ import java.sql.Statement;
 
 public abstract class AbstractDaoMySql {
 
-	private String _user, _password;
-	private Connection connection;
+	protected String _user, _password;
+	protected Connection connection;
 	
 	public AbstractDaoMySql() {
 		

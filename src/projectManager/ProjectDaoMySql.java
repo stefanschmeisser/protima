@@ -1,7 +1,11 @@
 package projectManager;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import applicationManager.AbstractDaoMySql;
 
 public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
@@ -14,14 +18,20 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 	 */
 	@Override
 	public void createProject(){
-		
+		try {
+			openConnection(_user, _password);
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("INSERT INTO project(projectID, name, description, projectmanagerID) VALUES ()");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * edit an existing project in the database
 	 */
 	@Override
-	public void editProject(){
+	public void editProject(int id){
 		
 	}
 	
@@ -29,7 +39,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 	 * delete an existing project from the database
 	 */
 	@Override
-	public void removeProject(){
+	public void removeProject(int id){
 		
 	}
 	
