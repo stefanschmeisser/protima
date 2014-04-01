@@ -1,6 +1,7 @@
 package ticketManager;
 
-import org.eclipse.swt.widgets.Composite;
+import loginManager.ILoginDaoMySql;
+
 import org.eclipse.swt.widgets.*;
 
 import frontController.IContentState;
@@ -13,6 +14,10 @@ public class TicketController implements IContentState {
 	private TicketEditViewController tevc;
 	private TicketCreateViewController tcvc;
 	
+	private TicketDaoMySql mysqlDao;
+	
+	
+	
 	public TicketController(Shell shell){
 		
 		// forward the shell parent object to the current/default TicketViewController
@@ -20,6 +25,8 @@ public class TicketController implements IContentState {
 //		tdvc = new TicketDetailViewController(shell);
 //		tevc = new TicketEditViewController(shell);
 		tcvc = new TicketCreateViewController(shell);
+		
+		this.mysqlDao = new TicketDaoMySql();
 	}
 	
 	@Override
