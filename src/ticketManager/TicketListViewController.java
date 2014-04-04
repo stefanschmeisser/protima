@@ -1,26 +1,48 @@
 package ticketManager;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
+
+import com.mysql.jdbc.ResultSetMetaData;
 
 public class TicketListViewController implements ITicketState, ITicketObserver {
 
 	private TicketListView tlv;
-	public Listener listener;
+	private Composite composite;
+	private ITicketDao ticketDao;
+	private Listener listener;
 	
-	public TicketListViewController(Shell shell){
+	public TicketListViewController(Shell shell, ITicketDao ticketDao){
 		
-		listener = new Listener() {
+		this.listener = new Listener() {
 			public void handleEvent(Event event) {
-				if (event.widget == tlv.btnStart) {
-					System.out.println("Btn Start auf TicketListView (nur zum TEST)");
-					//svc.setComposite(vd.getContentPanel());
-					//setCurrentView(svc);
+				if (event.widget == tlv.btnRefresh) {
+					System.out.println("Refresh");
+					fillTableData();
+				}
+				if (event.widget == tlv.btnCreate) {
+					System.out.println("Create");
+				}
+				if (event.widget == tlv.btnEdit) {
+					System.out.println("Edit");
+				}
+				if (event.widget == tlv.btnDelete) {
+					System.out.println("Delete");
 				}
 			}
 		};
-		
+
 		tlv = new TicketListView(shell, this.listener);
 		
+		// get the TicketDao (Type of Interface ITicketDao)
+		this.ticketDao = ticketDao;
+		
+		this.fillTableData();
 	}
 
 	public void setComposite(Composite comp) {
@@ -31,8 +53,46 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		return this.tlv.getComposite();
 	}
 	
-	public Listener getListener() {
-		return this.listener;
+	// ------------------------------------------------------------------------
+	
+	public void fillTableData(){
+		
+		tlv.getTable().setItemCount(0);
+		
+		TicketTableModel tableModel = this.ticketDao.selectTableModel("*", "ticket", "");
+		
+		if(tableModel != null){
+			
+			ArrayList<String> columnNames = tableModel.getColumnNames();
+			ArrayList<Vector> rows = tableModel.getRows();
+
+			System.out.println("laenge: " + columnNames.size());
+
+			// set column header names
+			for(int i = 0; i < columnNames.size(); i++){
+				TableColumn tc = new TableColumn(tlv.getTable(), SWT.LEFT);
+				tc.setText(columnNames.get(i).toString());
+				//tc.setWidth(100);
+			}
+
+			//set row data
+			for(int i = 0; i < rows.size(); i++){
+
+				Vector v = new Vector();
+				v = rows.get(i);
+
+				TableItem ti = new TableItem(tlv.getTable(), SWT.NONE);
+
+				for(int j = 0; j < v.size(); j++){
+					ti.setText(j, v.get(j).toString());
+				}
+			}
+
+			// set column width automatically
+			for (int i=0; i<columnNames.size(); i++) {
+				tlv.getTable().getColumn(i).pack ();
+			}	
+		}
 	}
 	
 }

@@ -1,7 +1,5 @@
 package ticketManager;
 
-import loginManager.ILoginDaoMySql;
-
 import org.eclipse.swt.widgets.*;
 
 import frontController.IContentState;
@@ -14,19 +12,21 @@ public class TicketController implements IContentState {
 	private TicketEditViewController tevc;
 	private TicketCreateViewController tcvc;
 	
-	private TicketDaoMySql mysqlDao;
+	private ITicketDao ticketDao;
 	
 	
 	
 	public TicketController(Shell shell){
 		
+		// creates a mySQL Dao Object and forwards it to the appropriate Ticket view controllers
+		this.ticketDao = new TicketDaoMySql();
+		
 		// forward the shell parent object to the current/default TicketViewController
-//		tlvc = new TicketListViewController(shell);
+		tlvc = new TicketListViewController(shell, this.ticketDao);
 //		tdvc = new TicketDetailViewController(shell);
 //		tevc = new TicketEditViewController(shell);
-		tcvc = new TicketCreateViewController(shell);
+//		tcvc = new TicketCreateViewController(shell);
 		
-		this.mysqlDao = new TicketDaoMySql();
 	}
 	
 	@Override
@@ -42,20 +42,20 @@ public class TicketController implements IContentState {
 	public void setComposite(Composite comp) {
 		
 		// get the composite from the current TicketViewController
-//		this.tlvc.setComposite(comp);
+		this.tlvc.setComposite(comp);
 //		this.tdvc.setComposite(comp);
 //		this.tevc.setComposite(comp);
-		this.tdvc.setComposite(comp);
+//		this.tdvc.setComposite(comp);
 	}
 
 	@Override
 	public Composite getComposite() {
 		
 		// get the composite from the current TicketViewController
-//		return this.tlvc.getComposite();
+		return this.tlvc.getComposite();
 //		return this.tdvc.getComposite();
 //		return this.tevc.getComposite();
-		return this.tcvc.getComposite();
+//		return this.tcvc.getComposite();
 		
 	}
 	

@@ -9,7 +9,7 @@ public class TicketCreateViewController implements ITicketState {
 	
 	public TicketCreateViewController(Shell shell){
 		
-		listener = new Listener() {
+		this.listener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == tcv.btnStart) {
 					System.out.println("Button Start auf TicketCreateView (nur zum TEST)");
