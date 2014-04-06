@@ -2,9 +2,9 @@ package loginManager;
 
 import org.eclipse.swt.widgets.Display;
 
-import userManager.Editor;
-import userManager.ProjectManager;
-import userManager.User;
+import frontController.FrontController;
+import userRights.ProjectManager;
+import userRights.User;
 import applicationManager.Application;
 import applicationManager.IApplicationState;
 

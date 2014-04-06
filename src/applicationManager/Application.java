@@ -5,7 +5,7 @@ import java.util.Vector;
 import org.eclipse.swt.widgets.Display;
 
 import loginManager.LoginController;
-import userManager.User;
+import userRights.User;
 import frontController.FrontController;
 
 public class Application {

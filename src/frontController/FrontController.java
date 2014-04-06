@@ -18,6 +18,7 @@ public class FrontController implements IApplicationState {
 	private StartViewController svc;
 	private ProjectViewController pvc;
 	private TicketController tc;
+	//private UserViewController uvc;
 	
 	public Listener listener;
 	
@@ -57,6 +58,12 @@ public class FrontController implements IApplicationState {
 //					System.out.println("Btn Team");
 //					tvc.setContentPane(vd.getContentPanel());
 //					setCurrentView(tvc);
+//				}
+				
+//				if (event.widget == vd.btnUser) {
+//					System.out.println("Btn User");
+//					uvc.setContentPane(vd.getContentPanel());
+//					setCurrentView(uvc);
 //				}
 			}
 		};
