@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.*;
 
 import applicationManager.IApplicationState;
 import ticketManager.TicketController;
+import projectManager.ProjectController;
 
 public class FrontController implements IApplicationState {
 	
@@ -16,7 +17,7 @@ public class FrontController implements IApplicationState {
 	private IContentState currentState;
 	private ViewDispatcher vd;
 	private StartViewController svc;
-	private ProjectViewController pvc;
+	private IContentState pc;
 	private TicketController tc;
 	
 	public Listener listener;
@@ -27,7 +28,7 @@ public class FrontController implements IApplicationState {
 		shell = new Shell(this.disp);
 		
 		svc = new StartViewController();
-		pvc = new ProjectViewController();
+		this.pc = new ProjectController(this.shell);
 		tc = new TicketController(this.shell);
 //		tvc = new TeamViewController();
 
@@ -45,8 +46,8 @@ public class FrontController implements IApplicationState {
 				}
 				if (event.widget == vd.btnProject) {
 					System.out.println("Btn Project");
-					pvc.setComposite(vd.getContentPanel());
-					setCurrentView(pvc);
+					pc.setComposite(vd.getContentPanel());
+					setCurrentView(pc);
 				}
 				if (event.widget == vd.btnTicket) {
 					System.out.println("Btn Ticket");
@@ -70,9 +71,7 @@ public class FrontController implements IApplicationState {
 		//blankComp.setBackground(red);
 		
 //		shell.pack();
-		
-		
-		
+
 		GridLayout uberLayout = new GridLayout(1, false);
 		shell.setLayout(uberLayout);
 		
@@ -85,13 +84,11 @@ public class FrontController implements IApplicationState {
 //		vd.getContentPanel().setLayout(gridlayout);
 //		blankComp.setLayout(gridlayout);
 		
-		
 		blankComp.moveBelow(vd.getContentPanel());
 		
 		shell.pack();
 		shell.open();
 		
-
         while (!shell.isDisposed()) {
          if (!this.disp.readAndDispatch())
           this.disp.sleep();
@@ -99,32 +96,11 @@ public class FrontController implements IApplicationState {
 		shell.dispose();
 	}
 	
-
-//	public void actionPerformed(ActionEvent e) {
-//		
-//		if(e.getActionCommand().equalsIgnoreCase("start")){
-//			//System.out.println("Start gedr√ºckt");
-//			svc.setContentPane(this.vd.getContentPanel());
-//			setCurrentView(this.svc);
-//		}
-//		
-//		if(e.getActionCommand().equalsIgnoreCase("project")){
-//			this.pvc = new ProjectViewController();
-//			pvc.setContentPane(this.vd.getContentPanel());
-//			setCurrentView(this.pvc);
-//		}
-//		
-//		if(e.getActionCommand().equalsIgnoreCase("ticket")){
-//			this.tc = new TicketController();
-//			tc.setContentPane(this.vd.getContentPanel());
-//			setCurrentView(this.tc);
-//		}
-//		
-//	}
-//
 	public void setCurrentView(IContentState pCurrentState){
 		this.currentState = pCurrentState;
-		this.zeigma();
+		System.out.println("set current View: " + this.currentState);
+		this.currentState.show();
+		//		this.zeigma();
 	}
 	
 	public void zeigma(){
@@ -140,8 +116,5 @@ public class FrontController implements IApplicationState {
 	public Listener getListener() {
 		return this.listener;
 	}
-
-  // irgendwas blödes
-
 
 }
