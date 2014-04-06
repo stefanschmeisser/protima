@@ -8,19 +8,20 @@ import frontController.IContentState;
 public class ProjectController implements IContentState {
 	
 	private Shell shell;
+	private Composite composite;
 	private IProjectDAO projectDAO;
 	private ProjectViewController projectViewController;
 	
 	//getAllProjects() List<int>
-	public ProjectController(Shell shell){
-		this.shell = shell;
+	public ProjectController(Composite composite){
+		this.composite = composite;
 		this.projectDAO = new ProjectDaoMySql();
-		this.projectViewController = new ProjectViewController(this.shell);	
+		this.projectViewController = new ProjectViewController(composite);	
 	}
 	
 	
 	public void show(){
-		System.out.println("ProjectController show()");
+
 	}
 
 
@@ -33,14 +34,13 @@ public class ProjectController implements IContentState {
 
 	@Override
 	public void setComposite(Composite composite) {
-		// TODO Auto-generated method stub
-		
+		this.composite = composite;
+		this.projectViewController.setComposite(composite);
 	}
-
 
 	@Override
 	public Composite getComposite() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

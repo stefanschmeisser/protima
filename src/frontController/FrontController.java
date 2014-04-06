@@ -1,5 +1,8 @@
 package frontController;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
@@ -19,6 +22,14 @@ public class FrontController implements IApplicationState {
 	private StartViewController svc;
 	private IContentState pc;
 	private TicketController tc;
+	private Composite content;
+	Menu menuBar, fileMenu, projectMenu, teamMenu, ticketMenu, helpMenu;
+	MenuItem fileMenuHeader, projectMenuHeader, teamMenuHeader, ticketMenuHeader, helpMenuHeader;
+	MenuItem fileExitItem, fileSaveItem;
+	MenuItem projectCreateItem, projectEditItem, projectDeleteItem;
+	MenuItem teamCreateItem, teamEditItem, teamDeleteItem;
+	MenuItem ticketCreateItem, ticketEditItem, ticketDeleteItem;
+	MenuItem helpGetHelpItem;
 	
 	public Listener listener;
 	
@@ -26,16 +37,76 @@ public class FrontController implements IApplicationState {
 		
 		this.disp = disp;
 		shell = new Shell(this.disp);
+		shell.setText("ProTiMa");
+		this.content = new Composite(shell, SWT.NONE);  
+		
+		menuBar = new Menu(shell, SWT.BAR);
+		
+		// ProMiTa Menü
+	    fileMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+	    fileMenuHeader.setText("&ProMiTa");	    
+	    fileMenu = new Menu(shell, SWT.DROP_DOWN);
+	    fileMenuHeader.setMenu(fileMenu);
+	    fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
+	    fileSaveItem.setText("&Speichern");
+	    fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
+	    fileExitItem.setText("&Beenden");
+
+	    // Projekt Menü
+	    projectMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+	    projectMenuHeader.setText("&Projekt");
+	    projectMenu = new Menu(shell, SWT.DROP_DOWN);
+	    projectMenuHeader.setMenu(projectMenu);
+	    projectCreateItem = new MenuItem(projectMenu, SWT.PUSH);
+	    projectCreateItem.setText("Neues Projekt");
+	    projectEditItem = new MenuItem(projectMenu, SWT.PUSH);
+	    projectEditItem.setText("Projekt editieren");
+	    projectDeleteItem = new MenuItem(projectMenu, SWT.PUSH);
+	    projectDeleteItem.setText("Projekt löschen");
+
+	    // Team Menü
+	    teamMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+	    teamMenuHeader.setText("&Team");
+	    teamMenu = new Menu(shell, SWT.DROP_DOWN);
+	    teamMenuHeader.setMenu(teamMenu);
+	    teamCreateItem = new MenuItem(teamMenu, SWT.PUSH);
+	    teamCreateItem.setText("Neues Team");
+	    teamEditItem = new MenuItem(teamMenu, SWT.PUSH);
+	    teamEditItem.setText("Team editieren");
+	    teamDeleteItem = new MenuItem(teamMenu, SWT.PUSH);
+	    teamDeleteItem.setText("Team löschen");
+
+	    // Ticket Menü
+	    ticketMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+	    ticketMenuHeader.setText("&Ticket");
+	    ticketMenu = new Menu(shell, SWT.DROP_DOWN);
+	    ticketMenuHeader.setMenu(ticketMenu);
+	    ticketCreateItem = new MenuItem(ticketMenu, SWT.PUSH);
+	    ticketCreateItem.setText("Neues Ticket");
+	    ticketEditItem = new MenuItem(ticketMenu, SWT.PUSH);
+	    ticketEditItem.setText("Ticket editieren");
+	    ticketDeleteItem = new MenuItem(ticketMenu, SWT.PUSH);
+	    ticketDeleteItem.setText("Ticket löschen");
+
+	    // Hilfe Menü
+	    helpMenuHeader = new MenuItem(menuBar, SWT.CASCADE);
+	    helpMenuHeader.setText("&Hilfe");
+	    helpMenu = new Menu(shell, SWT.DROP_DOWN);
+	    helpMenuHeader.setMenu(helpMenu);
+	    helpGetHelpItem = new MenuItem(helpMenu, SWT.PUSH);
+	    helpGetHelpItem.setText("&Info");
+
+//	    fileExitItem.addSelectionListener(new fileExitItemListener());
+//	    fileSaveItem.addSelectionListener(new fileSaveItemListener());
+//	    helpGetHelpItem.addSelectionListener(new helpGetHelpItemListener());
+
+	    shell.setMenuBar(menuBar);
 		
 		svc = new StartViewController();
-		this.pc = new ProjectController(this.shell);
+		this.pc = new ProjectController(content);
 		tc = new TicketController(this.shell);
 //		tvc = new TeamViewController();
 
-		Composite blankComp = this.tc.getComposite();//new Composite(shell, SWT.NONE);
-		GridLayout blankCompLayout = new GridLayout();
-		blankComp.setLayout(blankCompLayout);
-		
 		//TODO: untere Composite (blankComp) kontextsensitiv aendern
 		listener = new Listener() {
 			public void handleEvent(Event event) {
@@ -46,7 +117,7 @@ public class FrontController implements IApplicationState {
 				}
 				if (event.widget == vd.btnProject) {
 					System.out.println("Btn Project");
-					pc.setComposite(vd.getContentPanel());
+					pc.setComposite(content);
 					setCurrentView(pc);
 				}
 				if (event.widget == vd.btnTicket) {
@@ -61,16 +132,6 @@ public class FrontController implements IApplicationState {
 //				}
 			}
 		};
-		
-		//Label blankLabel = new Label(blankComp, SWT.NONE);
-		//blankLabel.setText("Mystery");
-//		blankLabel.setBounds(0, 0, 200, 200);
-		
-		//Color red = new Color (Display.getCurrent(), 255, 0, 0);
-		//blankLabel.setBackground(red);
-		//blankComp.setBackground(red);
-		
-//		shell.pack();
 
 		GridLayout uberLayout = new GridLayout(1, false);
 		shell.setLayout(uberLayout);
@@ -78,15 +139,14 @@ public class FrontController implements IApplicationState {
 		this.vd = new ViewDispatcher(this, shell);
 		vd.show(null);
 		
-		blankComp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		content.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		vd.getContentPanel().setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-//		vd.getContentPanel().setLayout(gridlayout);
-//		blankComp.setLayout(gridlayout);
-		
-		blankComp.moveBelow(vd.getContentPanel());
+
+		content.moveBelow(vd.getContentPanel());
 		
 		shell.pack();
+		shell.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
+		shell.setMaximized(true);
 		shell.open();
 		
         while (!shell.isDisposed()) {
@@ -96,21 +156,10 @@ public class FrontController implements IApplicationState {
 		shell.dispose();
 	}
 	
-	public void setCurrentView(IContentState pCurrentState){
-		this.currentState = pCurrentState;
+	public void setCurrentView(IContentState currentState){
+		this.currentState = currentState;
 		System.out.println("set current View: " + this.currentState);
 		this.currentState.show();
-		//		this.zeigma();
-	}
-	
-	public void zeigma(){
-		this.currentState.show();
-	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public Listener getListener() {

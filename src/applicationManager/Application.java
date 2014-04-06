@@ -29,11 +29,6 @@ public class Application {
 		disp = new Display();
 //		setCurrentState(new LoginController(this, disp));
 		setCurrentState(new FrontController(disp));
-		this.show();
-	}
-	
-	public void show() {
-		currentState.show();
 	}
 	
 	public void setCurrentState(IApplicationState state) {
