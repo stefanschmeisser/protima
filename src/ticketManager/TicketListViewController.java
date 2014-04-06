@@ -1,22 +1,26 @@
 package ticketManager;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.*;
 
 public class TicketListViewController implements ITicketState, ITicketObserver {
 
 	private TicketListView tlv;
-	private Composite composite;
+	public Listener listener;
 	
 	public TicketListViewController(Shell shell){
 		
-		tlv = new TicketListView(shell);
+		listener = new Listener() {
+			public void handleEvent(Event event) {
+				if (event.widget == tlv.btnStart) {
+					System.out.println("Btn Start auf TicketListView (nur zum TEST)");
+					//svc.setComposite(vd.getContentPanel());
+					//setCurrentView(svc);
+				}
+			}
+		};
 		
-		//composite = new Composite(shell, SWT.NONE);
+		tlv = new TicketListView(shell, this.listener);
+		
 	}
 
 	public void setComposite(Composite comp) {
@@ -25,6 +29,10 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 
 	public Composite getComposite() {
 		return this.tlv.getComposite();
+	}
+	
+	public Listener getListener() {
+		return this.listener;
 	}
 	
 }

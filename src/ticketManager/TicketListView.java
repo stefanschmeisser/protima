@@ -2,16 +2,17 @@ package ticketManager;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.*;
+
+
 
 public class TicketListView {
 
 	private Composite composite;
+	public Button btnStart;
 	
-	public TicketListView(Shell shell){
+	public TicketListView(Shell shell, Listener listener){
 		
 		composite = new Composite(shell, SWT.NONE);
 
