@@ -1,19 +1,14 @@
 package ticketManager;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
-
 import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
-
-import com.mysql.jdbc.ResultSetMetaData;
 
 public class TicketListViewController implements ITicketState, ITicketObserver {
 
 	private TicketListView tlv;
-	private Composite composite;
+//	private Composite composite;
 	private ITicketDao ticketDao;
 	private Listener listener;
 	
@@ -36,6 +31,7 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 				}
 			}
 		};
+		
 
 		tlv = new TicketListView(shell, this.listener);
 		
@@ -45,10 +41,14 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		this.fillTableData();
 	}
 
+	// ------------------------------------------------------------------------
+	
 	public void setComposite(Composite comp) {
 		this.tlv.setComposite(comp);
 	}
 
+	// ------------------------------------------------------------------------
+	
 	public Composite getComposite() {
 		return this.tlv.getComposite();
 	}
@@ -65,8 +65,6 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 			
 			ArrayList<String> columnNames = tableModel.getColumnNames();
 			ArrayList<Vector> rows = tableModel.getRows();
-
-			System.out.println("laenge: " + columnNames.size());
 
 			// set column header names
 			for(int i = 0; i < columnNames.size(); i++){
@@ -94,5 +92,10 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 			}	
 		}
 	}
+
+	// ------------------------------------------------------------------------
 	
+	public void getSelectedTableItem(){
+		
+	}
 }
