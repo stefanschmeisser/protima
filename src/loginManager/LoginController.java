@@ -3,6 +3,7 @@ package loginManager;
 import org.eclipse.swt.widgets.Display;
 
 import userManager.Editor;
+import userManager.ProjectManager;
 import userManager.User;
 import applicationManager.Application;
 import applicationManager.IApplicationState;
@@ -40,7 +41,7 @@ public class LoginController implements IApplicationState {
 			//FIXME: AccessLevel (Editor, TeamLeader etc) auch notwendig!! 
 			//TODO: Und davon abhängig den korrekten Benutzer anlegen!
 			String[] userTemp = this.datenWerk.getUserData(userPreData);
-			app.setCurrentUser(new Editor(Integer.parseInt(userTemp[0]), userTemp[1]));
+			app.setCurrentUser(new ProjectManager(Integer.parseInt(userTemp[0]), userTemp[1]));
 			
 			return true;
 		}
