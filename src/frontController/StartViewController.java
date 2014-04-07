@@ -18,20 +18,19 @@ public class StartViewController implements IContentState {
 		
 	}
 
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setComposite(Composite comp) {
-		this.composite = comp;
-		Color red = new Color (Display.getCurrent(), 255, 0, 0);
-		composite.setBackground(red);
-		
-	}
-
+//	@Override
+//	public void show() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void setComposite(Composite comp) {
+//		this.composite = comp;
+//		Color red = new Color (Display.getCurrent(), 255, 0, 0);
+//		composite.setBackground(red);
+//		
+//	}
 
 	@Override
 	public Composite getComposite() {

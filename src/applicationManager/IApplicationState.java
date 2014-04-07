@@ -1,6 +1,8 @@
 package applicationManager;
 
+import frontController.IContentState;
+
 
 public interface IApplicationState {
-	public void show();
+	public void setCurrentView(IContentState currentState);
 }
