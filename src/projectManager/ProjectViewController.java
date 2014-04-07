@@ -17,8 +17,7 @@ public class ProjectViewController implements Listener {
 	private IProjectState projectEditView;
 	private IProjectState projectCreateView;
 	
-	
-	public ProjectViewController(Composite composite){
+	public ProjectViewController(Shell shell){
 		this.shell = shell;
 		projectListView = new ProjectListView(this, this.shell);
 		projectDetailView = new ProjectDetailView(this, this.shell);
@@ -27,18 +26,13 @@ public class ProjectViewController implements Listener {
 	}
 	
 	public void setCurrentView(IProjectState currentState){
-		this.currentState.getComposite().dispose();
+		System.out.println(this.currentState);
+//		if(this.currentState != null){
+//			this.currentState.getComposite().dispose();
+//		}
 		this.currentState = currentState;
 		this.currentState.show();
 		
-	}
-	
-	public void setComposite(Composite composite){
-		this.composite = composite;
-	}
-	
-	public Composite getComposite(){
-		return this.composite;
 	}
 	
 	public void handleEvent(Event event) {
