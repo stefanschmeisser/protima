@@ -34,8 +34,8 @@ public class LoginController implements IApplicationState {
 		String[] userPreData = this.datenWerk.getAccess(user, password);
 //		System.out.println(userPreData);
 		if (userPreData[0] != null) {
-			for (int i=0; i < userPreData.length; i++)
-				System.out.println("Wert["+i+"]: " + userPreData[i]);
+//			for (int i=0; i < userPreData.length; i++)
+//				System.out.println("Wert["+i+"]: " + userPreData[i]);
 			//TODO: User anlegen und in Application currentUser setzen!
 			// Minimum ID & Name
 			//FIXME: AccessLevel (Editor, TeamLeader etc) auch notwendig!! 
