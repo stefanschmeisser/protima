@@ -3,33 +3,23 @@ package ticketManager;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-
-
 import org.eclipse.swt.widgets.*;
-
 import frontController.IContentState;
 
 
 public class TicketController implements IContentState {
-
-	private TicketListViewController tlvc;
-	private TicketDetailViewController tdvc;
-	private TicketEditViewController tevc;
-	private TicketCreateViewController tcvc;
 	
-	private TicketDaoMySql mysqlDao;
-	
-	
+	private TicketViewController tvc;
+	private ITicketDao ticketDao;
 	
 	public TicketController(Shell shell){
 		
-		// forward the shell parent object to the current/default TicketViewController
-//		tlvc = new TicketListViewController(shell);
-//		tdvc = new TicketDetailViewController(shell);
-//		tevc = new TicketEditViewController(shell);
-		tcvc = new TicketCreateViewController(shell);
+		// creates a mySQL Dao Object and forwards it to the appropriate Ticket view controllers
+		this.ticketDao = new TicketDaoMySql();
 		
-		this.mysqlDao = new TicketDaoMySql();
+		// forward the shell parent object to the current/default TicketViewController
+		tvc = new TicketViewController(shell, this.ticketDao);
+		
 	}
 	
 	@Override
@@ -45,39 +35,31 @@ public class TicketController implements IContentState {
 	public void setComposite(Composite comp) {
 		
 		// get the composite from the current TicketViewController
-//		this.tlvc.setComposite(comp);
-//		this.tdvc.setComposite(comp);
-//		this.tevc.setComposite(comp);
-		this.tdvc.setComposite(comp);
+		this.tvc.setComposite(comp);
 	}
 
 	@Override
 	public Composite getComposite() {
 		
 		// get the composite from the current TicketViewController
-//		return this.tlvc.getComposite();
-//		return this.tdvc.getComposite();
-//		return this.tevc.getComposite();
-		return this.tcvc.getComposite();
-		
+		return this.tvc.getComposite();	
 	}
 	
 	
-	public void createTicket(){
-		
-	}
-	
-	public void editTicket(){
-		
-	}
-	
-	public void removeTicket(){
-		
-	}
-	
-	public void readTicket(){
-		
-	}
-	
+//	public void createTicket(){
+//		
+//	}
+//	
+//	public void editTicket(){
+//		
+//	}
+//	
+//	public void removeTicket(){
+//		
+//	}
+//	
+//	public void readTicket(){
+//		
+//	}
 	
 }
