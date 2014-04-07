@@ -2,6 +2,7 @@ package projectManager;
 
 import java.util.Vector;
 
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
@@ -27,11 +28,13 @@ public class ProjectViewController implements Listener {
 	
 	public void setCurrentView(IProjectState currentState){
 		System.out.println(this.currentState);
-//		if(this.currentState != null){
-//			this.currentState.getComposite().dispose();
-//		}
+		if(this.currentState != null){
+			this.currentState.getComposite().dispose();
+		}
 		this.currentState = currentState;
 		this.currentState.show();
+		this.shell.setLayout(new GridLayout());
+		
 		
 	}
 	

@@ -35,8 +35,8 @@ public class ProjectCreateView implements IProjectState {
         createButton.setImage(imageCreateProject);
         createButton.setLocation(0, 0);
         createButton.setLayoutData(new GridData(GridData.BEGINNING));
-	
         
+        this.shell.layout();
 	}
 
 	@Override
