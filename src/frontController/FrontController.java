@@ -38,7 +38,7 @@ public class FrontController implements IApplicationState, Listener {
         
 		this.svc = new StartViewController();
 		this.pc = new ProjectController(this.shell);
-		this.tc = new TicketController(this.shell);
+//		this.tc = new TicketController(this.shell);
 //		this.tvc = new TeamViewController();
 		setCurrentView(this.pc);
 		

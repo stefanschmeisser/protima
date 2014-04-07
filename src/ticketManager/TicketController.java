@@ -21,28 +21,10 @@ public class TicketController implements IContentState {
 		tvc = new TicketViewController(shell, this.ticketDao);
 		
 	}
-	
-	@Override
-	public void setCurrentView(IContentState pCurrentState) {
-		// TODO Auto-generated method stub	
-	}
 
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-	}
-
-	public void setComposite(Composite comp) {
-		
+	public void setComposite(Composite comp) {	
 		// get the composite from the current TicketViewController
 		this.tvc.setComposite(comp);
-	}
-
-	@Override
-	public Composite getComposite() {
-		
-		// get the composite from the current TicketViewController
-		return this.tvc.getComposite();	
 	}
 	
 	

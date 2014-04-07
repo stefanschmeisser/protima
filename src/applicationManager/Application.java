@@ -21,7 +21,6 @@ public class Application {
 		// Standardwert für den Start
 		//FIXME: So kommt leider "GUI" Kram in den Controller, aber ohne gemeinsames Display (mainThread für die GUI) leider nahe zu unmöglich die Shells zu wechseln!
 		disp = new Display();
-
 		setCurrentState(new FrontController(disp));
 //		setCurrentState(new LoginController(this, disp));
 	}

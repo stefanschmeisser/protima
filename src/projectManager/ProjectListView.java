@@ -1,7 +1,6 @@
 package projectManager;
 
 import java.awt.Color;
-
 import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -17,7 +16,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
-import userManager.ProjectManager;
+import userRights.ProjectManager;
 
 public class ProjectListView implements IProjectState {
 

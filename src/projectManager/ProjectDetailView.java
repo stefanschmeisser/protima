@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import userManager.ProjectManager;
+import userRights.ProjectManager;
 
 public class ProjectDetailView implements IProjectState {
 	

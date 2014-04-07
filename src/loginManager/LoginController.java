@@ -3,6 +3,7 @@ package loginManager;
 import org.eclipse.swt.widgets.Display;
 
 import frontController.FrontController;
+import frontController.IContentState;
 import userRights.ProjectManager;
 import userRights.User;
 import applicationManager.Application;
@@ -51,5 +52,11 @@ public class LoginController implements IApplicationState {
 	
 	public void switchToFcState() {
 		app.switchToFcState();
+	}
+
+	@Override
+	public void setCurrentView(IContentState currentState) {
+		// TODO Auto-generated method stub
+		
 	}
 }

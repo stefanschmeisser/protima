@@ -17,30 +17,6 @@ public class UserController implements IContentState {
 	private Composite composite;
 	private User user; 
 	private int[] userIDs;
-
-	@Override
-	public void setCurrentView(IContentState pCurrentState) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setComposite(Composite composite) {
-		// TODO Auto-generated method stub
-	
-	}
-
-	@Override
-	public Composite getComposite() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	public void getAllUsers(){
 		userIDs = userDAO.getUserList();
