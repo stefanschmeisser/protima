@@ -13,35 +13,23 @@ public class ProjectController implements IContentState {
 	private ProjectViewController projectViewController;
 	
 	//getAllProjects() List<int>
-	public ProjectController(Composite composite){
-		this.composite = composite;
+	public ProjectController(Shell shell){
+		this.shell = shell;
 		this.projectDAO = new ProjectDaoMySql();
-		this.projectViewController = new ProjectViewController(composite);	
-	}
-	
-	
-	public void show(){
-
+		this.projectViewController = new ProjectViewController(shell);
 	}
 
 
-	@Override
-	public void setCurrentView(IContentState pCurrentState) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void setCurrentView(IContentState currentState) {
+//		this.currentState = currentState;
+//	}
 
 
-	@Override
-	public void setComposite(Composite composite) {
-		this.composite = composite;
-		this.projectViewController.setComposite(composite);
-	}
-
-	@Override
-	public Composite getComposite() {
-		
-		return null;
-	}
+//	@Override
+//	public void setComposite(Composite composite) {
+//		this.composite = composite;
+//		this.projectViewController.setComposite(composite);
+//	}
 
 }

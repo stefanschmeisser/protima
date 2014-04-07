@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 
 import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
@@ -17,12 +18,13 @@ public class FrontController implements IApplicationState {
 	
 	private Display disp;
 	private Shell shell;
+	private Composite composite;
 	private IContentState currentState;
 	private ViewDispatcher vd;
 	private StartViewController svc;
 	private IContentState pc;
 	private TicketController tc;
-	private Composite content;
+//	private Composite content;
 	Menu menuBar, fileMenu, projectMenu, teamMenu, ticketMenu, helpMenu;
 	MenuItem fileMenuHeader, projectMenuHeader, teamMenuHeader, ticketMenuHeader, helpMenuHeader;
 	MenuItem fileExitItem, fileSaveItem;
@@ -38,7 +40,9 @@ public class FrontController implements IApplicationState {
 		this.disp = disp;
 		shell = new Shell(this.disp);
 		shell.setText("ProTiMa");
-		this.content = new Composite(shell, SWT.NONE);  
+		Image imageApplicationIcon = new Image(Display.getCurrent(), "content/icon.png");
+        shell.setImage(imageApplicationIcon);
+//<>		this.content = new Composite(shell, SWT.NONE);  
 		
 		menuBar = new Menu(shell, SWT.BAR);
 		
@@ -103,7 +107,7 @@ public class FrontController implements IApplicationState {
 	    shell.setMenuBar(menuBar);
 		
 		svc = new StartViewController();
-		this.pc = new ProjectController(content);
+		this.pc = new ProjectController(this.shell);
 		tc = new TicketController(this.shell);
 //		tvc = new TeamViewController();
 
@@ -112,17 +116,17 @@ public class FrontController implements IApplicationState {
 			public void handleEvent(Event event) {
 				if (event.widget == vd.btnStart) {
 					System.out.println("Btn Start");
-					svc.setComposite(vd.getContentPanel());
+//					svc.setComposite(vd.getContentPanel());
 					setCurrentView(svc);
 				}
 				if (event.widget == vd.btnProject) {
 					System.out.println("Btn Project");
-					pc.setComposite(content);
+//					pc.setComposite(content);
 					setCurrentView(pc);
 				}
 				if (event.widget == vd.btnTicket) {
 					System.out.println("Btn Ticket");
-					tc.setComposite(vd.getContentPanel());
+//					tc.setComposite(vd.getContentPanel());
 					setCurrentView(tc);
 				}
 //				if (event.widget == vd.btnTeam) {
@@ -139,10 +143,9 @@ public class FrontController implements IApplicationState {
 		this.vd = new ViewDispatcher(this, shell);
 		vd.show(null);
 		
-		content.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		vd.getContentPanel().setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		content.moveBelow(vd.getContentPanel());
+//		content.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+//		vd.getContentPanel().setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+//		content.moveBelow(vd.getContentPanel());
 		
 		shell.pack();
 		shell.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
@@ -158,8 +161,6 @@ public class FrontController implements IApplicationState {
 	
 	public void setCurrentView(IContentState currentState){
 		this.currentState = currentState;
-		System.out.println("set current View: " + this.currentState);
-		this.currentState.show();
 	}
 	
 	public Listener getListener() {

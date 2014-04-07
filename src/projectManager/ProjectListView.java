@@ -24,15 +24,16 @@ public class ProjectListView implements IProjectState {
 	private Shell shell;
 	private Composite composite;
 	private ProjectViewController projectViewController;
-	private Button createButton, saveButton, cancelButton;
+	public static Button createButton, saveButton, cancelButton;
 	private Label labelProjectID, labelProjectName, labelProjectDescription, labelProjectManager;
 	private Text textProjectID, textProjectName, textProjectDescription;
 	private Combo comboProjectManager;
 	private ProjectManager projectManager;
 	
-	public ProjectListView(ProjectViewController projectViewController, Composite composite){
+	public ProjectListView(ProjectViewController projectViewController, Shell shell){
 		this.projectViewController = projectViewController;
-		this.composite = composite;
+		this.shell = shell;
+		this.composite = new Composite(this.shell, SWT.NONE);
 	}
 	
 	@Override
@@ -123,8 +124,12 @@ public class ProjectListView implements IProjectState {
 	}
 	
 
-	public Button getEditButton(){
-		return this.createButton;
+//	public Button getEditButton(){
+//		return this.createButton;
+//	}
+	
+	public Composite getComposite(){
+		return this.composite;
 	}
 	
 	public Button getCancelButton(){

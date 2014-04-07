@@ -19,15 +19,15 @@ public class ProjectViewController implements Listener {
 	
 	
 	public ProjectViewController(Composite composite){
-		this.composite = composite;
-		projectListView = new ProjectListView(this, this.composite);
-		projectDetailView = new ProjectDetailView(this, this.composite);
-		projectEditView = new ProjectEditView(this, this.composite);
-		projectCreateView = new ProjectCreateView(this, this.composite);
+		this.shell = shell;
+		projectListView = new ProjectListView(this, this.shell);
+		projectDetailView = new ProjectDetailView(this, this.shell);
+		projectEditView = new ProjectEditView(this, this.shell);
 		setCurrentView(projectListView);
 	}
 	
 	public void setCurrentView(IProjectState currentState){
+		this.currentState.getComposite().dispose();
 		this.currentState = currentState;
 		this.currentState.show();
 		
@@ -42,13 +42,17 @@ public class ProjectViewController implements Listener {
 	}
 	
 	public void handleEvent(Event event) {
-		if(event.widget == projectListView.getEditButton()){
-			System.out.println("HIER");
+		 
+		if(event.widget == ProjectListView.createButton){
+			System.out.println("create");
+			projectCreateView = new ProjectCreateView(this, this.shell);
+			setCurrentView(projectCreateView);
 		}
 		
-		if(event.widget == projectListView.getCancelButton()){
-			System.out.println("Cancel gedrückt");
-		}
+//		if(event.widget == projectListView.getCancelButton()){
+//			System.out.println("Cancel gedrückt");
+//		}
+		
 	}
 	
 }
