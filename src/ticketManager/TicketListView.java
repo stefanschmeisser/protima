@@ -78,10 +78,9 @@ public class TicketListView {
 	    // TABELLE für den LISTVIEW
 	    this.table = new Table(compgrid, SWT.BORDER);
 	    this.table.setSize(600, 200);
-	    
 	    this.table.setLayoutData(data);	    
 	    this.table.setHeaderVisible(true);
-	    
+	    this.table.addListener(SWT.Selection, listener);
 
 	    // DETAIL VIEW
 	    data = new GridData();

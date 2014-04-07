@@ -2,17 +2,20 @@ package ticketManager;
 
 import java.util.ArrayList;
 import java.util.Vector;
+
 import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
 
 public class TicketListViewController implements ITicketState, ITicketObserver {
 
 	private TicketListView tlv;
-//	private Composite composite;
+	private TicketViewController tvc;
 	private ITicketDao ticketDao;
 	private Listener listener;
 	
-	public TicketListViewController(Shell shell, ITicketDao ticketDao){
+	public TicketListViewController(TicketViewController tvc, Shell shell, ITicketDao ticketDao){
+		
+		this.tvc = tvc;
 		
 		this.listener = new Listener() {
 			public void handleEvent(Event event) {
@@ -29,10 +32,13 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 				if (event.widget == tlv.btnDelete) {
 					System.out.println("Delete");
 				}
+				// Table Listener
+				if(event.widget == tlv.getTable()){
+					getSelectedTableItem();
+				}	
 			}
 		};
 		
-
 		tlv = new TicketListView(shell, this.listener);
 		
 		// get the TicketDao (Type of Interface ITicketDao)
@@ -96,6 +102,18 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 	// ------------------------------------------------------------------------
 	
 	public void getSelectedTableItem(){
+
 		
+		TableItem[] ti = tlv.getTable().getSelection();
+		
+		String str = "";
+		for(int i = 0; i < tlv.getTable().getColumnCount(); i++){
+			str = str + ti[0].getText(i) + ", ";
+			
+		}
+		System.out.println(str);
+		
+	
+	
 	}
 }

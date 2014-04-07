@@ -8,8 +8,6 @@ import org.eclipse.swt.widgets.*;
 
 public class Ticket {
 	
-	private enum TicketPriorityLevel { IN_TIME, URGENT, CRITICAL}
-	private enum TicketProcessStatus { OPEN, IN_PROGRESS, DONE, SUSPENDED, WAITING}
 	//private enum NotifyStatus {???}
 	
 	private int ticketId;
