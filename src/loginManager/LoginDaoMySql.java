@@ -9,8 +9,6 @@ public class LoginDaoMySql extends AbstractDaoMySql implements ILoginDao {
 		super();
 	}
 	
-	
-	
 	public String[] getAccess(String user, String password) {
 //		System.out.println("getAccess");
 		String column = "name, password";
