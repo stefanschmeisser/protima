@@ -41,17 +41,19 @@ public class FrontController implements IApplicationState {
 		listener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == vd.btnStart) {
-					System.out.println("Btn Start");
+//					System.out.println("Btn Start");
 					svc.setComposite(vd.getContentPanel());
 					setCurrentView(svc);
 				}
 				if (event.widget == vd.btnProject) {
+
 					System.out.println("Btn Project");
 					pc.setComposite(vd.getContentPanel());
 					setCurrentView(pc);
+
 				}
 				if (event.widget == vd.btnTicket) {
-					System.out.println("Btn Ticket");
+//					System.out.println("Btn Ticket");
 					tc.setComposite(vd.getContentPanel());
 					setCurrentView(tc);
 				}

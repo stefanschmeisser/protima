@@ -91,7 +91,7 @@ public abstract class AbstractDaoMySql {
 				qryStr += " WHERE "+ condition;
 			}
 			qryStr += " LIMIT 0,1";
-			System.out.println("abstract: " + qryStr);
+//			System.out.println("abstract: " + qryStr);
 			try {
 				openConnection(_user, _password);
 				Statement stmt = connection.createStatement();
