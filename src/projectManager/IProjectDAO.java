@@ -1,10 +1,10 @@
 package projectManager;
-import java.util.List;
+import java.util.ArrayList;
 
 public interface IProjectDAO {
-	public void createProject();
-	public void editProject();
-	public void removeProject();
-	public List<Project> getProjectList();
-	public Project getProject();
+	public void createProject(String name, String description, int projectmanagerID);
+	public void editProject(int projectID, String name, String description, int projectmanagerID);
+	public void removeProject(int projectID);
+	public ArrayList<Project> getProjectList();
+	public Project getProject(int projectID);
 }

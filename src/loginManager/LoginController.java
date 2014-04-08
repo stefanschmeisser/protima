@@ -2,8 +2,10 @@ package loginManager;
 
 import org.eclipse.swt.widgets.Display;
 
-import userManager.Editor;
-import userManager.User;
+import frontController.FrontController;
+import frontController.IContentState;
+import userRights.ProjectManager;
+import userRights.User;
 import applicationManager.Application;
 import applicationManager.IApplicationState;
 
@@ -33,14 +35,14 @@ public class LoginController implements IApplicationState {
 		String[] userPreData = this.datenWerk.getAccess(user, password);
 //		System.out.println(userPreData);
 		if (userPreData[0] != null) {
-			for (int i=0; i < userPreData.length; i++)
-				System.out.println("Wert["+i+"]: " + userPreData[i]);
+//			for (int i=0; i < userPreData.length; i++)
+//				System.out.println("Wert["+i+"]: " + userPreData[i]);
 			//TODO: User anlegen und in Application currentUser setzen!
 			// Minimum ID & Name
 			//FIXME: AccessLevel (Editor, TeamLeader etc) auch notwendig!! 
 			//TODO: Und davon abhängig den korrekten Benutzer anlegen!
 			String[] userTemp = this.datenWerk.getUserData(userPreData);
-			app.setCurrentUser(new Editor(Integer.parseInt(userTemp[0]), userTemp[1]));
+			app.setCurrentUser(new ProjectManager(Integer.parseInt(userTemp[0]), userTemp[1]));
 			
 			return true;
 		}
@@ -50,5 +52,11 @@ public class LoginController implements IApplicationState {
 	
 	public void switchToFcState() {
 		app.switchToFcState();
+	}
+
+	@Override
+	public void setCurrentView(IContentState currentState) {
+		// TODO Auto-generated method stub
+		
 	}
 }

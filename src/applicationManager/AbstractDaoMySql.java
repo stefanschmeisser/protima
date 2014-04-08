@@ -8,8 +8,8 @@ import java.sql.Statement;
 
 public abstract class AbstractDaoMySql {
 
-	private String _user, _password;
-	private Connection connection;
+	protected String _user, _password;
+	protected Connection connection;
 	
 	public AbstractDaoMySql() {
 		
@@ -91,7 +91,7 @@ public abstract class AbstractDaoMySql {
 				qryStr += " WHERE "+ condition;
 			}
 			qryStr += " LIMIT 0,1";
-			System.out.println("abstract: " + qryStr);
+//			System.out.println("abstract: " + qryStr);
 			try {
 				openConnection(_user, _password);
 				Statement stmt = connection.createStatement();

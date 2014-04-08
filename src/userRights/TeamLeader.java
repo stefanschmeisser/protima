@@ -1,4 +1,4 @@
-package userManager;
+package userRights;
 
 public class TeamLeader extends Editor {
 
