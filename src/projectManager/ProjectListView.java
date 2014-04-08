@@ -69,23 +69,26 @@ public class ProjectListView implements IProjectState {
 		createButton = new Button(compgrid, SWT.PUSH);
 		Image imageCreateProject = new Image(Display.getCurrent(), "content/addItemToList.png");
         createButton.setImage(imageCreateProject);
-        createButton.setSize(32,32);
+        createButton.setSize(34,34);
         createButton.setLayoutData(data);
         createButton.addListener(SWT.Selection, this.projectViewController);
         
+        /**
+         * noch im Listener chekcne ob der button ausgewählt wurde
+         */
         data = new GridData(GridData.HORIZONTAL_ALIGN_END);
         editButton = new Button(compgrid, SWT.PUSH);
         Image imageEditProject = new Image(Display.getCurrent(), "content/editListItem.png");
         editButton.setImage(imageEditProject);
-        editButton.setSize(32,32);
+        editButton.setSize(34,34);
         editButton.setLayoutData(data);
-        editButton.addListener(SWT.Selection, this.projectViewController);    
+        editButton.addListener(SWT.Selection, this.projectViewController);  
         
         data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		deleteButton = new Button(compgrid, SWT.PUSH);
 		Image imageDeleteProject = new Image(Display.getCurrent(), "content/deleteFromList.png");
 		deleteButton.setImage(imageDeleteProject);
-		deleteButton.setSize(32,32);
+		deleteButton.setSize(34,34);
 		deleteButton.setLayoutData(data);
 		deleteButton.addListener(SWT.Selection, this.projectViewController);
 	
@@ -108,15 +111,6 @@ public class ProjectListView implements IProjectState {
 	    this.table.setLayoutData(tableGrid);	    
 	    this.table.setHeaderVisible(true);
 	    this.table.addListener(SWT.Selection, this.projectViewController);
-
-//	    data = new GridData();
-//	    data.horizontalAlignment = GridData.FILL;
-//	    data.grabExcessHorizontalSpace = true;
-//	    data.horizontalSpan = 5;
-//	    data.heightHint = 200;
-//	    
-//	    Composite compdetail = new Composite(this.shell, SWT.NONE);
-//	    compdetail.setLayoutData(data);
 	}
 	
 	public Table getTable(){
@@ -131,10 +125,6 @@ public class ProjectListView implements IProjectState {
 	@Override
 	public void setComposite(Composite composite){
 		this.composite = composite;
-	}
-	
-	public Button getCancelButton(){
-		return this.cancelButton;
 	}
 	
 	public int getProjectID(){

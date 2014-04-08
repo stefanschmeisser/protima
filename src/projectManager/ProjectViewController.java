@@ -72,11 +72,17 @@ public class ProjectViewController implements Listener {
 	public void handleEvent(Event event) {
 		 
 		if(event.widget == ProjectListView.createButton){
+			projectCreateView = new ProjectCreateView(this, this.shell);
+			setCurrentView(this.projectCreateView);
+		}
+		
+		if(event.widget == ProjectListView.editButton){
+			System.out.println("EDIT Button");
 			projectEditView = new ProjectEditView(this, this.shell);
 			setCurrentView(this.projectEditView);
 		}
 		
-		if(event.widget == ProjectEditView.backButton){
+		if(event.widget == ProjectEditView.cancelButton || event.widget == ProjectCreateView.cancelButton ){
 			this.projectListView = new ProjectListView(this, this.shell);
 			this.projectDetailView = new ProjectDetailView(this, this.shell);
 			setCurrentView(this.projectListView);
