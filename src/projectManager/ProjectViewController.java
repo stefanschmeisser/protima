@@ -76,7 +76,7 @@ public class ProjectViewController implements Listener {
 			setCurrentView(this.projectEditView);
 		}
 		
-		if(event.widget == ProjectEditView.backButton){
+		if(event.widget == ProjectEditView.cancelButton || event.widget == ProjectCreateView.cancelButton ){
 			this.projectListView = new ProjectListView(this, this.shell);
 			this.projectDetailView = new ProjectDetailView(this, this.shell);
 			setCurrentView(this.projectListView);

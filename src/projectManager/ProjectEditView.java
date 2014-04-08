@@ -1,12 +1,15 @@
 package projectManager;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
@@ -20,7 +23,7 @@ public class ProjectEditView implements IProjectState {
 	private Label labelProjectID, labelProjectName, labelProjectDescription, labelProjectManager;
 	private Text textProjectID, textProjectName, textProjectDescription;
 	private Combo comboProjectManager;
-	public static Button backButton, saveButton, cancelButton;
+	public static Button saveButton, cancelButton;
 	
 	public ProjectEditView(ProjectViewController projectViewController, Shell shell){
 		this.projectViewController = projectViewController;
@@ -35,14 +38,17 @@ public class ProjectEditView implements IProjectState {
 	    this.composite.setLayout(new GridLayout());
 	    
 	    Composite header = new Composite(this.composite, SWT.NONE);
-		
+	    
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 12;
 	    layout.makeColumnsEqualWidth = true;
 	    header.setLayout(layout);
 
-	    Label projectDetailHeader = new Label(header, SWT.NONE);
-	    projectDetailHeader.setText("Detail View");
+	    Label projectEditHeader = new Label(header, SWT.NONE);
+	    projectEditHeader.setText("Detail View");
+	    FontData[] fD = projectEditHeader.getFont().getFontData();
+	    fD[0].setHeight(16);
+	    projectEditHeader.setFont( new Font(Display.getCurrent(),fD[0]));
 
 		Composite content = new Composite(this.composite, SWT.NONE);
 	    content.setLayout(new GridLayout(2, true));
@@ -81,10 +87,12 @@ public class ProjectEditView implements IProjectState {
 		saveButton = new Button(buttons, SWT.PUSH);
 		saveButton.setText("Speichern");
 		saveButton.setLayoutData(new GridData(GridData.BEGINNING));
+		saveButton.addListener(SWT.Selection, this.projectViewController);
 		
 		cancelButton = new Button(buttons, SWT.PUSH);
-		cancelButton.setText("Cancel");
+		cancelButton.setText("Abbrechen");
 		cancelButton.setLayoutData(new GridData(GridData.BEGINNING));
+		cancelButton.addListener(SWT.Selection, this.projectViewController);
 	}
 	
 	@Override
