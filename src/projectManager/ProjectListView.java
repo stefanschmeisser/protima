@@ -123,8 +123,14 @@ public class ProjectListView implements IProjectState {
 		return this.table;
 	}
 	
+	@Override
 	public Composite getComposite(){
 		return this.composite;
+	}
+	
+	@Override
+	public void setComposite(Composite composite){
+		this.composite = composite;
 	}
 	
 	public Button getCancelButton(){

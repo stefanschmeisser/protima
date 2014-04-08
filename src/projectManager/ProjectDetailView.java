@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
 import userRights.ProjectManager;
@@ -27,20 +28,25 @@ public class ProjectDetailView implements IProjectState {
 		this.projectViewController = projectViewController;
 		this.shell = shell;
 		this.composite = new Composite(this.shell, SWT.NONE);
+		this.composite.setLocation(0,0);
 	}
 	
 	@Override
 	public void show() {
 		
+		Composite header = new Composite(this.composite, SWT.NONE);
+		
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 12;
 	    layout.makeColumnsEqualWidth = true;
-	    this.composite.setLayout(layout);
+	    header.setLayout(layout);
 	    
 //	    GridData header = new GridData(GridData.FILL_HORIZONTAL);
-	    GridData header = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
-	    Label ticket = new Label(this.composite, SWT.NONE);
-	    ticket.setText("Detail View");
+//	    GridData header = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+	    Label projectDetailHeader = new Label(header, SWT.NONE);
+	    projectDetailHeader.setText("Detail View");
+	    
+	    
 		
 //		Composite rightColumn = new Composite(composite, SWT.NONE);
 //        rightColumn.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL));
@@ -49,11 +55,13 @@ public class ProjectDetailView implements IProjectState {
 //		gridLayout2.numColumns = 2;
 //		rightColumn.setLayout(gridLayout2);
 //		
-//		labelProjectID = new Label(rightColumn, SWT.NONE);
+//		Composite content = new Composite(this.composite, SWT.NONE);
+//	    
+//	    labelProjectID = new Label(content, SWT.NONE);
 //		labelProjectID.setText("Projekt ID: ");
 //		labelProjectID.setLayoutData(new GridData(GridData.BEGINNING));
 //		
-//		textProjectID = new Text(rightColumn, SWT.READ_ONLY | SWT.BORDER);
+//		textProjectID = new Text(content, SWT.READ_ONLY | SWT.BORDER);
 //		textProjectID.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 //		
 //		labelProjectManager = new Label(rightColumn, SWT.NONE);
@@ -89,6 +97,17 @@ public class ProjectDetailView implements IProjectState {
 	@Override
 	public Composite getComposite(){
 		return this.composite;
+	}
+
+	@Override
+	public void setComposite(Composite composite){
+		this.composite = composite;
+	}
+	
+	@Override
+	public Table getTable() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

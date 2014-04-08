@@ -17,6 +17,7 @@ import ticketManager.TicketTableModel;
 public class ProjectViewController implements Listener {
 
 	private Shell shell;
+	private ProjectController projectController; 
 	private IProjectState currentState;
 	private IProjectState projectListView;
 	private IProjectState projectDetailView;
@@ -24,11 +25,11 @@ public class ProjectViewController implements Listener {
 	private IProjectState projectCreateView;
 	private ArrayList<Project> projectListData;
 	
-	public ProjectViewController(Shell shell){
+	public ProjectViewController(Shell shell, ProjectController projectController){
 		this.shell = shell;
+		this.projectController = projectController;
 		projectListView = new ProjectListView(this, this.shell);
 		projectDetailView = new ProjectDetailView(this, this.shell);
-		projectEditView = new ProjectEditView(this, this.shell);
 		setCurrentView(projectListView);
 	}
 	
@@ -42,15 +43,14 @@ public class ProjectViewController implements Listener {
 		this.currentState = currentState;
 		this.currentState.show();
 		if(this.currentState == this.projectListView){
+			this.fillTableData(this.projectController.getTableListData());
 			this.projectDetailView.show();
 		}
 		this.shell.layout();
 	}
 	
 	public void fillTableData(ArrayList<Project> projectListData){
-		
 		this.projectListData = projectListData;
-		
 		if(projectListData != null){
 			for(int i=0; i < 3; i++){
 				TableColumn tableColumn = new TableColumn(this.projectListView.getTable(), SWT.LEFT);
@@ -72,7 +72,14 @@ public class ProjectViewController implements Listener {
 	public void handleEvent(Event event) {
 		 
 		if(event.widget == ProjectListView.createButton){
+			projectEditView = new ProjectEditView(this, this.shell);
 			setCurrentView(this.projectEditView);
+		}
+		
+		if(event.widget == ProjectEditView.backButton){
+			this.projectListView = new ProjectListView(this, this.shell);
+			this.projectDetailView = new ProjectDetailView(this, this.shell);
+			setCurrentView(this.projectListView);
 		}
 		
 		if(event.widget == projectListView.getTable()){
@@ -81,7 +88,7 @@ public class ProjectViewController implements Listener {
 
 			for(int i=0; i < this.projectListData.size(); i++){
 				if(Integer.parseInt(selection[0].getText()) == this.projectListData.get(i).getProjectId()){
-					System.out.println("HIER BIN ICH" + this.projectListData.get(i).getProjectId());
+					
 				}
 			}
 			

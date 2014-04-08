@@ -51,4 +51,10 @@ public class ProjectCreateView implements IProjectState {
 		return null;
 	}
 
+	@Override
+	public void setComposite(Composite composite) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
