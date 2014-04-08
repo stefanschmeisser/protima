@@ -42,22 +42,22 @@ public class ProjectListView implements IProjectState {
 	public void show() {		
 		
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 3;
+		layout.numColumns = 12;
 	    layout.makeColumnsEqualWidth = true;
 	    this.composite.setLayout(layout);
 	    
 	    GridData header = new GridData(GridData.FILL_HORIZONTAL);
-	    header = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+//	    header = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
 	    Label ticket = new Label(this.composite, SWT.NONE);
 	    ticket.setText("Ticket Overview");
 	    
 	    Composite compgrid = new Composite(this.composite, SWT.NONE);
 	    GridData data = new GridData(GridData.FILL_BOTH);
 	    data.horizontalSpan = 3;
-	    data.widthHint = 600;
+	    data.widthHint = this.composite.getSize().x;
 	    compgrid.setLayoutData(data);
 	    layout = new GridLayout();
-	    layout.numColumns = 6;
+	    layout.numColumns = 12;
 	    layout.marginHeight = 15;
 	    compgrid.setLayout(layout);
 	    
@@ -92,12 +92,22 @@ public class ProjectListView implements IProjectState {
 		data = new GridData();
 	    data.horizontalAlignment = GridData.FILL;
 	    data.grabExcessHorizontalSpace = true;
-	    data.horizontalSpan = 5;
+	    data.horizontalSpan = 12;
 	    data.heightHint = 100;
 	    
-	    this.table = new Table(compgrid, SWT.BORDER);
-	    this.table.setSize(600, 200);
-	    this.table.setLayoutData(data);	    
+	    Composite tableComposite = new Composite(this.composite, SWT.NONE);
+	    GridData tableGrid = new GridData(GridData.FILL_HORIZONTAL);
+	    tableGrid.horizontalSpan = 12;
+	    tableGrid.widthHint = this.composite.getSize().x;
+	    tableGrid.minimumWidth = this.composite.getSize().y;
+//	    tableGrid.grabExcessHorizontalSpace = true;
+	    data.widthHint = this.shell.getSize().x;
+	    tableComposite.setLayoutData(tableGrid);
+	    tableComposite.setLayout(layout);
+	    
+	    this.table = new Table(tableComposite, SWT.BORDER);
+	    this.table.setSize(tableComposite.getSize().x, tableComposite.getSize().y);
+	    this.table.setLayoutData(tableGrid);	    
 	    this.table.setHeaderVisible(true);
 	    this.table.addListener(SWT.Selection, this.projectViewController);
 
@@ -112,10 +122,9 @@ public class ProjectListView implements IProjectState {
 
 	}
 	
-
-//	public Button getEditButton(){
-//		return this.createButton;
-//	}
+	public Table getTable(){
+		return this.table;
+	}
 	
 	public Composite getComposite(){
 		return this.composite;

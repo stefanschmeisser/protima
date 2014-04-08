@@ -3,12 +3,10 @@ package projectManager;
 public class Project {
 	
 	private int projectId;
-	//private ArrayList teams;
 	private int projectManager;
 	private String projectName;
 	private String projectDescription;
 		
-	
 	public int getProjectId() {
 		return projectId;
 	}
@@ -40,7 +38,5 @@ public class Project {
 	public void setProjectDescription(String projectDescription) {
 		this.projectDescription = projectDescription;
 	}
-	
-	
 
 }

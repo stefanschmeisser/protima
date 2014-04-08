@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
 
 public class ProjectCreateView implements IProjectState {
 
@@ -42,6 +43,12 @@ public class ProjectCreateView implements IProjectState {
 	@Override
 	public Composite getComposite(){
 		return this.composite;
+	}
+
+	@Override
+	public Table getTable() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

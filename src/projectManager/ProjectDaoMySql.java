@@ -1,5 +1,7 @@
 package projectManager;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,9 +11,31 @@ import java.util.List;
 
 import applicationManager.AbstractDaoMySql;
 
-public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
+public class ProjectDaoMySql implements IProjectDAO {
 
-	private List<Project> projectList;
+	private String _user, _password, _schema;
+	private Connection connection;
+	private ArrayList<Project> projectList;
+	
+	public ProjectDaoMySql() {
+		_user = "root";
+		_password = "";
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	private void openConnection(String user, String password) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String conString = "jdbc:mysql://localhost/sag";
+			connection = DriverManager.getConnection(conString, _user, _password);
+			connection.setAutoCommit(false);
+		} catch (ClassNotFoundException e) {
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * creates a new project in the database
@@ -69,7 +93,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 	 * returns a List with all projects from the database
 	 */
 	@Override
-	public List<Project> getProjectList(){
+	public ArrayList<Project> getProjectList(){
 		this.projectList = new ArrayList<Project>();
 		openConnection(_user,_password);
 		try{
