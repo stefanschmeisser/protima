@@ -18,7 +18,14 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		
 		this.tvc = ticketViewController;
 		this.shell = shell;
-		
+		this.ticketDao = ticketDao;
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	@Override
+	public void show() {
+
 		this.listener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == tlv.btnRefresh) {
@@ -28,10 +35,10 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 				if (event.widget == tlv.btnCreate) {
 					System.out.println("Create");
 					tvc.setCurrentView(tvc.getTicketCreateViewController());
-//					tvc.getcurrentView().getComposite().dispose();
 				}
 				if (event.widget == tlv.btnEdit) {
 					System.out.println("Edit");
+					
 				}
 				if (event.widget == tlv.btnDelete) {
 					System.out.println("Delete");
@@ -43,14 +50,6 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 			}
 		};
 		
-		// get the TicketDao (Type of Interface ITicketDao)
-		this.ticketDao = ticketDao;
-	}
-	
-	// ------------------------------------------------------------------------
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
 		tlv = new TicketListView(this.shell, this.listener);
 		this.fillTableData();
 		this.shell.layout();

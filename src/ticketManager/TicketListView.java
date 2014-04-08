@@ -27,10 +27,10 @@ public class TicketListView {
 //	    test.setText("test");
 //	    test.setLayoutData(data);
 	    
-	    Composite compgrid = new Composite(shell, SWT.NONE);
+	    Composite compgrid = new Composite(composite, SWT.NONE);
 	    GridData data = new GridData(GridData.FILL_BOTH);
 	    data.horizontalSpan = 3;
-	    data.widthHint = 600;
+//	    data.widthHint = 600;
 	    compgrid.setLayoutData(data);
 	    layout = new GridLayout();
 	    layout.numColumns = 6;
@@ -83,14 +83,14 @@ public class TicketListView {
 	    this.table.addListener(SWT.Selection, listener);
 
 	    // DETAIL VIEW
-	    data = new GridData();
-	    data.horizontalAlignment = GridData.FILL;
-	    data.grabExcessHorizontalSpace = true;
-	    data.horizontalSpan = 5;
-	    data.heightHint = 200;
+//	    data = new GridData();
+//	    data.horizontalAlignment = GridData.FILL;
+//	    data.grabExcessHorizontalSpace = true;
+//	    data.horizontalSpan = 5;
+//	    data.heightHint = 200;
 	    
-	    Composite compdetail = new Composite(shell, SWT.NONE);
-	    compdetail.setLayoutData(data);
+//	    Composite compdetail = new Composite(shell, SWT.NONE);
+//	    compdetail.setLayoutData(data);
 
 	}
 

@@ -26,7 +26,8 @@ public class TicketViewController {
 		tlvc = new TicketListViewController(this, shell, this.ticketDao);
 //		tdvc = new TicketDetailViewController(shell);
 //		tevc = new TicketEditViewController(shell);
-		tcvc = new TicketCreateViewController(shell);
+		tcvc = new TicketCreateViewController(this, shell, this.ticketDao);
+		
 		this.setCurrentView(tlvc);
 	}
 	
@@ -39,13 +40,38 @@ public class TicketViewController {
 		if(this.currentView != null){
 			this.currentView.getComposite().dispose();
 		}
+		
+//		if(this.currentView == this.tlvc){
+//			this.tcvc.getComposite().dispose();
+//		}
+		
 		this.currentView = currentState;
 		this.currentView.show();
-		this.shell.setLayout(new GridLayout());
+		
+//		if(this.currentView == this.tlvc){
+//			this.tcvc.show();
+//		}
+//		this.shell.setLayout(new GridLayout());
 		
 		System.out.println("Output CurrentState: " + this.currentView);
 	}
 	
+	
+//	public void setCurrentView(IProjectState currentState){
+//		if(this.currentState != null){
+//			this.currentState.getComposite().dispose();
+//		}
+//		if(this.currentState == this.projectListView){
+//			this.projectDetailView.getComposite().dispose();
+//		}
+//		this.currentState = currentState;
+//		this.currentState.show();
+//		if(this.currentState == this.projectListView){
+//			this.fillTableData(this.projectController.getTableListData());
+//			this.projectDetailView.show();
+//		}
+//		this.shell.layout();
+//	}
 	// ------------------------------------------------------------------------
 	
 	public ITicketState getcurrentView(){
