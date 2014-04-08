@@ -6,7 +6,7 @@ public interface IUserDAO {
 	
 	public void getUser(int id);
 	
-	public int[] getUserList();
+	public String[][] getUserList();
 	
 	public void getUsersByProject(String projectName);
 	

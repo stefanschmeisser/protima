@@ -3,7 +3,9 @@ package userManager;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
+import frontController.FrontController;
 import frontController.IContentState;
 import userRights.User;
 
@@ -13,15 +15,27 @@ import java.util.List;
 public class UserController implements IContentState {
 	
 	private IUserDAO userDAO;
-	private userViewController uvc;
+	private UserViewController uvc;
 	private Composite composite;
 	private User user; 
-	private int[] userIDs;
+	private String[][] userIDs;
+	private Shell shell;
+	private FrontController parent;
 
+	public UserController(Shell shell, FrontController parent){
+		this.parent = parent;
+		userDAO = new UserDaoMySql();
+		this.shell = shell;
+		uvc = new UserViewController(shell, this);
+		
+	}
+	
 	@Override
 	public void setCurrentView(IContentState pCurrentState) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("setcompo");
+		parent.setBlankComposite(uvc.getComposite());
+		this.shell.layout();
 	}
 
 	@Override
@@ -32,18 +46,21 @@ public class UserController implements IContentState {
 
 	@Override
 	public void setComposite(Composite composite) {
-		// TODO Auto-generated method stub
-	
+		this.composite = composite;
+		Color blue = new Color (Display.getCurrent(), 0, 200, 255);
+		this.composite.setBackground(blue);
+		parent.setBlankComposite(composite);
 	}
 
 	@Override
 	public Composite getComposite() {
 		// TODO Auto-generated method stub
-		return null;
+		return uvc.getComposite();
 	}
 	
-	public void getAllUsers(){
+	public String[][] getAllUsers(){
 		userIDs = userDAO.getUserList();
+		return userIDs;
 	}
 	
 

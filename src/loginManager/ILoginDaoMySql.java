@@ -13,8 +13,8 @@ public class ILoginDaoMySql implements ILoginDao {
 	
 	public ILoginDaoMySql() {
 		
-		_user = "sag";
-		_password = "Jr22HhUSLMz9Nu3m";
+		_user = "U1629523";
+		_password = "!2S0A1G4!";
 		
 		openConnection(_user, _password);
 		
@@ -23,7 +23,7 @@ public class ILoginDaoMySql implements ILoginDao {
 	private void openConnection(String user, String password) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String conString = "jdbc:mysql://games.thm.de/sag";
+			String conString = "jdbc:mysql://rdbms.strato.de";
 			connection = DriverManager.getConnection(conString, _user, _password);
 			connection.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {

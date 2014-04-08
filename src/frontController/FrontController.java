@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.*;
 
 import applicationManager.IApplicationState;
 import ticketManager.TicketController;
+import userManager.UserController;
 
 public class FrontController implements IApplicationState {
 	
@@ -18,8 +19,9 @@ public class FrontController implements IApplicationState {
 	private StartViewController svc;
 	private ProjectViewController pvc;
 	private TicketController tc;
-	//private UserViewController uvc;
+	private UserController uc;
 	
+	private Composite blankComp;
 	public Listener listener;
 	
 	public FrontController(Display disp){
@@ -27,12 +29,13 @@ public class FrontController implements IApplicationState {
 		this.disp = disp;
 		shell = new Shell(this.disp);
 		
-		svc = new StartViewController();
-		pvc = new ProjectViewController();
-		tc = new TicketController(this.shell);
+//		svc = new StartViewController();
+//		pvc = new ProjectViewController();
+//		tc = new TicketController(this.shell);
+		uc = new UserController(this.shell,this);
 //		tvc = new TeamViewController();
 
-		Composite blankComp = this.tc.getComposite();//new Composite(shell, SWT.NONE);
+		blankComp = this.uc.getComposite();//new Composite(shell, SWT.NONE);
 		GridLayout blankCompLayout = new GridLayout();
 		blankComp.setLayout(blankCompLayout);
 		
@@ -60,11 +63,11 @@ public class FrontController implements IApplicationState {
 //					setCurrentView(tvc);
 //				}
 				
-//				if (event.widget == vd.btnUser) {
-//					System.out.println("Btn User");
-//					uvc.setContentPane(vd.getContentPanel());
-//					setCurrentView(uvc);
-//				}
+				if (event.widget == vd.btnUser) {
+					System.out.println("Btn User");
+					uc.setComposite(vd.getContentPanel());
+					setCurrentView(uc);
+				}
 			}
 		};
 		
@@ -132,6 +135,12 @@ public class FrontController implements IApplicationState {
 	public void setCurrentView(IContentState pCurrentState){
 		this.currentState = pCurrentState;
 		this.zeigma();
+	}
+	
+	public void setBlankComposite(Composite compo){
+		
+		this.blankComp = compo;
+		
 	}
 	
 	public void zeigma(){
