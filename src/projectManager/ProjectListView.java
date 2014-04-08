@@ -73,13 +73,16 @@ public class ProjectListView implements IProjectState {
         createButton.setLayoutData(data);
         createButton.addListener(SWT.Selection, this.projectViewController);
         
+        /**
+         * noch im Listener chekcne ob der button ausgewählt wurde
+         */
         data = new GridData(GridData.HORIZONTAL_ALIGN_END);
         editButton = new Button(compgrid, SWT.PUSH);
         Image imageEditProject = new Image(Display.getCurrent(), "content/editListItem.png");
         editButton.setImage(imageEditProject);
         editButton.setSize(34,34);
         editButton.setLayoutData(data);
-        editButton.addListener(SWT.Selection, this.projectViewController);    
+        editButton.addListener(SWT.Selection, this.projectViewController);  
         
         data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		deleteButton = new Button(compgrid, SWT.PUSH);

@@ -86,10 +86,12 @@ this.composite.setLayout(new GridLayout());
 	    createButton = new Button(buttons, SWT.PUSH);
 	    createButton.setText("Projekt erstellen");
 	    createButton.setLayoutData(new GridData(GridData.BEGINNING));
+	    createButton.addListener(SWT.Selection, this.projectViewController);
 		
 		cancelButton = new Button(buttons, SWT.PUSH);
 		cancelButton.setText("Abbrechen");
 		cancelButton.setLayoutData(new GridData(GridData.BEGINNING));
+		cancelButton.addListener(SWT.Selection, this.projectViewController);
 	}
 
 	@Override
