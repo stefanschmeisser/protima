@@ -2,7 +2,6 @@ package ticketManager;
 
 import java.util.ArrayList;
 import java.util.Vector;
-
 import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
 

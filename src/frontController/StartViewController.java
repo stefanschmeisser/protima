@@ -12,7 +12,7 @@ public class StartViewController implements IContentState {
 	}
 	
 	
-	@Override
+//	@Override
 	public void setCurrentView(IContentState pCurrentState) {
 		// TODO Auto-generated method stub
 		
@@ -32,7 +32,7 @@ public class StartViewController implements IContentState {
 //		
 //	}
 
-	@Override
+//	@Override
 	public Composite getComposite() {
 		// TODO Auto-generated method stub
 		return this.composite;
