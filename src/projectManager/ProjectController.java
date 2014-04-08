@@ -6,6 +6,8 @@ import java.util.Vector;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -19,19 +21,23 @@ public class ProjectController implements IContentState {
 	private Composite composite;
 	private IProjectDAO projectDAO;
 	private ProjectViewController projectViewController;
-	private Project selectedProject;
 	
-	//getAllProjects() List<int>
 	public ProjectController(Shell shell){
 		this.shell = shell;
 		this.projectDAO = new ProjectDaoMySql();
-		this.projectViewController = new ProjectViewController(shell);
-		
-		this.selectedProject = this.projectDAO.getProject(100);
-		System.out.println("Projekt ID: " + this.selectedProject.getProjectId());
-		System.out.println("Projektname: " + this.selectedProject.getProjectName());
-		
-		projectViewController.fillTableData(this.projectDAO.getProjectList());
+		this.projectViewController = new ProjectViewController(shell, this);
+	}
+	
+	public ArrayList<Project> getTableListData(){
+		return this.projectDAO.getProjectList();
+	}
+	
+	public Project getProject(int projectID){
+		return this.projectDAO.getProject(projectID);
+	}
+	
+	public void setProject(Project project){
+		this.projectDAO.createProject(project.getProjectName(), project.getProjectDescription(), project.getProjectManager());
 	}
 	
 }

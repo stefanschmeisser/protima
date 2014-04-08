@@ -7,5 +7,6 @@ import org.eclipse.swt.widgets.Table;
 public interface IProjectState {
 	public void show();
 	public Composite getComposite();
+	public void setComposite(Composite composite);
 	public Table getTable();
 }
