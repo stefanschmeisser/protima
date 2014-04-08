@@ -44,13 +44,13 @@ public class ProjectDaoMySql implements IProjectDAO {
 	public void createProject(String name, String description, int projectmanagerID){
 		try {
 			openConnection(_user, _password);
-//			Statement stmt = connection.createStatement();
-//			ResultSet rs = stmt.executeQuery("INSERT INTO project(projectID, name, description, projectmanagerID) VALUES ()");
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO project(name, description, projectmanagerID) VALUES (?,?,?)");
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, description);
 			preparedStatement.setInt(3, projectmanagerID);
 			preparedStatement.executeUpdate();
+			connection.commit();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
