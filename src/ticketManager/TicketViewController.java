@@ -1,11 +1,13 @@
 package ticketManager;
 
+import java.awt.Color;
+
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Shell;
 
 public class TicketViewController {
 
-	private ITicketState currentState;
+	private ITicketState currentView;
 	private Shell shell;
 	
 	private ITicketState tlvc;
@@ -32,19 +34,23 @@ public class TicketViewController {
 	
 	public void setCurrentView(ITicketState currentState){
 		
-		System.out.println("Input CurrentState: " + this.currentState);
+		System.out.println("Input CurrentState: " + this.currentView);
 		
-		if(this.currentState != null){
-			this.currentState.getComposite().dispose();
+		if(this.currentView != null){
+			this.currentView.getComposite().dispose();
 		}
-		this.currentState = currentState;
-		this.currentState.show();
+		this.currentView = currentState;
+		this.currentView.show();
 		this.shell.setLayout(new GridLayout());
 		
-		System.out.println("Output CurrentState: " + this.currentState);
+		System.out.println("Output CurrentState: " + this.currentView);
 	}
 	
 	// ------------------------------------------------------------------------
+	
+	public ITicketState getcurrentView(){
+		return this.currentView;
+	}
 	
 	public ITicketState getTicketListViewController(){
 		return this.tlvc;

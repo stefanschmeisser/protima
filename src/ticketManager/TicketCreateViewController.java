@@ -16,9 +16,9 @@ public class TicketCreateViewController implements ITicketState {
 		
 		this.listener = new Listener() {
 			public void handleEvent(Event event) {
-				if (event.widget == tcv.btnStart) {
-					System.out.println("Button Start auf TicketCreateView (nur zum TEST)");
-				}
+//				if (event.widget == tcv.btnStart) {
+//					System.out.println("Button Start auf TicketCreateView (nur zum TEST)");
+//				}
 			}
 		};
 	}
