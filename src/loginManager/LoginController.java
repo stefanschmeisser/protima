@@ -21,12 +21,12 @@ public class LoginController implements IApplicationState {
 		this.datenWerk = new LoginDaoMySql();
 		this.app = app;
 		this.disp = disp;
+		this.lvc = new LoginViewController(this, disp);
 	}
 
 	public void show() {
 		// TODO Auto-generated method stub
-		this.lvc = new LoginViewController(this, disp);
-		this.lvc.show();
+		
 	}
 	
 	public boolean checkUserCredentials(String user, String password) {
