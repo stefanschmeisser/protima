@@ -22,6 +22,7 @@ public class ProjectViewController implements Listener {
 	private IProjectState projectDetailView;
 	private IProjectState projectEditView;
 	private IProjectState projectCreateView;
+	private ArrayList<Project> projectListData;
 	
 	public ProjectViewController(Shell shell){
 		this.shell = shell;
@@ -32,16 +33,24 @@ public class ProjectViewController implements Listener {
 	}
 	
 	public void setCurrentView(IProjectState currentState){
-		System.out.println(this.currentState);
 		if(this.currentState != null){
 			this.currentState.getComposite().dispose();
 		}
+		if(this.currentState == this.projectListView){
+			this.projectDetailView.getComposite().dispose();
+		}
 		this.currentState = currentState;
 		this.currentState.show();
-		this.shell.setLayout(new GridLayout());
+		if(this.currentState == this.projectListView){
+			this.projectDetailView.show();
+		}
+		this.shell.layout();
 	}
 	
 	public void fillTableData(ArrayList<Project> projectListData){
+		
+		this.projectListData = projectListData;
+		
 		if(projectListData != null){
 			for(int i=0; i < 3; i++){
 				TableColumn tableColumn = new TableColumn(this.projectListView.getTable(), SWT.LEFT);
@@ -49,14 +58,12 @@ public class ProjectViewController implements Listener {
 				if(i == 1) {tableColumn.setText("Name");}
 				if(i == 2) {tableColumn.setText("Description");}
 //				if(i == 3) {tableColumn.setText("Projectmanager");}
-				System.out.println("tableColumn" + i);
 			}
 			for(int i=0; i < projectListData.size(); i++){
 				TableItem tableItem = new TableItem(this.projectListView.getTable(), SWT.NONE);
 				tableItem.setText(0, Integer.toString(projectListData.get(i).getProjectId()));
 				tableItem.setText(1, projectListData.get(i).getProjectName());
 				tableItem.setText(2, "hallo");
-				System.out.println("projectListData");
 				this.projectListView.getTable().getColumn(i).pack();
 			}
 		}
@@ -65,9 +72,19 @@ public class ProjectViewController implements Listener {
 	public void handleEvent(Event event) {
 		 
 		if(event.widget == ProjectListView.createButton){
-			System.out.println("create");
-			projectCreateView = new ProjectCreateView(this, this.shell);
-			setCurrentView(projectCreateView);
+			setCurrentView(this.projectEditView);
+		}
+		
+		if(event.widget == projectListView.getTable()){
+			System.out.println(projectListView.getTable().getSelectionIndices());
+			TableItem[] selection = projectListView.getTable().getSelection();
+
+			for(int i=0; i < this.projectListData.size(); i++){
+				if(Integer.parseInt(selection[0].getText()) == this.projectListData.get(i).getProjectId()){
+					System.out.println("HIER BIN ICH" + this.projectListData.get(i).getProjectId());
+				}
+			}
+			
 		}
 		
 //		if(event.widget == projectListView.getCancelButton()){

@@ -21,16 +21,11 @@ public class ProjectController implements IContentState {
 	private ProjectViewController projectViewController;
 	private Project selectedProject;
 	
-	//getAllProjects() List<int>
 	public ProjectController(Shell shell){
 		this.shell = shell;
 		this.projectDAO = new ProjectDaoMySql();
 		this.projectViewController = new ProjectViewController(shell);
-		
 		this.selectedProject = this.projectDAO.getProject(100);
-		System.out.println("Projekt ID: " + this.selectedProject.getProjectId());
-		System.out.println("Projektname: " + this.selectedProject.getProjectName());
-		
 		projectViewController.fillTableData(this.projectDAO.getProjectList());
 	}
 	
