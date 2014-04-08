@@ -1,54 +1,64 @@
 package ticketManager;
 
-import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Shell;
 
-import frontController.IContentState;
+public class TicketViewController {
 
-public class TicketViewController implements IContentState {
-
-	private TicketListViewController tlvc;
-	private TicketDetailViewController tdvc;
-	private TicketEditViewController tevc;
-	private TicketCreateViewController tcvc;
+	private ITicketState currentState;
+	private Shell shell;
+	
+	private ITicketState tlvc;
+	private ITicketState tdvc;
+	private ITicketState tevc;
+	private ITicketState tcvc;
 	private ITicketDao ticketDao;
 
-
+	// ------------------------------------------------------------------------
+	
 	public TicketViewController(Shell shell, ITicketDao ticketDao){
 
+		this.shell = shell;
 		this.ticketDao = ticketDao;
 		
-		//this.tlvc = new TicketListViewController(shell, ticketDao);
-
-
-		// forward the TVC Instance, the shell parent object to the current/default TicketViewController and the TicketDao
 		tlvc = new TicketListViewController(this, shell, this.ticketDao);
 //		tdvc = new TicketDetailViewController(shell);
 //		tevc = new TicketEditViewController(shell);
-//		tcvc = new TicketCreateViewController(shell);
-
-	}
-
-
-	public void setComposite(Composite comp) {
-
-		// get the composite from the current TicketViewController
-		this.tlvc.setComposite(comp);
-//		this.tdvc.setComposite(comp);
-//		this.tevc.setComposite(comp);
-//		this.tcvc.setComposite(comp);
-	}
-
-//	@Override
-	public Composite getComposite() {
-
-		// get the composite from the current TicketViewController
-		return this.tlvc.getComposite();
-//		return this.tdvc.getComposite();
-//		return this.tevc.getComposite();
-//		return this.tcvc.getComposite();
+		tcvc = new TicketCreateViewController(shell);
+		this.setCurrentView(tlvc);
 	}
 	
+	// ------------------------------------------------------------------------
 	
-
+	public void setCurrentView(ITicketState currentState){
+		
+		System.out.println("Input CurrentState: " + this.currentState);
+		
+		if(this.currentState != null){
+			this.currentState.getComposite().dispose();
+		}
+		this.currentState = currentState;
+		this.currentState.show();
+		this.shell.setLayout(new GridLayout());
+		
+		System.out.println("Output CurrentState: " + this.currentState);
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	public ITicketState getTicketListViewController(){
+		return this.tlvc;
+	}
+	
+	public ITicketState getTicketDetailViewController(){
+		return this.tdvc;
+	}
+	
+	public ITicketState getTicketEditViewController(){
+		return this.tevc;
+	}
+	
+	public ITicketState getTicketCreateViewController(){
+		return this.tcvc;
+	}
 }

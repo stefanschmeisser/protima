@@ -11,13 +11,17 @@ public class TicketEditViewController implements ITicketState  {
 		tev = new TicketEditView(shell);
 	}
 
-	public void setComposite(Composite comp) {
-		this.tev.setComposite(comp);
-	}
+//	public void setComposite(Composite comp) {
+//		this.tev.setComposite(comp);
+//	}
 
 	public Composite getComposite() {
 		return this.tev.getComposite();
 	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
 	
-	
+	}	
 }

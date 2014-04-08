@@ -12,12 +12,18 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 		tdv = new TicketDetailView(shell);
 	}
 	
-	public void setComposite(Composite comp) {
-		this.tdv.setComposite(comp);
-	}
+//	public void setComposite(Composite comp) {
+//		this.tdv.setComposite(comp);
+//	}
 
 	public Composite getComposite() {
 		return this.tdv.getComposite();
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

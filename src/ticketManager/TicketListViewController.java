@@ -2,19 +2,22 @@ package ticketManager;
 
 import java.util.ArrayList;
 import java.util.Vector;
+
 import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
 
 public class TicketListViewController implements ITicketState, ITicketObserver {
 
+	private Shell shell;
 	private TicketListView tlv;
 	private TicketViewController tvc;
 	private ITicketDao ticketDao;
 	private Listener listener;
 	
-	public TicketListViewController(TicketViewController tvc, Shell shell, ITicketDao ticketDao){
+	public TicketListViewController(TicketViewController ticketViewController, Shell shell, ITicketDao ticketDao){
 		
-		this.tvc = tvc;
+		this.tvc = ticketViewController;
+		this.shell = shell;
 		
 		this.listener = new Listener() {
 			public void handleEvent(Event event) {
@@ -24,6 +27,7 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 				}
 				if (event.widget == tlv.btnCreate) {
 					System.out.println("Create");
+					tvc.setCurrentView(tvc.getTicketCreateViewController());
 				}
 				if (event.widget == tlv.btnEdit) {
 					System.out.println("Edit");
@@ -38,26 +42,27 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 			}
 		};
 		
-		tlv = new TicketListView(shell, this.listener);
-		
 		// get the TicketDao (Type of Interface ITicketDao)
 		this.ticketDao = ticketDao;
-		
+	}
+	
+	// ------------------------------------------------------------------------
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		tlv = new TicketListView(this.shell, this.listener);
 		this.fillTableData();
+		this.shell.layout();
 	}
 
 	// ------------------------------------------------------------------------
 	
-	public void setComposite(Composite comp) {
-		this.tlv.setComposite(comp);
-	}
-
-	// ------------------------------------------------------------------------
-	
+	@Override
 	public Composite getComposite() {
+		// TODO Auto-generated method stub
 		return this.tlv.getComposite();
 	}
-	
+
 	// ------------------------------------------------------------------------
 	
 	public void fillTableData(){
@@ -101,7 +106,6 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 	// ------------------------------------------------------------------------
 	
 	public void getSelectedTableItem(){
-
 		
 		TableItem[] ti = tlv.getTable().getSelection();
 		
@@ -111,8 +115,5 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 			
 		}
 		System.out.println(str);
-		
-	
-	
 	}
 }

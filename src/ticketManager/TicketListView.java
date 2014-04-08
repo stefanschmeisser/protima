@@ -94,6 +94,7 @@ public class TicketListView {
 
 	}
 
+	// ------------------------------------------------------------------------
 	
 	public void setComposite(Composite comp) {
 		this.composite = comp;
@@ -102,6 +103,8 @@ public class TicketListView {
 		
 	}
 
+	// ------------------------------------------------------------------------
+	
 	public Composite getComposite() {
 		
 		return this.composite;
@@ -112,6 +115,9 @@ public class TicketListView {
 	public Table getTable(){
 		return this.table;
 	}
+	
+	// ------------------------------------------------------------------------
+	
 	public void setTable(Table table){
 		this.table = table;
 	}

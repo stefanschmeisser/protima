@@ -5,9 +5,14 @@ import org.eclipse.swt.widgets.*;
 public class TicketCreateViewController implements ITicketState {
 
 	private TicketCreateView tcv;
+	private Shell shell;
 	private Listener listener;
 	
+	// ------------------------------------------------------------------------
+	
 	public TicketCreateViewController(Shell shell){
+		
+		this.shell = shell;
 		
 		this.listener = new Listener() {
 			public void handleEvent(Event event) {
@@ -16,17 +21,20 @@ public class TicketCreateViewController implements ITicketState {
 				}
 			}
 		};
-		
-		tcv = new TicketCreateView(shell, listener);
 	}
 
-	public void setComposite(Composite comp) {
-		this.tcv.setComposite(comp);
+	// ------------------------------------------------------------------------
+	
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		tcv = new TicketCreateView(this.shell, listener);
+		this.shell.layout();
 	}
-
+	
+	// ------------------------------------------------------------------------
+	
 	public Composite getComposite() {
 		return this.tcv.getComposite();
 	}
-	
-
 }
