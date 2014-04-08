@@ -1,7 +1,5 @@
 package projectManager;
 
-import java.util.Vector;
-
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -11,7 +9,6 @@ import org.eclipse.swt.widgets.Shell;
 public class ProjectViewController implements Listener {
 
 	private Shell shell;
-	private Composite composite;
 	private IProjectState currentState;
 	private IProjectState projectListView;
 	private IProjectState projectDetailView;
@@ -34,8 +31,6 @@ public class ProjectViewController implements Listener {
 		this.currentState = currentState;
 		this.currentState.show();
 		this.shell.setLayout(new GridLayout());
-		
-		
 	}
 	
 	public void handleEvent(Event event) {
