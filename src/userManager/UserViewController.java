@@ -1,5 +1,5 @@
 package userManager;
 
-public class userViewController {
+public class UserViewController {
 
 }
