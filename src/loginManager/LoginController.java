@@ -23,7 +23,6 @@ public class LoginController implements IApplicationState {
 		this.disp = disp;
 	}
 
-	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 		this.lvc = new LoginViewController(this, disp);
