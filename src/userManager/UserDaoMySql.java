@@ -14,9 +14,9 @@ public class UserDaoMySql extends AbstractDaoMySql implements IUserDAO{
 	}
 
 	@Override
-	public int[] getUserList() {
+	public String[][] getUserList() {
 		// TODO Auto-generated method stub
-		String userList[][] = selectMultiValues("name, id", "user", "");
+		String userList[][] = selectMultiValues("userID, name", "user", "");
 		for(int i = 0; i < userList.length; i++){
 			
 			for(int k = 0; k < userList[i].length; k++ ){
@@ -26,7 +26,7 @@ public class UserDaoMySql extends AbstractDaoMySql implements IUserDAO{
 			}
 			
 		}
-		return null;
+		return userList;
 	}
 
 	@Override
