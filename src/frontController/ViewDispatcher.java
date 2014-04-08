@@ -100,24 +100,28 @@ public class ViewDispatcher {
 //        this.btnStart.setText("Start");
         Image imageStart = new Image(Display.getCurrent(), "content/menu.png");
         btnStart.setImage(imageStart);
+        btnStart.setSize(50, 50);
         this.btnStart.setLayoutData(new GridData(GridData.BEGINNING));
         
         btnProject = new Button(this.menu, SWT.PUSH);
 //        btnProject.setText("Project");
         Image imageProject = new Image(Display.getCurrent(), "content/project.png");
         btnProject.setImage(imageProject);
+        btnProject.setSize(50, 50);
         btnProject.setLayoutData(new GridData(GridData.BEGINNING));
         
         btnTicket = new Button(this.menu, SWT.PUSH);
 //        btnTicket.setText("Ticket");
         Image imageTicket = new Image(Display.getCurrent(), "content/ticket.png");
         btnTicket.setImage(imageTicket);
+        btnTicket.setSize(50, 50);
         btnTicket.setLayoutData(new GridData(GridData.BEGINNING));
         
         btnTeam = new Button(this.menu, SWT.PUSH);
 //        btnTeam.setText("Team");
         Image imageTeam = new Image(Display.getCurrent(), "content/team.png");
         btnTeam.setImage(imageTeam);
+        btnTeam.setSize(50,50);
         btnTeam.setLayoutData(new GridData(GridData.BEGINNING));
        
         // add Event Handler
