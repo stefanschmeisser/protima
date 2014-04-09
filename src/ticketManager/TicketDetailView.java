@@ -1,5 +1,7 @@
 package ticketManager;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
@@ -233,4 +235,44 @@ public class TicketDetailView {
 		return this.composite;
 	}
 	
+	// ------------------------------------------------------------------------
+	
+	// SETTERS
+
+	public void setTicketTitle(String str){
+		this.ticketTitleInput.setText(str);
+	}
+	
+	public void setTicketDescription(String str){
+		this.ticketDescInput.setText(str);
+	}
+	
+	public void setTicketPriorityLevel(String str){
+		this.ticketPriorityLevelInput.setText(str);
+	}
+
+	public void setTicketProcessStatus(String str){
+		this.ticketProcessStatusInput.setText(str);
+	}
+	
+	public void setTicketProjectId(String str){
+		this.projectIDInput.setText(str);
+	}
+	
+	public void setTicketCurrentEditorUid(String str){
+		this.currentEditorUIDInput.setText(str);
+	}
+
+	public void setTicketAssignedTeam(String str){
+		this.assignedTeamIDInput.setText(str);
+	}
+	
+	public void setTicketStartDate(String str){
+		this.ticketStartDateInput.setDate(0, 0, 0);
+	}
+	
+	public void setTicketEndDate(String str){
+		this.ticketEndDateInput.setDate(0, 0, 0);
+	}
+
 }

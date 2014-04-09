@@ -129,21 +129,18 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		for(int i = 0; i < tlv.getTable().getColumnCount(); i++){
 			str = str + ti[0].getText(i) + ", ";
 			
+//			tvc.getTicketDetailViewController()
+			
 		}
-//		System.out.println(str);
+		
+		
+		System.out.println(str);
 	}
 	
 	// ------------------------------------------------------------------------
 	
 	private void deleteTicket(){
-		
-		MessageBox dialog = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
-		dialog.setText("My info");
-		dialog.setMessage("Do you really want to do this?");
 
-		// open dialog and await user selection
-		int returnCode = dialog.open();
-		
 		boolean isSelected = false;
 		
 		for(int i = 0; i < tlv.getTable().getItemCount(); i++){
@@ -151,16 +148,25 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 				isSelected = true;
 			}
 		}
-				
-		if(returnCode == 32 && isSelected){
-			TableItem[] ti = tlv.getTable().getSelection();
-			this.ticketDao.deleteTicket(ti[0].getText(0));
-			isSelected = false;
-		}
-		else{
-			System.out.println("Nothing selected or aborted by user.");
-		}
+		
+		if(isSelected){
+			
+			MessageBox dialog = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
+			dialog.setText("Delete Ticket");
+			dialog.setMessage("Are you sure?");
 
+			// open dialog and await user selection
+			int returnCode = dialog.open();
+				
+			if(returnCode == 32){
+				TableItem[] ti = tlv.getTable().getSelection();
+				this.ticketDao.deleteTicket(ti[0].getText(0));
+				isSelected = false;
+			}
+			else{
+				System.out.println("Aborted by user.");
+			}
+		}
 	}
 
 }
