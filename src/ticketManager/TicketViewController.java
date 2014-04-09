@@ -24,7 +24,7 @@ public class TicketViewController {
 		this.ticketDao = ticketDao;
 		
 		tlvc = new TicketListViewController(this, shell, this.ticketDao);
-//		tdvc = new TicketDetailViewController(shell);
+		tdvc = new TicketDetailViewController(this, shell, this.ticketDao);
 //		tevc = new TicketEditViewController(shell);
 		tcvc = new TicketCreateViewController(this, shell, this.ticketDao);
 		
@@ -39,16 +39,16 @@ public class TicketViewController {
 			this.currentView.getComposite().dispose();
 		}
 		
-//		if(this.currentView == this.tlvc){
-//			this.tcvc.getComposite().dispose();
-//		}
+		if(this.currentView == this.tlvc){
+			this.tdvc.getComposite().dispose();
+		}
 		
 		this.currentView = currentState;
 		this.currentView.show();
 		
-//		if(this.currentView == this.tlvc){
-//			this.tcvc.show();
-//		}
+		if(this.currentView == this.tlvc){
+			this.tdvc.show();
+		}
 //		this.shell.setLayout(new GridLayout());	
 	}
 	
