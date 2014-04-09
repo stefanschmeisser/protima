@@ -69,6 +69,7 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		
 		tlv.getTable().setItemCount(0);
 		
+		
 		TicketTableModel tableModel = this.ticketDao.selectTableModel("*", "ticket", "");
 		
 		if(tableModel != null){

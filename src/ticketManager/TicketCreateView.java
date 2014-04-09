@@ -1,5 +1,6 @@
 package ticketManager;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.swt.SWT;
@@ -217,14 +218,86 @@ public class TicketCreateView {
 //		btnStart.addListener(SWT.Selection, listener);
 	}
 	
-	
+	// ------------------------------------------------------------------------
 	public void setComposite(Composite comp) {
 		this.composite = comp;
 		Color blue = new Color (Display.getCurrent(), 0, 0, 0);
 		this.composite.setBackground(blue);
 	}
 
+	// ------------------------------------------------------------------------
 	public Composite getComposite() {
 		return this.composite;
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	// SETTERS
+	
+	public void setTicketProjectId(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.projectIDInput.add(str.get(i));
+		}
+	}
+	
+	public void setTicketAssignedTeam(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.assignedTeamIDInput.add(str.get(i));
+		}
+	}
+	
+	public void setCurrentEditorUIDInput(String[] str){
+		for(int i = 0; i < str.length; i++){
+			this.currentEditorUIDInput.add(str[i]);
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	// GETTERS
+	
+	public String getTicketTitle(){
+		return this.ticketTitleInput.getText();
+	}
+	
+	public String getTicketDescription(){
+		return this.ticketDescInput.getText();
+	}
+	
+	public String getTicketPriorityLevel(){
+		return this.ticketPriorityLevelInput.getText();
+	}
+	
+	public String getTicketProcessStatus(){
+		return this.ticketProcessStatusInput.getText();
+	}
+	
+	public String getTicketProjectId(){
+		return this.projectIDInput.getText();
+	}
+	
+	public String getTicketCurrentEditorUid(){
+		return this.currentEditorUIDInput.getText();
+	}
+	
+	public String getTicketAssignedTeam(){
+		return this.assignedTeamIDInput.getText();
+	}
+	
+	public String getTicketStartDate(){
+		
+		String date = "";
+		date += this.ticketStartDateInput.getYear() + "-";
+		date += this.ticketStartDateInput.getMonth() + "-";
+		date += this.ticketStartDateInput.getDay();
+		return date;
+	}
+	
+	public String getTicketEndDate(){
+		String date = "";
+		date += this.ticketEndDateInput.getYear() + "-";
+		date += this.ticketEndDateInput.getMonth() + "-";
+		date += this.ticketEndDateInput.getDay();
+		return date;
 	}
 }

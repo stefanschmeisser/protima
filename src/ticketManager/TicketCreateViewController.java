@@ -1,5 +1,9 @@
 package ticketManager;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.*;
 
 public class TicketCreateViewController implements ITicketState {
@@ -31,6 +35,7 @@ public class TicketCreateViewController implements ITicketState {
 				}
 				if (event.widget == tcv.btnCreate) {
 					System.out.println("Create");
+					createTicket();
 					tvc.setCurrentView(tvc.getTicketListViewController());
 				}
 				if (event.widget == tcv.btnCancel) {
@@ -42,6 +47,8 @@ public class TicketCreateViewController implements ITicketState {
 
 		tcv = new TicketCreateView(this.shell, this.btnListener);
 		
+		this.setTeamCombobox();
+		
 		this.shell.layout();
 	}
 	
@@ -49,5 +56,42 @@ public class TicketCreateViewController implements ITicketState {
 	
 	public Composite getComposite() {
 		return this.tcv.getComposite();
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	private void setTeamCombobox(){
+	
+		TicketTableModel tableModel = this.ticketDao.selectTableModel("*", "team", "");
+		ArrayList<String> str = new ArrayList<String>();
+	
+		if(tableModel != null){
+			ArrayList<Vector> rows = tableModel.getRows();
+
+			for(int i = 0; i < rows.size(); i++){
+				Vector v = new Vector();
+				str.add(v.get(0).toString());
+//				System.out.println("test: " + v.get(0).toString());
+			}
+		}
+		System.out.println(str);
+//		this.tcv.setTicketAssignedTeam(str);
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	private void createTicket(){
+		
+		ArrayList<String> values = new ArrayList<String>();
+		
+		values.add(tcv.getTicketTitle());
+		values.add(tcv.getTicketDescription());
+		values.add(tcv.getTicketStartDate());
+		values.add(tcv.getTicketEndDate());
+		values.add(tcv.getTicketPriorityLevel());
+		values.add(tcv.getTicketProjectId());
+		values.add(tcv.getTicketAssignedTeam());
+		
+		this.ticketDao.insertTicket(values);
 	}
 }

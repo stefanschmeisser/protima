@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
+
 import com.mysql.jdbc.ResultSetMetaData;
 
 
@@ -118,5 +119,55 @@ public class TicketDaoMySql implements ITicketDao {
 	}
 
 // ----------------------------------------------------------------------------
+
+//	INSERT INTO table_name
+//	VALUES (value1,value2,value3,...);
+
+//	INSERT INTO `ticket`(`ticketID`, `title`, `description`, `startdate`, `enddate`, `priority`, `projectID`, `teamID`) 
+//	VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8])
 	
+	public void insertTicket(ArrayList<String> valuesList) {
+
+		String values = "";
+		
+		for(int i = 0; i < valuesList.size(); i++){
+			if(i < valuesList.size()-1){
+				values += "'" + valuesList.get(i).toString() + "', ";
+			}
+			else{
+				values += "'"+ valuesList.get(i).toString() + "'";
+			}
+		}
+		
+//		System.out.println("FINAL VALUES: " + values);
+		
+		
+		String insertStmt = "INSERT INTO `ticket`(`title`, `description`, `startdate`, `enddate`, `priority`, `projectID`, `teamID`) VALUES ";
+		String qryStr = insertStmt + "(" + values + ")";
+		
+		if(values != ""){
+			
+			System.out.println("im if");
+			
+			try {
+				System.out.println("im try");
+				openConnection(_user, _password);
+				Statement stmt = connection.createStatement();
+//				stmt.executeUpdate(qryStr);
+				stmt.execute(qryStr);
+				
+				
+				System.out.println("QueryString: " + qryStr + ". Successfully executed.");
+		
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+
+
 }
