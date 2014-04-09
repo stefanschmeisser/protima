@@ -2,8 +2,8 @@ package ticketManager;
 
 import java.util.ArrayList;
 import java.util.Vector;
-
 import org.eclipse.swt.*;
+import org.eclipse.swt.events.*;
 import org.eclipse.swt.widgets.*;
 
 public class TicketListViewController implements ITicketState, ITicketObserver {
@@ -137,10 +137,30 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 	
 	private void deleteTicket(){
 		
-		TableItem[] ti = tlv.getTable().getSelection();
+		MessageBox dialog = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
+		dialog.setText("My info");
+		dialog.setMessage("Do you really want to do this?");
+
+		// open dialog and await user selection
+		int returnCode = dialog.open();
 		
-		this.ticketDao.deleteTicket(ti[0].getText(0));
+		boolean isSelected = false;
 		
-//		System.out.println("delete ticket with no: " + ti[0].getText(0));
+		for(int i = 0; i < tlv.getTable().getItemCount(); i++){
+			if(tlv.getTable().isSelected(i)){
+				isSelected = true;
+			}
+		}
+				
+		if(returnCode == 32 && isSelected){
+			TableItem[] ti = tlv.getTable().getSelection();
+			this.ticketDao.deleteTicket(ti[0].getText(0));
+			isSelected = false;
+		}
+		else{
+			System.out.println("Nothing selected or aborted by user.");
+		}
+
 	}
+
 }
