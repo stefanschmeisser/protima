@@ -36,8 +36,8 @@ public class ProjectController implements IContentState {
 		return this.projectDAO.getProject(projectID);
 	}
 	
-	public void setProject(Project project){
-		this.projectDAO.createProject(project.getProjectName(), project.getProjectDescription(), project.getProjectManager());
+	public void setProject(String projectname, String projectDescription, int projectManager){
+		this.projectDAO.createProject(projectname, projectDescription, projectManager);
 	}
 	
 }

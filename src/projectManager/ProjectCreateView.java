@@ -21,8 +21,8 @@ public class ProjectCreateView implements IProjectState {
 	private Shell shell;
 	private Composite composite;
 	private Label labelProjectID, labelProjectName, labelProjectDescription, labelProjectManager;
-	private Text textProjectID, textProjectName, textProjectDescription;
-	private Combo comboProjectManager;
+	public static Text textProjectID, textProjectName, textProjectDescription;
+	public static Combo comboProjectManager;
 	public static Button createButton, cancelButton;
 	
 	public ProjectCreateView(ProjectViewController projectViewController, Shell shell){
@@ -34,7 +34,7 @@ public class ProjectCreateView implements IProjectState {
 	@Override
 	public void show() {
 		
-this.composite.setLayout(new GridLayout());
+		this.composite.setLayout(new GridLayout());
 	    
 	    Composite header = new Composite(this.composite, SWT.NONE);
 	    
@@ -108,7 +108,6 @@ this.composite.setLayout(new GridLayout());
 	@Override
 	public void setComposite(Composite composite) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
