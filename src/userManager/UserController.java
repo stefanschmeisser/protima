@@ -25,12 +25,13 @@ public class UserController implements IContentState {
 	public UserController(Shell shell, FrontController parent){
 		this.parent = parent;
 		userDAO = new UserDaoMySql();
+		setComposite(parent.getComposite());
 		this.shell = shell;
 		uvc = new UserViewController(shell, this);
 		
 	}
 	
-	@Override
+//	@Override
 	public void setCurrentView(IContentState pCurrentState) {
 		// TODO Auto-generated method stub
 		System.out.println("setcompo");
@@ -38,13 +39,13 @@ public class UserController implements IContentState {
 		this.shell.layout();
 	}
 
-	@Override
+//	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+//	@Override
 	public void setComposite(Composite composite) {
 		this.composite = composite;
 		Color blue = new Color (Display.getCurrent(), 0, 200, 255);
@@ -52,9 +53,10 @@ public class UserController implements IContentState {
 		parent.setBlankComposite(composite);
 	}
 
-	@Override
+//	@Override
 	public Composite getComposite() {
 		// TODO Auto-generated method stub
+		//System.out.println("habs geholt");
 		return uvc.getComposite();
 	}
 	

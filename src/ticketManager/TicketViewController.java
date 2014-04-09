@@ -39,7 +39,7 @@ public class TicketViewController implements IContentState {
 //		this.tcvc.setComposite(comp);
 	}
 
-	@Override
+//	@Override
 	public Composite getComposite() {
 
 		// get the composite from the current TicketViewController
