@@ -1,12 +1,15 @@
 package ticketManager;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import org.eclipse.swt.widgets.*;
 
 public interface ITicketDao {
 
 	public ResultSet select(String column, String table, String condition);
-//	public void selectTable(String column, String table, String condition, Table outputTable);
 	public TicketTableModel selectTableModel(String column, String table, String condition);
+	public void insertTicket(ArrayList<String> values);
+	public void deleteTicket(String ticketId);
 }

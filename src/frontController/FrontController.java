@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.*;
 import applicationManager.IApplicationState;
 import ticketManager.TicketController;
 import projectManager.ProjectController;
+import userManager.UserController;
 
 public class FrontController implements IApplicationState, Listener {
 	
@@ -24,10 +25,12 @@ public class FrontController implements IApplicationState, Listener {
 	private StartViewController svc;
 	private IContentState pc;
 	private TicketController tc;
+	private UserController uc;
 	public Listener listener;
 	
 	public FrontController(Display disp){
 		this.disp = disp;
+
 		this.shell = new Shell(this.disp);
 		this.shell.setText("ProTiMa");
 		Image imageApplicationIcon = new Image(Display.getCurrent(), "content/icon.png");
@@ -37,8 +40,8 @@ public class FrontController implements IApplicationState, Listener {
         vd = new ViewDispatcher(this, this.shell);
         
 		this.svc = new StartViewController();
-		this.pc = new ProjectController(this.shell);
-//		this.tc = new TicketController(this.shell);
+//		this.pc = new ProjectController(this.shell);
+		this.tc = new TicketController(this.shell);
 //		this.tvc = new TeamViewController();
 		setCurrentView(this.pc);
 		
@@ -78,6 +81,7 @@ public class FrontController implements IApplicationState, Listener {
 //		}
 	}
 	
+
 	public void setCurrentView(IContentState currentState){
 		this.currentState = currentState;
 	}
