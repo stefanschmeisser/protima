@@ -121,12 +121,6 @@ public class TicketDaoMySql implements ITicketDao {
 
 // ----------------------------------------------------------------------------
 
-//	INSERT INTO table_name
-//	VALUES (value1,value2,value3,...);
-
-//	INSERT INTO `ticket`(`ticketID`, `title`, `description`, `startdate`, `enddate`, `priority`, `projectID`, `teamID`) 
-//	VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8])
-	
 	public void insertTicket(ArrayList<String> valuesList) {
 
 		String values = "";
@@ -148,13 +142,25 @@ public class TicketDaoMySql implements ITicketDao {
 			PreparedStatement preparedStatement = connection.prepareStatement(qryStr);
 			preparedStatement.executeUpdate();
 			connection.commit();
-		} catch (SQLException e1) {
-			
-			e1.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	// ------------------------------------------------------------------------
 
+	public void deleteTicket(String ticketId){
+		
+		String deleteStmt = "DELETE FROM `sag`.`ticket` WHERE `ticket`.`ticketID` = "+ ticketId +";";
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(deleteStmt);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }

@@ -29,11 +29,11 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		this.listener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == tlv.btnRefresh) {
-					System.out.println("Refresh");
+//					System.out.println("Refresh");
 					fillTableData();
 				}
 				if (event.widget == tlv.btnCreate) {
-					System.out.println("Create");
+//					System.out.println("Create");
 					tvc.setCurrentView(tvc.getTicketCreateViewController());
 				}
 				if (event.widget == tlv.btnEdit) {
@@ -41,8 +41,9 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 					
 				}
 				if (event.widget == tlv.btnDelete) {
-					System.out.println("Delete");
+//					System.out.println("Delete");
 					deleteTicket();
+					fillTableData();
 				}
 				// Table Listener
 				if(event.widget == tlv.getTable()){
@@ -66,10 +67,23 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 
 	// ------------------------------------------------------------------------
 	
-	public void fillTableData(){
+	private void refreshTableData(){
+		
+		tlv.getTable().setRedraw( false );
+		
+		while ( tlv.getTable().getColumnCount() > 0 ) {
+			tlv.getTable().getColumns()[ 0 ].dispose();
+		}
 		
 		tlv.getTable().setItemCount(0);
-		
+		tlv.getTable().setRedraw( true );
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	public void fillTableData(){
+
+		this.refreshTableData();
 		
 		TicketTableModel tableModel = this.ticketDao.selectTableModel("*", "ticket", "");
 		
@@ -125,6 +139,8 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		
 		TableItem[] ti = tlv.getTable().getSelection();
 		
-		System.out.println("delete ticket with no: " + ti[0].getText(0));
+		this.ticketDao.deleteTicket(ti[0].getText(0));
+		
+//		System.out.println("delete ticket with no: " + ti[0].getText(0));
 	}
 }
