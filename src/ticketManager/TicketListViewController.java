@@ -42,6 +42,7 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 				}
 				if (event.widget == tlv.btnDelete) {
 					System.out.println("Delete");
+					deleteTicket();
 				}
 				// Table Listener
 				if(event.widget == tlv.getTable()){
@@ -115,6 +116,15 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 			str = str + ti[0].getText(i) + ", ";
 			
 		}
-		System.out.println(str);
+//		System.out.println(str);
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	private void deleteTicket(){
+		
+		TableItem[] ti = tlv.getTable().getSelection();
+		
+		System.out.println("delete ticket with no: " + ti[0].getText(0));
 	}
 }

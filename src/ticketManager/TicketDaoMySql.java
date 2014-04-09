@@ -2,6 +2,7 @@ package ticketManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -139,31 +140,17 @@ public class TicketDaoMySql implements ITicketDao {
 			}
 		}
 		
-//		System.out.println("FINAL VALUES: " + values);
-		
-		
 		String insertStmt = "INSERT INTO `ticket`(`title`, `description`, `startdate`, `enddate`, `priority`, `projectID`, `teamID`) VALUES ";
 		String qryStr = insertStmt + "(" + values + ")";
 		
-		if(values != ""){
-			
-			System.out.println("im if");
-			
-			try {
-				System.out.println("im try");
-				openConnection(_user, _password);
-				Statement stmt = connection.createStatement();
-//				stmt.executeUpdate(qryStr);
-				stmt.execute(qryStr);
-				
-				
-				System.out.println("QueryString: " + qryStr + ". Successfully executed.");
 		
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (Exception e){
-				e.printStackTrace();
-			}
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(qryStr);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
 		}
 	}
 	
