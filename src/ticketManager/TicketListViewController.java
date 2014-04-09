@@ -38,7 +38,7 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 				}
 				if (event.widget == tlv.btnEdit) {
 					System.out.println("Edit");
-					
+					tvc.setCurrentView(tvc.getTicketEditViewController());
 				}
 				if (event.widget == tlv.btnDelete) {
 //					System.out.println("Delete");
