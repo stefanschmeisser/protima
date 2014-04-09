@@ -246,11 +246,12 @@ public class TicketCreateView {
 		}
 	}
 	
-	public void setCurrentEditorUIDInput(String[] str){
-		for(int i = 0; i < str.length; i++){
-			this.currentEditorUIDInput.add(str[i]);
+	public void setCurrentEditorUIDInput(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.currentEditorUIDInput.add(str.get(i));
 		}
 	}
+
 	
 	// ------------------------------------------------------------------------
 	

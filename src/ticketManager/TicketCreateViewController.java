@@ -47,7 +47,9 @@ public class TicketCreateViewController implements ITicketState {
 
 		tcv = new TicketCreateView(this.shell, this.btnListener);
 		
-		this.setTeamCombobox();
+		this.setCombobox("team");
+		this.setCombobox("project");
+		this.setCombobox("user");
 		
 		this.shell.layout();
 	}
@@ -60,22 +62,32 @@ public class TicketCreateViewController implements ITicketState {
 	
 	// ------------------------------------------------------------------------
 	
-	private void setTeamCombobox(){
+	private void setCombobox(String table){
 	
-		TicketTableModel tableModel = this.ticketDao.selectTableModel("*", "team", "");
+		TicketTableModel tableModel = this.ticketDao.selectTableModel("*", table, "");
 		ArrayList<String> str = new ArrayList<String>();
-	
+		
+		
 		if(tableModel != null){
 			ArrayList<Vector> rows = tableModel.getRows();
 
 			for(int i = 0; i < rows.size(); i++){
+
 				Vector v = new Vector();
+				v = rows.get(i);
 				str.add(v.get(0).toString());
-//				System.out.println("test: " + v.get(0).toString());
+			}
+
+			if(table.equals("team")){
+				this.tcv.setTicketAssignedTeam(str);
+			}
+			if(table.equals("project")){
+				this.tcv.setTicketProjectId(str);
+			}
+			if(table.equals("user")){
+				this.tcv.setCurrentEditorUIDInput(str);
 			}
 		}
-		System.out.println(str);
-//		this.tcv.setTicketAssignedTeam(str);
 	}
 	
 	// ------------------------------------------------------------------------
