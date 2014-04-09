@@ -12,10 +12,11 @@ public class LoginViewController {
 		//TODO: implementieren
 		this.papa = papa;
 		this.disp = disp;
+		this.lv = new LoginView(this, disp);
 	}
 
 	public void show() {
-		this.lv = new LoginView(this, disp);
+		
 	}
 	
 	public boolean checkUserCredentials(String user, String password) {
