@@ -2,11 +2,13 @@ package ticketManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
+
 import com.mysql.jdbc.ResultSetMetaData;
 
 
@@ -118,5 +120,47 @@ public class TicketDaoMySql implements ITicketDao {
 	}
 
 // ----------------------------------------------------------------------------
+
+	public void insertTicket(ArrayList<String> valuesList) {
+
+		String values = "";
+		
+		for(int i = 0; i < valuesList.size(); i++){
+			if(i < valuesList.size()-1){
+				values += "'" + valuesList.get(i).toString() + "', ";
+			}
+			else{
+				values += "'"+ valuesList.get(i).toString() + "'";
+			}
+		}
+		
+		String insertStmt = "INSERT INTO `ticket`(`title`, `description`, `startdate`, `enddate`, `priority`, `projectID`, `teamID`) VALUES ";
+		String qryStr = insertStmt + "(" + values + ")";
+		
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(qryStr);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
+	// ------------------------------------------------------------------------
+
+	public void deleteTicket(String ticketId){
+		
+		String deleteStmt = "DELETE FROM `sag`.`ticket` WHERE `ticket`.`ticketID` = "+ ticketId +";";
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(deleteStmt);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 }

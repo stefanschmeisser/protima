@@ -1,174 +1,304 @@
 package ticketManager;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 
 public class TicketCreateView {
 
-	private Composite composite;
-	public Button btnStart;
+	private Composite composite, compgrid;
+	private Label ticketIDLabel, ticketTitleLabel, ticketDescLabel, ticketStartDateLabel, ticketEndDateLabel, projectIDLabel;
+	private Label ticketPriorityLevelLabel, ticketProcessStatusLabel, currentEditorUIDLabel, assignedTeamIDLabel;
+	private Text ticketIDInput, ticketTitleInput, ticketDescInput;
+	private Combo ticketPriorityLevelInput, ticketProcessStatusInput, projectIDInput, currentEditorUIDInput, assignedTeamIDInput;
+	private DateTime ticketStartDateInput, ticketEndDateInput;
+	public Button btnCreate, btnCancel, btnClear;
+	private Listener numListener, btnListener;
+	private Shell shell;
 	
-	public TicketCreateView(Shell shell, Listener listener){
+	private TicketPriorityLevel ticketPriorityLevel;
+	private TicketProcessStatus ticketProcessStatus;
+	
+	public TicketCreateView(Shell shell, Listener btnListener){
 		
-		composite = new Composite(shell, SWT.NONE);
+		this.shell = shell;
 		
+		this.composite = new Composite(shell, SWT.NONE);
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 2;
+		layout.numColumns = 4;
 	    layout.makeColumnsEqualWidth = true;
 	    composite.setLayout(layout);
+//	    composite.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
 	    
-	    // TICKET ID
-	    GridData data = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
-	    data.widthHint = 300;
-	    Label tickedIDLabel = new Label(composite, SWT.PUSH);
-	    tickedIDLabel.setText("Ticket ID");
-	    tickedIDLabel.setLayoutData(data);
+	    GridData data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketIDLabel = new Label(composite, SWT.RIGHT);
+	    this.ticketIDLabel.setText("Ticket ID");
+	    this.ticketIDLabel.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketIDInput = new Text(composite, SWT.READ_ONLY | SWT.LEFT | SWT.BORDER);
+	    this.ticketIDInput.setLayoutData(data);
+	    this.ticketIDInput.setText("automatisch");
+	    this.ticketIDInput.setEnabled(false);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 2;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketTitleLabel = new Label(composite, SWT.RIGHT);
+	    this.ticketTitleLabel.setText("Ticket Title");
+	    this.ticketTitleLabel.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 3;
+	    this.ticketTitleInput = new Text(composite, SWT.LEFT | SWT.BORDER);
+	    this.ticketTitleInput.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketDescLabel = new Label(composite, SWT.RIGHT);
+	    this.ticketDescLabel.setText("Ticket Beschreibung");
+	    this.ticketDescLabel.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.heightHint = 70;
+	    data.horizontalSpan = 3;
+	    this.ticketDescInput = new Text(this.composite,  SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+	    this.ticketDescInput.setBounds(10, 10, 300, 200);
+	    this.ticketDescInput.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketStartDateLabel = new Label(composite, SWT.RIGHT);
+	    this.ticketStartDateLabel.setText("Ticket Date");
+	    this.ticketStartDateLabel.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketStartDateInput = new DateTime(this.composite, SWT.CALENDAR);
+	    this.ticketStartDateInput.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketEndDateLabel = new Label(composite, SWT.RIGHT);
+	    this.ticketEndDateLabel.setText("Ticket End-Date");
+	    this.ticketEndDateLabel.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketEndDateInput = new DateTime(this.composite, SWT.CALENDAR);
+	    this.ticketEndDateInput.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 4;
+	    data.heightHint = 10;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketPriorityLevelLabel = new Label(composite, SWT.RIGHT);
+	    this.ticketPriorityLevelLabel.setText("Priority Level");
+	    this.ticketPriorityLevelLabel.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketPriorityLevelInput = new Combo(composite, SWT.DROP_DOWN);
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.IN_TIME.toString());
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.URGENT.toString());
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.CRITICAL.toString());
+	    this.ticketPriorityLevelInput.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketProcessStatusLabel = new Label(composite, SWT.RIGHT);
+	    this.ticketProcessStatusLabel.setText("Process Status");
+	    this.ticketProcessStatusLabel.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.ticketProcessStatusInput = new Combo(composite, SWT.DROP_DOWN);
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.OPEN.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.IN_PROGRESS.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.WAITING.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.SUSPENDED.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.DONE.toString());
+	    this.ticketProcessStatusInput.setLayoutData(data);
 
-	    data = new GridData(GridData.HORIZONTAL_ALIGN_END);
-	    data.widthHint = 300;
-	    Text tickedIDInput = new Text(composite, SWT.NONE);
-	    tickedIDInput.setLayoutData(data);
 	    
-	    // TICKETTITEL
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Label ticketTitleLabel = new Label(composite, SWT.PUSH);
-	    ticketTitleLabel.setText("Titel");
-	    ticketTitleLabel.setLayoutData(data);
-
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Text ticketTitleInput = new Text(composite, SWT.NONE);
-	    ticketTitleInput.setLayoutData(data);
-	
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 4;
+	    data.heightHint = 10;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
 	    
-	    // TICKETBESCHREIBUNG
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Label ticketDescLabel = new Label(composite, SWT.PUSH);
-	    ticketDescLabel.setText("Beschreibung");
-	    ticketDescLabel.setLayoutData(data);
-
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Text ticketDescInput = new Text(composite, SWT.NONE);
-	    ticketDescInput.setLayoutData(data);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.currentEditorUIDLabel = new Label(composite, SWT.RIGHT);
+	    this.currentEditorUIDLabel.setText("Editor ID");
+	    this.currentEditorUIDLabel.setLayoutData(data);
 	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.currentEditorUIDInput = new Combo(composite, SWT.DROP_DOWN);
+//	    this.currentEditorUIDInput.add("ITEM");
+	    this.currentEditorUIDInput.setLayoutData(data);
 	    
-	    // KALENDER STARTDATUM
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Label ticketStartDateLabel = new Label(composite, SWT.PUSH);
-	    ticketStartDateLabel.setText("Start-Datum");
-	    ticketStartDateLabel.setLayoutData(data);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.assignedTeamIDLabel = new Label(composite, SWT.RIGHT);
+	    this.assignedTeamIDLabel.setText("Team ID");
+	    this.assignedTeamIDLabel.setLayoutData(data);
 	    
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    DateTime ticketStartDateInput = new DateTime(composite, SWT.CALENDAR);
-	    ticketStartDateInput.setLayoutData(data);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.assignedTeamIDInput = new Combo(composite, SWT.DROP_DOWN);
+//	    this.assignedTeamIDInput.add("ITEM");
+	    this.assignedTeamIDInput.setLayoutData(data);
 	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.projectIDLabel = new Label(composite, SWT.RIGHT);
+	    this.projectIDLabel.setText("Project ID");
+	    this.projectIDLabel.setLayoutData(data);
 	    
-	    // KALENDER ENDDATUM
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Label ticketEndDateLabel = new Label(composite, SWT.PUSH);
-	    ticketEndDateLabel.setText("End-Datum");
-	    ticketEndDateLabel.setLayoutData(data);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.projectIDInput = new Combo(composite, SWT.DROP_DOWN);
+//	    this.projectIDInput.add("ITEM");
+	    this.projectIDInput.setLayoutData(data);
 	    
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    DateTime ticketEndDateInput = new DateTime(composite, SWT.CALENDAR);
-	    ticketEndDateInput.setLayoutData(data);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 2;
+	    data.heightHint = 5;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
 	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 4;
+	    data.heightHint = 10;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
 	    
-	    // PRIORITÄTEN-Level
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Label ticketPriorityLevelLabel = new Label(composite, SWT.PUSH);
-	    ticketPriorityLevelLabel.setText("Priorität");
-	    ticketPriorityLevelLabel.setLayoutData(data);
-
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Combo ticketPriorityLevelInput = new Combo(composite, SWT.DROP_DOWN);
-	    ticketPriorityLevelInput.add(TicketPriorityLevel.IN_TIME.toString());
-	    ticketPriorityLevelInput.add(TicketPriorityLevel.URGENT.toString());
-	    ticketPriorityLevelInput.add(TicketPriorityLevel.CRITICAL.toString());
-	    ticketPriorityLevelInput.setLayoutData(data);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.heightHint = 5;
+	    data.horizontalSpan = 2;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
 	    
+//	    data = new GridData(GridData.HORIZONTAL_ALIGN_CENTER);
+//	    this.btnClear = new Button(composite, SWT.PUSH);
+//	    this.btnClear.setText("Clear");
+//	    this.btnClear.addListener(SWT.Selection, btnListener);
+//	    this.btnClear.setLayoutData(data);
 	    
-	    // BEARBEITUNGS-Status
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Label ticketProcessStatusLabel = new Label(composite, SWT.PUSH);
-	    ticketProcessStatusLabel.setText("Beschreibung");
-	    ticketProcessStatusLabel.setLayoutData(data);
-
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Combo ticketProcessStatusInput = new Combo(composite, SWT.DROP_DOWN);
-	    ticketProcessStatusInput.add(TicketProcessStatus.OPEN.toString());
-	    ticketProcessStatusInput.add(TicketProcessStatus.IN_PROGRESS.toString());
-	    ticketProcessStatusInput.add(TicketProcessStatus.WAITING.toString());
-	    ticketProcessStatusInput.add(TicketProcessStatus.SUSPENDED.toString());
-	    ticketProcessStatusInput.add(TicketProcessStatus.DONE.toString());
-	    ticketProcessStatusInput.setLayoutData(data);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.btnCreate = new Button(composite, SWT.PUSH);
+	    this.btnCreate.setText("Create");
+	    this.btnCreate.addListener(SWT.Selection, btnListener);
+	    this.btnCreate.setLayoutData(data);
 	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.btnCancel = new Button(composite, SWT.PUSH);
+	    this.btnCancel.setText("Cancel");
+	    this.btnCancel.addListener(SWT.Selection, btnListener);
+	    this.btnCancel.setLayoutData(data);
 	    
-	    // ZUGEWIESENER USER
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Label currentEditorUIDLabel = new Label(composite, SWT.PUSH);
-	    currentEditorUIDLabel.setText("Bearbeiter ID");
-	    currentEditorUIDLabel.setLayoutData(data);
-
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Text currentEditorUIDInput = new Text(composite, SWT.NONE);
-	    currentEditorUIDInput.setLayoutData(data);
+	    this.shell.layout();
 	    
-	    
-	    // ZUGEWIESENES TEAM
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Label assignedTeamIDLabel = new Label(composite, SWT.PUSH);
-	    assignedTeamIDLabel.setText("Team ID");
-	    assignedTeamIDLabel.setLayoutData(data);
-
-	    data = new GridData(GridData.FILL_BOTH);
-	    data.widthHint = 300;
-	    Text assignedTeamIDInput = new Text(composite, SWT.NONE);
-	    assignedTeamIDInput.setLayoutData(data);
-	    
-	    
+//	    data = new GridData(GridData.FILL_HORIZONTAL);
+//	    this.projectIDInput = new Text(composite, SWT.LEFT | SWT.BORDER);
+//	    this.projectIDInput.addListener(SWT.Verify, numListener);
+//	    this.projectIDInput.setLayoutData(data);
+//	    
 //		composite = new Composite(shell, SWT.NONE);
 //
-//		Label blankLabel = new Label(composite, SWT.NONE);
-//		blankLabel.setText("Ticket Create View");
+//		Label blankLabel = new Label(compgrid, SWT.NONE);
+//		blankLabel.setText(Ticket Create View);
 //		
 //		Color col = new Color (Display.getCurrent(), 0, 170, 170);
 //		blankLabel.setBackground(col);	
 //		
 //		btnStart = new Button(composite, SWT.PUSH);
-//      btnStart.setText("Start");
-//      btnStart.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+//		btnStart.setText(Start);
+//		btnStart.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 //        
-//      btnStart.addListener(SWT.Selection, listener);
+//		btnStart.addListener(SWT.Selection, listener);
 	}
 	
-	
+	// ------------------------------------------------------------------------
 	public void setComposite(Composite comp) {
 		this.composite = comp;
 		Color blue = new Color (Display.getCurrent(), 0, 0, 0);
 		this.composite.setBackground(blue);
-		
 	}
 
+	// ------------------------------------------------------------------------
 	public Composite getComposite() {
-		
 		return this.composite;
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	// SETTERS
+	
+	public void setTicketProjectId(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.projectIDInput.add(str.get(i));
+		}
+	}
+	
+	public void setTicketAssignedTeam(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.assignedTeamIDInput.add(str.get(i));
+		}
+	}
+	
+	public void setCurrentEditorUIDInput(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.currentEditorUIDInput.add(str.get(i));
+		}
+	}
+
+	
+	// ------------------------------------------------------------------------
+	
+	// GETTERS
+	
+	public String getTicketTitle(){
+		return this.ticketTitleInput.getText();
+	}
+	
+	public String getTicketDescription(){
+		return this.ticketDescInput.getText();
+	}
+	
+	public String getTicketPriorityLevel(){
+		return this.ticketPriorityLevelInput.getText();
+	}
+	
+	public String getTicketProcessStatus(){
+		return this.ticketProcessStatusInput.getText();
+	}
+	
+	public String getTicketProjectId(){
+		return this.projectIDInput.getText();
+	}
+	
+	public String getTicketCurrentEditorUid(){
+		return this.currentEditorUIDInput.getText();
+	}
+	
+	public String getTicketAssignedTeam(){
+		return this.assignedTeamIDInput.getText();
+	}
+	
+	public String getTicketStartDate(){
+		
+		String date = "";
+		date += this.ticketStartDateInput.getYear() + "-";
+		date += this.ticketStartDateInput.getMonth() + "-";
+		date += this.ticketStartDateInput.getDay();
+		return date;
+	}
+	
+	public String getTicketEndDate(){
+		String date = "";
+		date += this.ticketEndDateInput.getYear() + "-";
+		date += this.ticketEndDateInput.getMonth() + "-";
+		date += this.ticketEndDateInput.getDay();
+		return date;
 	}
 }
