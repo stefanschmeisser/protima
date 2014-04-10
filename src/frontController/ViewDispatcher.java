@@ -114,11 +114,6 @@ public class ViewDispatcher {
         btnStart.setSize(50, 50);
         this.btnStart.setLayoutData(new GridData(GridData.BEGINNING));
         
-        btnUser = new Button(this.menu, SWT.PUSH);
-        //btnUser.setImage(imageProject);
-        btnUser.setSize(50, 50);
-        btnUser.setLayoutData(new GridData(GridData.BEGINNING));
-        
         btnProject = new Button(this.menu, SWT.PUSH);
 //        btnProject.setText("Project");
         Image imageProject = new Image(Display.getCurrent(), "content/project.png");
@@ -140,13 +135,18 @@ public class ViewDispatcher {
         btnTeam.setSize(50,50);
         btnTeam.setLayoutData(new GridData(GridData.BEGINNING));
        
+        btnUser = new Button(this.menu, SWT.PUSH);
+        Image imageUser = new Image(Display.getCurrent(), "content/user.png");
+        btnUser.setImage(imageUser);
+        btnUser.setSize(50, 50);
+        btnUser.setLayoutData(new GridData(GridData.BEGINNING));
+        
         // add Event Handler
 	    btnStart.addListener(SWT.Selection, this.frontController);
-	    btnUser.addListener(SWT.Selection, this.frontController);
 	    btnProject.addListener(SWT.Selection, this.frontController);
 	    btnTicket.addListener(SWT.Selection, this.frontController);
 	    btnTeam.addListener(SWT.Selection, this.frontController);
-
+	    btnUser.addListener(SWT.Selection, this.frontController);
 	}
 	public Composite getComposite(){
 		return menu;
