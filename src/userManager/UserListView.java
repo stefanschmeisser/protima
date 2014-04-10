@@ -115,7 +115,7 @@ public class UserListView implements IUserState{
 				listBtnActivate = true;
 				ulvButton.setEnabled(true);
 				composite.dispose();
-				parentUVC.setCurrentView(new UserDetailView(shell, parentUVC, user,name,id));
+				parentUVC.setCurrentView(new UserDetailView(shell, parentUVC,name,id));
 				
 				System.out.println (event.item + " " + string);
 				//.setCurrentView(new U);
