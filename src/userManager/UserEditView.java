@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import applicationManager.Application;
 import userRights.Editor;
 
 
@@ -28,12 +29,15 @@ public class UserEditView implements IUserState{
 	private Label userNameLabel;
 	private Text userNameOutput;
 	private Label userProjektLabel;
-	private Text userDescOutput;
+	private Text userPasswordOutput;
 	private Button btnOk;
 	private Button btnCancel;
 	private final Shell shell; 
+	private UserDaoMySql userDao;
+	private int userID;
+	private String newPassword;
 	
-	public UserEditView(final Shell shell,final UserViewController parent, final int id, final String userName){
+	public UserEditView(final Shell shell,final UserViewController parent, final int id, final String userName, String pw){
 		/*
 		composite = new Composite(shell, SWT.NONE);
 	
@@ -52,12 +56,20 @@ public class UserEditView implements IUserState{
 		blankLabel.setBackground(red);	
 		*/
 		/**********************************************************************************/
+		
 		this.shell = shell;
 		this.composite = new Composite(shell, SWT.NONE);
+		userDao = new UserDaoMySql();
+		newPassword = pw;
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 4;
 	    layout.makeColumnsEqualWidth = true;
 	    composite.setLayout(layout);
+	    
+	   // Application app = Application.getInstance();
+	    //userID = app.getCurrentUserID();
+	   // userID = 
+	    
 	    
 	    GridData data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.userIDLabel = new Label(this.composite, SWT.RIGHT);
@@ -87,6 +99,8 @@ public class UserEditView implements IUserState{
 	    this.userNameOutput.setText(userName);
 	    this.userNameOutput.setEnabled(true);
 	    this.userNameOutput.setLayoutData(data);
+	    
+	    
 	   
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
@@ -95,13 +109,12 @@ public class UserEditView implements IUserState{
 	    this.userProjektLabel.setLayoutData(data);
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
-	    data.heightHint = 70;
-	    data.widthHint = 505;
 	    data.horizontalSpan = 3;
-	    this.userDescOutput = new Text(this.composite,  SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-	    //this.userDescOutput.setEnabled(true);
-	    this.userDescOutput.setLayoutData(data);
-	    
+	    this.userPasswordOutput = new Text(this.composite, SWT.LEFT | SWT.BORDER);
+	    this.userPasswordOutput.setText(pw);
+	    this.userPasswordOutput.setEnabled(true);
+	    this.userPasswordOutput.setLayoutData(data);
+	     
 	   
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    data.horizontalSpan = 4;
@@ -139,14 +152,14 @@ public class UserEditView implements IUserState{
 			
 		public void handleEvent(Event event) {
 				if (event.widget == btnOk) {
-					composite.dispose();
 					//in die db = userNameOutput.getText();
+					userDao.editUserNameInDB(userNameOutput.getText().trim(), id,userPasswordOutput.getText());
 					parent.setCurrentView(new UserListView(shell, parent));
-	
+					composite.dispose();
 				}
 				if(event.widget == btnCancel){
 					composite.dispose();
-					parent.setCurrentView(new UserDetailView(shell, parent,userName,id));
+					parent.setCurrentView(new UserDetailView(shell, parent,userName,id,newPassword));
 				}
 			}
 		};
@@ -163,14 +176,11 @@ public class UserEditView implements IUserState{
 	    this.btnCancel.setText("Cancel");
 	    this.btnCancel.addListener(SWT.Selection, buttonListener);
 	    this.btnCancel.setLayoutData(data);
-	    
-	    
-	    
+
 	    this.shell.layout();		
 		
 		/***********************************************************************************/
-		
-		
+
 	}
 	
 	public void setComposite(Composite comp) {

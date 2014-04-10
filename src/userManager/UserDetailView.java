@@ -28,43 +28,21 @@ public class UserDetailView implements IUserState{
 	private Text userIDInput;
 	private Composite compgrid;
 	private Label userNameLabel;
-	private Text userTitleOutput;
-	private Label userProjektLabel;
-	private Text userDescOutput;
+	private Text userNameInput;
+	private Label userPasswordLabel;
+	private Text userPasswordOutput;
 	private Button btnEdit;
 	private Button btnCancel;
 	
-	public UserDetailView(final Shell shell, final UserViewController parent, final String userName, final int id){
+	public UserDetailView(final Shell shell, final UserViewController parent, final String userName, final int id, final String pw){
 		this.shell = shell;
-		//this.user = user;
-		/*
-		composite = new Composite(shell, SWT.NONE);
-		composite.setBackground(new Color(Display.getCurrent(),255,123,34));
-		GridLayout myLayout = new GridLayout();
-		myLayout.numColumns = 2;
-		myLayout.makeColumnsEqualWidth = true;
-	    composite.setLayout(myLayout);
-	    
 		
-	    uevButton = new Button(composite, SWT.PUSH);
-	    
-		Label blankLabel = new Label(composite, SWT.NONE);
-		Label userLabel = new Label(composite,SWT.NONE);
-		
-		blankLabel.setText("UserDetailView");
-		blankLabel.setBounds(0, 0, 200, 200);
-		Color red = new Color (Display.getCurrent(), 255, 230, 0);
-		blankLabel.setBackground(red);
-		
-		userLabel.setText("Benutzer: " + userName + " | " + user.toString());
-		userLabel.setBounds(0, 50, 200, 200);
-		*/
 		Listener buttonListener = new Listener() {
 			
 		public void handleEvent(Event event) {
 				if (event.widget == btnEdit) {
 					composite.dispose();
-					parent.setCurrentView(new UserEditView(shell, parent, id, userName));
+					parent.setCurrentView(new UserEditView(shell, parent, id, userName, pw));
 	
 				}
 				if(event.widget == btnCancel){
@@ -74,7 +52,6 @@ public class UserDetailView implements IUserState{
 			}
 		};
 		
-		//uevButton.addListener(SWT.Selection, buttonListener);
 		
 		/*****************************************************************************************/
 					
@@ -84,6 +61,7 @@ public class UserDetailView implements IUserState{
 			    layout.makeColumnsEqualWidth = true;
 			    composite.setLayout(layout);
 			    
+			    /* ID LABEL + BUTTON */
 			    GridData data = new GridData(GridData.FILL_HORIZONTAL);
 			    this.userIDLabel = new Label(this.composite, SWT.RIGHT);
 			    this.userIDLabel.setText("Benutzer ID");
@@ -96,11 +74,14 @@ public class UserDetailView implements IUserState{
 			    this.userIDInput.setEditable(false);
 			    this.userIDInput.setLayoutData(data);
 			    
+			    /* FREIRAUM F†R BESSERE ANORDNUNG*/
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    data.horizontalSpan = 2;
 			    this.compgrid = new Composite(this.composite, SWT.NONE);
 			    this.compgrid.setLayoutData(data);
 			    
+			    
+			    /* NAME LABEL + BUTTON */
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    this.userNameLabel = new Label(this.composite, SWT.RIGHT);
 			    this.userNameLabel.setText("User Name");
@@ -108,57 +89,30 @@ public class UserDetailView implements IUserState{
 			    
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    data.horizontalSpan = 3;
-			    this.userTitleOutput = new Text(this.composite, SWT.READ_ONLY | SWT.LEFT | SWT.BORDER);
-			    this.userTitleOutput.setText(userName);
-			    this.userTitleOutput.setEnabled(false);
-			    this.userTitleOutput.setLayoutData(data);
+			    this.userNameInput = new Text(this.composite, SWT.READ_ONLY | SWT.LEFT | SWT.BORDER);
+			    this.userNameInput.setText(userName);
+			    this.userNameInput.setEnabled(false);
+			    this.userNameInput.setLayoutData(data);
+			    
+			    /* PASSWORD LABEL + BUTTON */
+			    data = new GridData(GridData.FILL_HORIZONTAL);
+			    this.userPasswordLabel = new Label(this.composite, SWT.RIGHT);
+			    this.userPasswordLabel.setText("Passwort");
+			    this.userPasswordLabel.setLayoutData(data);
 			    
 			    data = new GridData(GridData.FILL_HORIZONTAL);
-			    this.userProjektLabel = new Label(this.composite, SWT.RIGHT);
-			    this.userProjektLabel.setText("Projekte");
-			    this.userProjektLabel.setLayoutData(data);
-			    
-			    data = new GridData(GridData.FILL_HORIZONTAL);
-			    data.heightHint = 70;
-			    data.widthHint = 505;
 			    data.horizontalSpan = 3;
-			    this.userDescOutput = new Text(this.composite,  SWT.READ_ONLY | SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-			    this.userDescOutput.setEnabled(false);
-			    this.userDescOutput.setLayoutData(data);
+			    this.userPasswordOutput = new Text(this.composite,  SWT.READ_ONLY | SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+			    this.userPasswordOutput.setText("***");
+			    this.userPasswordOutput.setEnabled(false);
+			    this.userPasswordOutput.setLayoutData(data);
 			    
+			    /* FREIRAUM F†R BESSERE ANORDNUNG DER BUTTONS*/
+			    data = new GridData(GridData.FILL_HORIZONTAL);
+			    data.horizontalSpan = 2;
+			    this.compgrid = new Composite(this.composite, SWT.NONE);
+			    this.compgrid.setLayoutData(data);
 			   
-			    data = new GridData(GridData.FILL_HORIZONTAL);
-			    data.horizontalSpan = 4;
-			    data.heightHint = 10;
-			    this.compgrid = new Composite(this.composite, SWT.NONE);
-			    this.compgrid.setLayoutData(data);
-			    
-			    
-			    data = new GridData(GridData.FILL_HORIZONTAL);
-			    data.horizontalSpan = 4;
-			    data.heightHint = 10;
-			    this.compgrid = new Composite(this.composite, SWT.NONE);
-			    this.compgrid.setLayoutData(data);
-			    
-			    
-			    data = new GridData(GridData.FILL_HORIZONTAL);
-			    data.horizontalSpan = 2;
-			    data.heightHint = 5;
-			    this.compgrid = new Composite(this.composite, SWT.NONE);
-			    this.compgrid.setLayoutData(data);
-			    
-			    data = new GridData(GridData.FILL_HORIZONTAL);
-			    data.horizontalSpan = 4;
-			    data.heightHint = 10;
-			    this.compgrid = new Composite(this.composite, SWT.NONE);
-			    this.compgrid.setLayoutData(data);
-			    
-			    data = new GridData(GridData.FILL_HORIZONTAL);
-			    data.heightHint = 5;
-			    data.horizontalSpan = 2;
-			    this.compgrid = new Composite(this.composite, SWT.NONE);
-			    this.compgrid.setLayoutData(data);
-			    
 			    // BUTTONS	    
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    this.btnEdit = new Button(this.composite, SWT.PUSH);
@@ -173,16 +127,6 @@ public class UserDetailView implements IUserState{
 			    this.btnCancel.setLayoutData(data);
 			    
 			    this.shell.layout();
-
-//				composite = new Composite(shell, SWT.NONE);
-		//
-//				Label blankLabel = new Label(composite, SWT.NONE);
-//				blankLabel.setText("TicketDetailView");
-//				blankLabel.setBounds(0, 0, 200, 200);
-//				
-//				Color col = new Color (Display.getCurrent(), 128, 128, 255);
-//				blankLabel.setBackground(col);	
-//				shell.pack();
 
 		
 		/*****************************************************************************************/

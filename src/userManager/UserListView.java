@@ -1,5 +1,7 @@
 package userManager;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -30,7 +32,9 @@ public class UserListView implements IUserState{
 	private Label userListLabel;
 	private Composite subMenuComposite;
 	private Boolean listBtnActivate = true;
-	private final Button ulvButton; 
+	private ArrayList <String> pw;
+	 private final Button addNewUserBtn; 
+	private Composite compgrid;
 	
 	
 	public UserListView(final Shell shell, final UserViewController parentUVC){
@@ -38,14 +42,7 @@ public class UserListView implements IUserState{
 		this.shell = shell;
 		shell.setMaximized(true);
 		
-		subMenuComposite = parentUVC.getSubMenuComposite();
-		
-		ulvButton = new Button(subMenuComposite, SWT.PUSH);
-		
-		ulvButton.setText("UserListView");
-		
-		//ulvButton.setEnabled(false);
-		
+		//subMenuComposite = parentUVC.getSubMenuComposite();
 		
 		composite = new Composite(shell, SWT.NONE);
 		GridLayout myLayout = new GridLayout();
@@ -57,48 +54,41 @@ public class UserListView implements IUserState{
 	    this.userListLabel.setText("Aktive Benutzer");
 	    this.userListLabel.setLayoutData(new GridData(GridData.END));
 	   
-	    GridData data = new GridData(GridData.FILL_HORIZONTAL);
-	    
-	    Listener buttonListener = new Listener() {
-			
-			public void handleEvent(Event event) {
-				if (event.widget == ulvButton) {
-					
-					
-					
-					
-				}
-			}
-		};
-		 
 		
-	    //FIXME: dispose() Aufruf sauber und in Ordnung?
+		GridData data = new GridData(GridData.FILL_HORIZONTAL);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 0;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
 	    
-		ulvButton.addListener(SWT.Selection, buttonListener);
-	
+	   
 		String[][] userList = parentUVC.getParent().getAllUsers();
 		System.out.println("userlist: "+userList[0][0]);
 		
 		//Table: 
 		//shell.setLayout(new GridLayout());
+		data = new GridData(GridData.FILL_HORIZONTAL);
 		final Table table = new Table (composite, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION);
 		table.setLinesVisible (true);
 		table.setHeaderVisible (true);
 		//GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.heightHint = 200;
 		table.setLayoutData(data);
-		String[] titles = {" ID ", "Name", "Team", "Projekt"};
+		String[] titles = {" ID ", "Name", "Passwort"};
 		for (int i=0; i<titles.length; i++) {
 			TableColumn column = new TableColumn (table, SWT.NONE);
 			column.setText (titles [i]);
 		}	
-		
+		pw = new ArrayList<String>();
 		for (int i=0; i<userList.length; i++) {
 			TableItem item = new TableItem (table, SWT.NONE);
-			item.setText (0, userList[i][0]);
-			item.setText (1, userList[i][1]);
-			
+			item.setText (0, userList[i][0]); //id
+			item.setText (1, userList[i][1]); //name
+			item.setText (2, "***"); // pw
+
+			pw.add(userList[i][2]);
 		}
+		
 		for (int i=0; i<titles.length; i++) {
 			table.getColumn (i).pack ();
 		}
@@ -111,16 +101,37 @@ public class UserListView implements IUserState{
 				String string =  event.detail == SWT.CHECK ? "Checked" : tableItems[event.index].getText(0);
 				user = new Editor (Integer.parseInt(tableItems[event.index].getText(0)),tableItems[event.index].getText(1) );
 				String name = tableItems[event.index].getText(1);
+				System.out.println("event index: "+event.index);
 				int id = Integer.parseInt(tableItems[event.index].getText(0));
 				listBtnActivate = true;
-				ulvButton.setEnabled(true);
+			//	ulvButton.setEnabled(true);
 				composite.dispose();
-				parentUVC.setCurrentView(new UserDetailView(shell, parentUVC,name,id));
+				parentUVC.setCurrentView(new UserDetailView(shell, parentUVC,name,id,pw.get(event.index)));
 				
 				System.out.println (event.item + " " + string);
 				//.setCurrentView(new U);
 			}
 		});
+		
+		data = new GridData(GridData.FILL_HORIZONTAL);
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 0;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
+	    
+	    addNewUserBtn = new Button(composite, SWT.PUSH);
+	    addNewUserBtn.setText("Benutzer hinzufŸgen");
+	    Listener buttonListener = new Listener() {
+			
+			public void handleEvent(Event event) {
+				if (event.widget == addNewUserBtn) {
+					composite.dispose();
+					parentUVC.setCurrentView(new UserAddNewView(shell, parentUVC));
+					
+				}
+			}
+		};
+		addNewUserBtn.addListener(SWT.Selection, buttonListener);
 		
 		shell.pack ();
 			    
