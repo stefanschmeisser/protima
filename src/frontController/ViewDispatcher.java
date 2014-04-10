@@ -15,10 +15,11 @@ public class ViewDispatcher {
 	private Shell shell;
 	private Composite menu;
 	private Label label;
-	public Button btnStart, btnProject, btnTicket, btnTeam;
-	Menu menuBar, fileMenu, projectMenu, teamMenu, ticketMenu, helpMenu;
-	MenuItem fileMenuHeader, projectMenuHeader, teamMenuHeader, ticketMenuHeader, helpMenuHeader;
+	public Button btnStart, btnProject, btnTicket, btnTeam, btnUser;
+	Menu menuBar, fileMenu, projectMenu, teamMenu, ticketMenu, helpMenu, userMenu;
+	MenuItem fileMenuHeader, projectMenuHeader, teamMenuHeader, ticketMenuHeader, helpMenuHeader, userMenuHeader;
 	MenuItem fileExitItem, fileSaveItem;
+	MenuItem userEditItem, userAddNewUserItem;
 	MenuItem projectCreateItem, projectEditItem, projectDeleteItem;
 	MenuItem teamCreateItem, teamEditItem, teamDeleteItem;
 	MenuItem ticketCreateItem, ticketEditItem, ticketDeleteItem;
@@ -45,6 +46,16 @@ public class ViewDispatcher {
 	    fileSaveItem.setText("&Speichern");
 	    fileExitItem = new MenuItem(fileMenu, SWT.PUSH);
 	    fileExitItem.setText("&Beenden");
+	    
+	    // User Menu
+	    userMenuHeader = new MenuItem(this.menuBar,SWT.CASCADE);
+	    userMenuHeader.setText("User");
+	    userMenu = new Menu(this.shell,SWT.DROP_DOWN);
+	    userMenuHeader.setMenu(userMenu);
+	    userEditItem = new MenuItem(userMenu,SWT.PUSH);
+	    userEditItem.setText("Benutzer Editieren");
+	    userAddNewUserItem = new MenuItem(userMenu,SWT.PUSH);
+	    userAddNewUserItem.setText("Benutzer hinzufŸgen");
 
 	    // Projekt Menü
 	    projectMenuHeader = new MenuItem(this.menuBar, SWT.CASCADE);
@@ -124,12 +135,21 @@ public class ViewDispatcher {
         btnTeam.setSize(50,50);
         btnTeam.setLayoutData(new GridData(GridData.BEGINNING));
        
+        btnUser = new Button(this.menu, SWT.PUSH);
+        Image imageUser = new Image(Display.getCurrent(), "content/user.png");
+        btnUser.setImage(imageUser);
+        btnUser.setSize(50, 50);
+        btnUser.setLayoutData(new GridData(GridData.BEGINNING));
+        
         // add Event Handler
 	    btnStart.addListener(SWT.Selection, this.frontController);
 	    btnProject.addListener(SWT.Selection, this.frontController);
 	    btnTicket.addListener(SWT.Selection, this.frontController);
 	    btnTeam.addListener(SWT.Selection, this.frontController);
-
+	    btnUser.addListener(SWT.Selection, this.frontController);
+	}
+	public Composite getComposite(){
+		return menu;
 	}
 
 }

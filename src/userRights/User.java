@@ -36,4 +36,8 @@ public abstract class User {
 		//TODO: implementieren
 		return new int[0];
 	}
+	
+	public int getUserID(){
+		return this.id;
+	}
 }
