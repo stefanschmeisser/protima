@@ -19,7 +19,7 @@ public abstract class AbstractDaoMySql {
 	protected void openConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(Protima.host, Protima.user, Protima.password);
+			connection = DriverManager.getConnection(Protima.HOST, Protima.USER, Protima.PASSWORD);
 			connection.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
