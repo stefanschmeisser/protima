@@ -7,7 +7,6 @@ public class TicketViewController {
 
 	private ITicketState currentView;
 	private Shell shell;
-	
 	private ITicketState tlvc;
 	private ITicketState tdvc;
 	private ITicketState tevc;
