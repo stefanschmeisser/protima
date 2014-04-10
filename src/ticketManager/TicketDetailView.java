@@ -6,15 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.*;
 
 public class TicketDetailView {
 
@@ -239,6 +231,10 @@ public class TicketDetailView {
 	
 	// SETTERS
 
+	public void setTicketId(String str){
+		this.ticketIDInput.setText(str);
+	}
+	
 	public void setTicketTitle(String str){
 		this.ticketTitleInput.setText(str);
 	}
@@ -267,12 +263,18 @@ public class TicketDetailView {
 		this.assignedTeamIDInput.setText(str);
 	}
 	
-	public void setTicketStartDate(String str){
-		this.ticketStartDateInput.setDate(0, 0, 0);
+	public void setTicketStartDate(ArrayList<Integer> dateYMD){
+		int year = dateYMD.get(0);
+		int month = dateYMD.get(1);
+		int day = dateYMD.get(2);
+		this.ticketStartDateInput.setDate(year, month, day);
 	}
 	
-	public void setTicketEndDate(String str){
-		this.ticketEndDateInput.setDate(0, 0, 0);
+	public void setTicketEndDate(ArrayList<Integer> dateYMD){
+		int year = dateYMD.get(0);
+		int month = dateYMD.get(1);
+		int day = dateYMD.get(2);
+		this.ticketEndDateInput.setDate(year, month, day);
 	}
 
 }

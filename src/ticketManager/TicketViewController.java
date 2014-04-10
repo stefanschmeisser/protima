@@ -1,10 +1,9 @@
 package ticketManager;
 
-import java.util.Observable;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Shell;
 
-public class TicketViewController extends Observable {
+public class TicketViewController {
 
 	private ITicketState currentView;
 	private Shell shell;
