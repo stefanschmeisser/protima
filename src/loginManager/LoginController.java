@@ -52,6 +52,7 @@ public class LoginController implements IApplicationState {
 	public void switchToFcState() {
 		app.switchToFcState();
 	}
+	
 
 	@Override
 	public void setCurrentView(IContentState currentState) {

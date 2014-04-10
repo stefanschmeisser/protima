@@ -23,6 +23,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 	/**
 	 * creates a new project in the database
 	 */
+	
 	@Override
 	public void createProject(String name, String description, int projectmanagerID){
 		try {
@@ -42,6 +43,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 	/**
 	 * edit an existing project in the database
 	 */
+	
 	@Override
 	public void editProject(int projectID, String name, String description, int projectmanagerID){
 		openConnection();
@@ -60,6 +62,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 	/**
 	 * delete an existing project from the database
 	 */
+	
 	@Override
 	public void removeProject(int projectID){
 		openConnection();
@@ -75,6 +78,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 	/**
 	 * returns a List with all projects from the database
 	 */
+	
 	@Override
 	public ArrayList<Project> getProjectList(){
 		this.projectList = new ArrayList<Project>();
@@ -100,6 +104,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 	/**
 	 * returns a existing project form the database
 	 */
+	
 	@Override
 	public Project getProject(int projectID){
 		Project project = new Project();
@@ -118,5 +123,6 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 			e.printStackTrace();
 		}
 		return project;
-	}	
+	}
+	
 }

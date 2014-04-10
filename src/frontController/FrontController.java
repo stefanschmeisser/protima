@@ -42,8 +42,9 @@ public class FrontController implements IApplicationState, Listener {
 		this.svc = new StartViewController();
 //		this.pc = new ProjectController(this.shell);
 		this.tc = new TicketController(this.shell);
+		//this.pc = new ProjectController(this.shell);
 //		this.tvc = new TeamViewController();
-		setCurrentView(this.pc);
+		setCurrentView(this.svc);
 		
 		shell.pack();
 		shell.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
@@ -62,6 +63,7 @@ public class FrontController implements IApplicationState, Listener {
 		if (event.widget == vd.btnStart) {
 			System.out.println("Btn Start");
 //			svc.setComposite(vd.getContentPanel());
+			
 			setCurrentView(svc);
 		}
 		if (event.widget == vd.btnProject) {
@@ -74,11 +76,22 @@ public class FrontController implements IApplicationState, Listener {
 //			tc.setComposite(vd.getContentPanel());
 			setCurrentView(tc);
 		}
+		if(event.widget == vd.btnUser){
+			System.out.println("Btn User");
+			if(uc==null){
+				this.uc = new UserController(this.shell, this);
+				setCurrentView(uc);
+			}
+			else{
+				setCurrentView(uc);
+			}
+		}
 //		if (event.widget == vd.btnTeam) {
 //			System.out.println("Btn Team");
 //			tvc.setContentPane(vd.getContentPanel());
 //			setCurrentView(tvc);
 //		}
+		
 	}
 	
 
@@ -89,5 +102,13 @@ public class FrontController implements IApplicationState, Listener {
 	public Listener getListener() {
 		return this.listener;
 	}
+
+	public void setBlankComposite(Composite composite) {
+		this.composite = composite;
+	}
+	public Composite getComposite(){
+		return this.composite;
+	}
+	
 
 }
