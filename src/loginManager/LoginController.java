@@ -2,26 +2,21 @@ package loginManager;
 
 import org.eclipse.swt.widgets.Display;
 
-import frontController.FrontController;
 import frontController.IContentState;
 import userRights.ProjectManager;
-import userRights.User;
 import applicationManager.Application;
 import applicationManager.IApplicationState;
 
 public class LoginController implements IApplicationState {
 
-	private LoginViewController lvc;
 	private LoginDaoMySql datenWerk;
 	private Application app;
-	private Display disp;
 	
 	
 	public LoginController(Application app, Display disp) {
 		this.datenWerk = new LoginDaoMySql();
 		this.app = app;
-		this.disp = disp;
-		this.lvc = new LoginViewController(this, disp);
+		new LoginViewController(this, disp);
 	}
 
 	public void show() {
