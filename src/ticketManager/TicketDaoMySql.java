@@ -16,8 +16,6 @@ import com.mysql.jdbc.ResultSetMetaData;
 
 public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 
-	private Connection connection;
-	
 	// ------------------------------------------------------------------------
 	
 	public TicketDaoMySql() {
