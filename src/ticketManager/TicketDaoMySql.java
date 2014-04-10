@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
-
 import applicationManager.AbstractDaoMySql;
-
 import com.mysql.jdbc.ResultSetMetaData;
 
 
@@ -22,8 +20,6 @@ public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 //		openConnection(_user, _password);
 //		this.select("*", "ticket", "");
 	}
-	
-	// ------------------------------------------------------------------------
 	
 	// ------------------------------------------------------------------------
 	
@@ -116,7 +112,8 @@ public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 			}
 		}
 		
-		String insertStmt = "INSERT INTO `ticket`(`title`, `description`, `startdate`, `enddate`, `priority`, `projectID`, `teamID`) VALUES ";
+		String insertStmt = "INSERT INTO `ticket`(`title`, `description`, `startdate`, `enddate`, " +
+							"`priority`, `projectID`, `teamID`, `editorID`, `processStatus`) VALUES ";
 		String qryStr = insertStmt + "(" + values + ")";
 		
 		
@@ -133,8 +130,10 @@ public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 
 	public void deleteTicket(String ticketId){
 		
-		String deleteStmt = "DELETE FROM `sag`.`ticket` WHERE `ticket`.`ticketID` = "+ ticketId +";";
+		String deleteStmt = "DELETE FROM `ticket` WHERE `ticket`.`ticketID` = "+ ticketId +";";
 
+		System.out.println(deleteStmt);
+		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(deleteStmt);
 			preparedStatement.executeUpdate();
