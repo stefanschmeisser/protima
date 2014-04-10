@@ -48,8 +48,8 @@ public class UserController implements IContentState {
 //	@Override
 	public void setComposite(Composite composite) {
 		this.composite = composite;
-		Color blue = new Color (Display.getCurrent(), 0, 200, 255);
-		this.composite.setBackground(blue);
+//		Color blue = new Color (Display.getCurrent(), 0, 200, 255);
+//		this.composite.setBackground(blue);
 		parent.setBlankComposite(composite);
 	}
 
@@ -64,6 +64,8 @@ public class UserController implements IContentState {
 		userIDs = userDAO.getUserList();
 		return userIDs;
 	}
+	
+	
 	
 
 }

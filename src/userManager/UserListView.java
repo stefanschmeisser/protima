@@ -29,59 +29,65 @@ public class UserListView implements IUserState{
 	private Shell shell;
 	private Label userListLabel;
 	private Composite subMenuComposite;
+	private Boolean listBtnActivate = true;
+	private final Button ulvButton; 
+	
+	
 	public UserListView(final Shell shell, final UserViewController parentUVC){
 		
 		this.shell = shell;
+		shell.setMaximized(true);
 		
-		subMenuComposite = new Composite(shell,SWT.NONE);
-		GridData datasubMenu = new GridData(GridData.FILL_HORIZONTAL);
-	    datasubMenu.widthHint = shell.getSize().x;
-	    datasubMenu.heightHint = 30;
-	    this.subMenuComposite.setLayoutData(datasubMenu);
-	    this.subMenuComposite.setLayout(new GridLayout(6, true));
-		this.subMenuComposite.setBackground(shell.getDisplay().getSystemColor(SWT.COLOR_DARK_GRAY));
+		subMenuComposite = parentUVC.getSubMenuComposite();
+		
+		ulvButton = new Button(subMenuComposite, SWT.PUSH);
+		
+		ulvButton.setText("UserListView");
+		
+		//ulvButton.setEnabled(false);
+		
 		
 		composite = new Composite(shell, SWT.NONE);
 		GridLayout myLayout = new GridLayout();
 		myLayout.numColumns = 2;
 		myLayout.makeColumnsEqualWidth = true;
 	    composite.setLayout(myLayout);
-	     
+	    
+	    this.userListLabel = new Label(this.composite, SWT.CENTER);
+	    this.userListLabel.setText("Aktive Benutzer");
+	    this.userListLabel.setLayoutData(new GridData(GridData.END));
+	   
 	    GridData data = new GridData(GridData.FILL_HORIZONTAL);
 	    
-		
-		final Button ulvButton = new Button(subMenuComposite, SWT.NONE);
-		ulvButton.setText("UserListView");
-
-		Listener buttonListener = new Listener() {
+	    Listener buttonListener = new Listener() {
 			
 			public void handleEvent(Event event) {
 				if (event.widget == ulvButton) {
 					
-					//System.out.println("ja mann");
-					Color red = new Color (Display.getCurrent(), 255, 230, 39);
 					
-					composite.dispose();
-					parentUVC.setCurrentView(new UserEditView(shell,parentUVC));
+					
+					
 				}
 			}
 		};
-		    
+		 
+		
 	    //FIXME: dispose() Aufruf sauber und in Ordnung?
 	    
 		ulvButton.addListener(SWT.Selection, buttonListener);
+	
 		String[][] userList = parentUVC.getParent().getAllUsers();
 		System.out.println("userlist: "+userList[0][0]);
 		
 		//Table: 
 		//shell.setLayout(new GridLayout());
-		final Table table = new Table (shell, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION);
+		final Table table = new Table (composite, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION);
 		table.setLinesVisible (true);
 		table.setHeaderVisible (true);
 		//GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		data.heightHint = 200;
 		table.setLayoutData(data);
-		String[] titles = {" ID ", "Name"};
+		String[] titles = {" ID ", "Name", "Team", "Projekt"};
 		for (int i=0; i<titles.length; i++) {
 			TableColumn column = new TableColumn (table, SWT.NONE);
 			column.setText (titles [i]);
@@ -99,20 +105,23 @@ public class UserListView implements IUserState{
 		table.addListener (SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent (Event event) {
-				// hole die ID aus der Tabelle und gebe diese weiter fŸr Detailansicht
+				// hole User aus der Tabelle und gebe diese weiter fŸr Detailansicht
+				
 				TableItem[] tableItems = table.getItems();
 				String string =  event.detail == SWT.CHECK ? "Checked" : tableItems[event.index].getText(0);
 				user = new Editor (Integer.parseInt(tableItems[event.index].getText(0)),tableItems[event.index].getText(1) );
-				parentUVC.setCurrentView(new UserDetailView(shell, parentUVC, user));
+				String name = tableItems[event.index].getText(1);
+				int id = Integer.parseInt(tableItems[event.index].getText(0));
+				listBtnActivate = true;
+				ulvButton.setEnabled(true);
+				composite.dispose();
+				parentUVC.setCurrentView(new UserDetailView(shell, parentUVC, user,name,id));
 				
-				//composite.dispose();
 				System.out.println (event.item + " " + string);
 				//.setCurrentView(new U);
 			}
 		});
-		this.userListLabel = new Label(this.composite, SWT.RIGHT);
-	    this.userListLabel.setText("Aktive Benutzer");
-	    this.userListLabel.setLayoutData(data);
+		
 		shell.pack ();
 			    
 	}
