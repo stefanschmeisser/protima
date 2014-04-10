@@ -1,12 +1,14 @@
 package ticketManager;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
+
 import org.eclipse.swt.*;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.widgets.*;
 
-public class TicketListViewController implements ITicketState, ITicketObserver {
+public class TicketListViewController implements ITicketState {
 
 	private Shell shell;
 	private TicketListView tlv;
@@ -14,11 +16,19 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 	private ITicketDao ticketDao;
 	private Listener listener;
 	
+	private Vector observers;
+	
+	private String ticketId, ticketTitle, ticketDescription, ticketStartDate, ticketEndeDate, ticketPriorityLevel, ticketProjectId, ticketTeamId = "";
+	
+	
+	
 	public TicketListViewController(TicketViewController ticketViewController, Shell shell, ITicketDao ticketDao){
 		
 		this.tvc = ticketViewController;
 		this.shell = shell;
 		this.ticketDao = ticketDao;
+		
+		observers = new Vector();
 	}
 	
 	// ------------------------------------------------------------------------
@@ -38,7 +48,7 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 				}
 				if (event.widget == tlv.btnEdit) {
 					System.out.println("Edit");
-					
+					tvc.setCurrentView(tvc.getTicketEditViewController());
 				}
 				if (event.widget == tlv.btnDelete) {
 //					System.out.println("Delete");
@@ -64,7 +74,9 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		// TODO Auto-generated method stub
 		return this.tlv.getComposite();
 	}
-
+	
+	// ------------------------------------------------------------------------
+	
 	// ------------------------------------------------------------------------
 	
 	private void refreshTableData(){
@@ -78,6 +90,9 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		tlv.getTable().setItemCount(0);
 		tlv.getTable().setRedraw( true );
 	}
+	
+	// ------------------------------------------------------------------------
+	
 	
 	// ------------------------------------------------------------------------
 	
@@ -118,6 +133,41 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 			}	
 		}
 	}
+	
+	// ------------------------------------------------------------------------
+	
+	
+	// ------------------------------------------------------------------------
+	
+	private void deleteTicket(){
+
+		boolean isSelected = false;
+		
+		for(int i = 0; i < tlv.getTable().getItemCount(); i++){
+			if(tlv.getTable().isSelected(i)){
+				isSelected = true;
+			}
+		}
+		
+		if(isSelected){
+			
+			MessageBox dialog = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
+			dialog.setText("Delete Ticket");
+			dialog.setMessage("Are you sure?");
+
+			// open dialog and await user selection
+			int returnCode = dialog.open();
+				
+			if(returnCode == 32){
+				TableItem[] ti = tlv.getTable().getSelection();
+				this.ticketDao.deleteTicket(ti[0].getText(0));
+				isSelected = false;
+			}
+			else{
+				System.out.println("Aborted by user.");
+			}
+		}
+	}
 
 	// ------------------------------------------------------------------------
 	
@@ -126,41 +176,104 @@ public class TicketListViewController implements ITicketState, ITicketObserver {
 		TableItem[] ti = tlv.getTable().getSelection();
 		
 		String str = "";
-		for(int i = 0; i < tlv.getTable().getColumnCount(); i++){
-			str = str + ti[0].getText(i) + ", ";
+//		for(int i = 0; i < tlv.getTable().getColumnCount(); i++){
+//			str = str + ti[0].getText(i) + ", ";
+//			
+//			this.ticketId = ti[0].getText(i);
+//		}
+		
+		this.ticketId = ti[0].getText(0);
+		this.ticketTitle = ti[0].getText(1);
+		this.ticketDescription = ti[0].getText(2);
+		this.ticketStartDate = ti[0].getText(3);
+		this.ticketEndeDate = ti[0].getText(4);
+		this.ticketPriorityLevel = ti[0].getText(5);
+		this.ticketProjectId = ti[0].getText(6);
+		this.ticketTeamId = ti[0].getText(7);
+		
 			
+		System.out.println("RESULT: " + this.ticketStartDate);
+	
+		this.notifyObserver();
+	}
+	
+
+	// ------------------------------------------------------------------------
+	
+	public void notifyObserver(){
+		for (int i=0; i< observers.size(); i++) {
+			((ITicketObserver)(observers.elementAt(i))).update();
 		}
-//		System.out.println(str);
 	}
 	
 	// ------------------------------------------------------------------------
 	
-	private void deleteTicket(){
-		
-		MessageBox dialog = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
-		dialog.setText("My info");
-		dialog.setMessage("Do you really want to do this?");
+	public void attachObserver(ITicketObserver obs){
+		observers.addElement(obs);
+		System.out.println("Observer registration");
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	public void detachObserver(ITicketObserver obs){
+		observers.removeElement(obs);
+		System.out.println("Observer deregistration");
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	// GETTERS
 
-		// open dialog and await user selection
-		int returnCode = dialog.open();
-		
-		boolean isSelected = false;
-		
-		for(int i = 0; i < tlv.getTable().getItemCount(); i++){
-			if(tlv.getTable().isSelected(i)){
-				isSelected = true;
-			}
-		}
-				
-		if(returnCode == 32 && isSelected){
-			TableItem[] ti = tlv.getTable().getSelection();
-			this.ticketDao.deleteTicket(ti[0].getText(0));
-			isSelected = false;
-		}
-		else{
-			System.out.println("Nothing selected or aborted by user.");
-		}
-
+	public String getTicketId(){
+		return this.ticketId;
+	}
+	
+	public String getTicketTitle(){
+		return this.ticketTitle;
 	}
 
+	public String getTicketDescription(){
+		return this.ticketDescription;
+	}
+
+	public String getTicketPriorityLevel(){
+		return this.ticketPriorityLevel;
+	}
+
+//	public String getTicketProcessStatus(){
+//		return this.ticketProcessStatus;
+//	}
+
+	public String getTicketProjectId(){
+		return this.ticketProjectId;
+	}
+
+//	public String getTicketCurrentEditorUid(){
+//		return this.currentEditorUIDInput.getText();
+//	}
+
+	public String getTicketAssignedTeam(){
+		return this.ticketTeamId;
+	}
+
+	public ArrayList<Integer> getTicketStartDate(){
+		
+		String[] singleStrings =  this.ticketStartDate.split("-");
+		// cast string to int and add it to the arraylist
+		ArrayList<Integer> date = new ArrayList<Integer>();
+		date.add(Integer.parseInt(singleStrings[0]));
+		date.add(Integer.parseInt(singleStrings[1]));
+		date.add(Integer.parseInt(singleStrings[2]));
+		return date;
+	}
+
+	public  ArrayList<Integer> getTicketEndDate(){
+		String[] singleStrings =  this.ticketStartDate.split("-");
+		// cast string to int and add it to the arraylist
+		ArrayList<Integer> date = new ArrayList<Integer>();
+		date.add(Integer.parseInt(singleStrings[0]));
+		date.add(Integer.parseInt(singleStrings[1]));
+		date.add(Integer.parseInt(singleStrings[2]));
+		return date;
+	}
 }

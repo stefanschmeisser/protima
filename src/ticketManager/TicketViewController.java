@@ -1,7 +1,5 @@
 package ticketManager;
 
-import java.awt.Color;
-
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Shell;
 
@@ -25,7 +23,7 @@ public class TicketViewController {
 		
 		tlvc = new TicketListViewController(this, shell, this.ticketDao);
 		tdvc = new TicketDetailViewController(this, shell, this.ticketDao);
-//		tevc = new TicketEditViewController(shell);
+		tevc = new TicketEditViewController(this, shell, this.ticketDao);
 		tcvc = new TicketCreateViewController(this, shell, this.ticketDao);
 		
 		this.setCurrentView(tlvc);
