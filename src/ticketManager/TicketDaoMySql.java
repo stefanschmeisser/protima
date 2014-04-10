@@ -9,39 +9,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import applicationManager.AbstractDaoMySql;
+
 import com.mysql.jdbc.ResultSetMetaData;
 
 
-public class TicketDaoMySql implements ITicketDao {
+public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 
-	private String _user, _password, _schema;
 	private Connection connection;
 	
 	// ------------------------------------------------------------------------
 	
 	public TicketDaoMySql() {
-		
-		_user = "root";
-		_password = "";
-		
 //		openConnection(_user, _password);
 //		this.select("*", "ticket", "");
 	}
 	
 	// ------------------------------------------------------------------------
-	
-	private void openConnection(String user, String password) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String conString = "jdbc:mysql://localhost/sag";
-			connection = DriverManager.getConnection(conString, _user, _password);
-			connection.setAutoCommit(false);
-		} catch (ClassNotFoundException e) {
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	// ------------------------------------------------------------------------
 	
@@ -57,7 +41,7 @@ public class TicketDaoMySql implements ITicketDao {
 			}
 			
 			try {
-				openConnection(_user, _password);
+				openConnection();
 				Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(qryStr);
 				//rs.last();
@@ -84,7 +68,7 @@ public class TicketDaoMySql implements ITicketDao {
 			}
 			
 			try {
-				openConnection(_user, _password);
+				openConnection();
 				Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(qryStr);
 				ResultSetMetaData rsMetaData = (ResultSetMetaData) rs.getMetaData();
