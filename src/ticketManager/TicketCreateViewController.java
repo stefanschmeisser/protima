@@ -103,6 +103,8 @@ public class TicketCreateViewController implements ITicketState {
 		values.add(tcv.getTicketPriorityLevel());
 		values.add(tcv.getTicketProjectId());
 		values.add(tcv.getTicketAssignedTeam());
+		values.add(tcv.getTicketCurrentEditorUid());
+		values.add(tcv.getTicketProcessStatus());
 		
 		this.ticketDao.insertTicket(values);
 	}

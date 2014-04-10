@@ -64,6 +64,8 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 		tdv.setTicketPriorityLevel(tlvc.getTicketPriorityLevel());
 		tdv.setTicketAssignedTeam(tlvc.getTicketAssignedTeam());
 		tdv.setTicketProjectId(tlvc.getTicketProjectId());
+		tdv.setTicketProcessStatus(tlvc.getTicketProcessStatus());
+		tdv.setTicketCurrentEditorUid(tlvc.getTicketCurrentEditorUid());
 		
 	}
 }

@@ -116,7 +116,8 @@ public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 			}
 		}
 		
-		String insertStmt = "INSERT INTO `ticket`(`title`, `description`, `startdate`, `enddate`, `priority`, `projectID`, `teamID`) VALUES ";
+		String insertStmt = "INSERT INTO `ticket`(`title`, `description`, `startdate`, `enddate`, " +
+							"`priority`, `projectID`, `teamID`, `editorID`, `processStatus`) VALUES ";
 		String qryStr = insertStmt + "(" + values + ")";
 		
 		

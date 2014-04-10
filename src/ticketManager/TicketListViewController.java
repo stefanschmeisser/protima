@@ -18,7 +18,7 @@ public class TicketListViewController implements ITicketState {
 	
 	private Vector observers;
 	
-	private String ticketId, ticketTitle, ticketDescription, ticketStartDate, ticketEndeDate, ticketPriorityLevel, ticketProjectId, ticketTeamId = "";
+	private String ticketId, ticketTitle, ticketDescription, ticketStartDate, ticketEndeDate, ticketPriorityLevel, ticketProjectId, ticketTeamId, ticketProcessStatus, ticketEditorId;
 	
 	
 	
@@ -77,8 +77,6 @@ public class TicketListViewController implements ITicketState {
 	
 	// ------------------------------------------------------------------------
 	
-	// ------------------------------------------------------------------------
-	
 	private void refreshTableData(){
 		
 		tlv.getTable().setRedraw( false );
@@ -90,9 +88,6 @@ public class TicketListViewController implements ITicketState {
 		tlv.getTable().setItemCount(0);
 		tlv.getTable().setRedraw( true );
 	}
-	
-	// ------------------------------------------------------------------------
-	
 	
 	// ------------------------------------------------------------------------
 	
@@ -133,9 +128,6 @@ public class TicketListViewController implements ITicketState {
 			}	
 		}
 	}
-	
-	// ------------------------------------------------------------------------
-	
 	
 	// ------------------------------------------------------------------------
 	
@@ -190,9 +182,9 @@ public class TicketListViewController implements ITicketState {
 		this.ticketPriorityLevel = ti[0].getText(5);
 		this.ticketProjectId = ti[0].getText(6);
 		this.ticketTeamId = ti[0].getText(7);
+		this.ticketEditorId = ti[0].getText(8);
+		this.ticketProcessStatus = ti[0].getText(9);
 		
-			
-		System.out.println("RESULT: " + this.ticketStartDate);
 	
 		this.notifyObserver();
 	}
@@ -240,17 +232,17 @@ public class TicketListViewController implements ITicketState {
 		return this.ticketPriorityLevel;
 	}
 
-//	public String getTicketProcessStatus(){
-//		return this.ticketProcessStatus;
-//	}
+	public String getTicketProcessStatus(){
+		return this.ticketProcessStatus;
+	}
 
 	public String getTicketProjectId(){
 		return this.ticketProjectId;
 	}
 
-//	public String getTicketCurrentEditorUid(){
-//		return this.currentEditorUIDInput.getText();
-//	}
+	public String getTicketCurrentEditorUid(){
+		return this.ticketEditorId;
+	}
 
 	public String getTicketAssignedTeam(){
 		return this.ticketTeamId;
