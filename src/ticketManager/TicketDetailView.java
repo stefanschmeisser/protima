@@ -1,18 +1,12 @@
 package ticketManager;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.*;
 
 public class TicketDetailView {
 
@@ -233,4 +227,54 @@ public class TicketDetailView {
 		return this.composite;
 	}
 	
+	// ------------------------------------------------------------------------
+	
+	// SETTERS
+
+	public void setTicketId(String str){
+		this.ticketIDInput.setText(str);
+	}
+	
+	public void setTicketTitle(String str){
+		this.ticketTitleInput.setText(str);
+	}
+	
+	public void setTicketDescription(String str){
+		this.ticketDescInput.setText(str);
+	}
+	
+	public void setTicketPriorityLevel(String str){
+		this.ticketPriorityLevelInput.setText(str);
+	}
+
+	public void setTicketProcessStatus(String str){
+		this.ticketProcessStatusInput.setText(str);
+	}
+	
+	public void setTicketProjectId(String str){
+		this.projectIDInput.setText(str);
+	}
+	
+	public void setTicketCurrentEditorUid(String str){
+		this.currentEditorUIDInput.setText(str);
+	}
+
+	public void setTicketAssignedTeam(String str){
+		this.assignedTeamIDInput.setText(str);
+	}
+	
+	public void setTicketStartDate(ArrayList<Integer> dateYMD){
+		int year = dateYMD.get(0);
+		int month = dateYMD.get(1);
+		int day = dateYMD.get(2);
+		this.ticketStartDateInput.setDate(year, month, day);
+	}
+	
+	public void setTicketEndDate(ArrayList<Integer> dateYMD){
+		int year = dateYMD.get(0);
+		int month = dateYMD.get(1);
+		int day = dateYMD.get(2);
+		this.ticketEndDateInput.setDate(year, month, day);
+	}
+
 }

@@ -8,23 +8,18 @@ import java.sql.Statement;
 
 public abstract class AbstractDaoMySql {
 
-	protected String _user, _password;
 	protected Connection connection;
 	
 	public AbstractDaoMySql() {
 		
-		_user = "sag";
-		_password = "Jr22HhUSLMz9Nu3m";
-		
-		openConnection(_user, _password);
+		openConnection();
 		
 	}
 	
-	protected void openConnection(String user, String password) {
+	protected void openConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String conString = "jdbc:mysql://games.thm.de/sag";
-			connection = DriverManager.getConnection(conString, _user, _password);
+			connection = DriverManager.getConnection(Protima.host, Protima.user, Protima.password);
 			connection.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -44,7 +39,7 @@ public abstract class AbstractDaoMySql {
 				qryStr += " WHERE "+ condition;
 			}
 			try {
-				openConnection(_user, _password);
+				openConnection();
 				Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(qryStr);
 				rs.last();
@@ -93,7 +88,7 @@ public abstract class AbstractDaoMySql {
 			qryStr += " LIMIT 0,1";
 //			System.out.println("abstract: " + qryStr);
 			try {
-				openConnection(_user, _password);
+				openConnection();
 				Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(qryStr);
 
