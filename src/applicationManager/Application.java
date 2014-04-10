@@ -1,7 +1,5 @@
 package applicationManager;
 
-import java.util.Vector;
-
 import org.eclipse.swt.widgets.Display;
 
 import loginManager.LoginController;
