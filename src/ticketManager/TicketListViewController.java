@@ -15,13 +15,10 @@ public class TicketListViewController implements ITicketState {
 	private TicketViewController tvc;
 	private ITicketDao ticketDao;
 	private Listener listener;
-	
 	private Vector observers;
-	
 	private String ticketId, ticketTitle, ticketDescription, ticketStartDate, ticketEndeDate, ticketPriorityLevel, ticketProjectId, ticketTeamId, ticketProcessStatus, ticketEditorId;
 	
-	
-	
+
 	public TicketListViewController(TicketViewController ticketViewController, Shell shell, ITicketDao ticketDao){
 		
 		this.tvc = ticketViewController;
