@@ -41,7 +41,7 @@ public class ViewDispatcher {
 		
 		// ProMiTa Men�
 	    fileMenuHeader = new MenuItem(this.menuBar, SWT.CASCADE);
-	    fileMenuHeader.setText("&ProMiTa");	    
+	    fileMenuHeader.setText("&ProTiMa");	    
 	    fileMenu = new Menu(this.shell, SWT.DROP_DOWN);
 	    fileMenuHeader.setMenu(fileMenu);
 	    fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
