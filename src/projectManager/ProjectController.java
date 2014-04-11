@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import ticketManager.TicketTableModel;
+import userRights.ProjectManager;
 import frontController.IContentState;
 
 public class ProjectController implements IContentState {
@@ -38,6 +39,10 @@ public class ProjectController implements IContentState {
 	
 	public void setProject(String projectname, String projectDescription, int projectManager){
 		this.projectDAO.createProject(projectname, projectDescription, projectManager);
+	}
+	
+	public ArrayList<ProjectManager> getProjectManagers(){
+		return this.projectDAO.getProjectManagers();
 	}
 	
 }

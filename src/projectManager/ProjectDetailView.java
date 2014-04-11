@@ -19,13 +19,7 @@ import userRights.ProjectManager;
 public class ProjectDetailView implements IProjectState {
 	
 	private ProjectViewController projectViewController;
-	private Shell shell;
 	private Composite composite, content;
-	private Button createButton, saveButton, cancelButton;
-	private Label labelProjectID, labelProjectName, labelProjectDescription, labelProjectManager;
-	private Text textProjectID, textProjectName, textProjectDescription;
-	private Combo comboProjectManager;
-	private ProjectManager projectManager;
 
 	public ProjectDetailView(ProjectViewController projectViewController, Composite content){
 		this.projectViewController = projectViewController;

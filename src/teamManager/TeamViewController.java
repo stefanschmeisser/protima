@@ -81,12 +81,12 @@ public class TeamViewController implements Listener {
 		
 		if(event.widget == TeamListView.editButton){
 			System.out.println("EDIT Button");
-			this.teamEditView = new TeamEditView(this, this.composite);
-			setCurrentView(this.teamEditView);
+//			this.teamEditView = new TeamEditView(this, this.composite);
+//			setCurrentView(this.teamEditView);
 		}
 		
 		if(event.widget == TeamListView.deleteButton){
-			
+			System.out.println("DELETE Button");
 		}
 		
 		if(event.widget == TeamCreateView.createButton){

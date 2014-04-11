@@ -8,11 +8,13 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
+import userRights.ProjectManager;
 import applicationManager.AbstractDaoMySql;
 
 public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 
 	private ArrayList<Project> projectList;
+	private ArrayList<ProjectManager> projectManagerList;
 	
 	public ProjectDaoMySql() {
 	}
@@ -53,6 +55,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 			preparedStatement.setInt(3, projectmanagerID);
 			preparedStatement.setInt(4, projectID);
 			preparedStatement.executeUpdate();
+			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -69,6 +72,7 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 			PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM project WHERE projectID = ?");
 			preparedStatement.setInt(1, projectID);
 			preparedStatement.executeUpdate();
+			connection.commit();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -122,6 +126,23 @@ public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 			e.printStackTrace();
 		}
 		return project;
+	}
+
+	@Override
+	public ArrayList<ProjectManager> getProjectManagers() {
+		this.projectManagerList = new ArrayList<ProjectManager>(); 
+		openConnection();
+		try{
+			Statement statement = connection.createStatement(); 
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM user");
+			while(resultSet.next()){
+				ProjectManager projectManager = new ProjectManager(resultSet.getInt("userID"), resultSet.getString("name"));
+				projectManagerList.add(projectManager);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return this.projectManagerList;
 	}
 	
 }

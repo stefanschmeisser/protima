@@ -41,7 +41,7 @@ public class TeamCreateView implements ITeamState {
 	    header.setLayout(layout);
 
 	    Label teamEditHeader = new Label(header, SWT.NONE);
-	    teamEditHeader.setText("Detail View");
+	    teamEditHeader.setText("Create Team");
 	    FontData[] fD = teamEditHeader.getFont().getFontData();
 	    fD[0].setHeight(16);
 	    teamEditHeader.setFont( new Font(Display.getCurrent(),fD[0]));

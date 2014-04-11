@@ -6,6 +6,7 @@ import java.util.Vector;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -77,12 +78,19 @@ public class ProjectViewController implements Listener {
 			System.out.println("Create Button");
 			this.projectCreateView = new ProjectCreateView(this, this.composite);
 			setCurrentView(this.projectCreateView);
+			ArrayList<String> projectManagerList = new ArrayList<String>();
+			for(int i=0; i < this.projectController.getProjectManagers().size(); i++){
+				projectManagerList.add(Integer.toString(this.projectController.getProjectManagers().get(i).getUserID()));
+			}
+			String[] simpleArray = new String[projectManagerList.size()];
+			projectManagerList.toArray(simpleArray);
+			ProjectCreateView.comboProjectManager.setItems(simpleArray);
 		}
 		
 		if(event.widget == ProjectListView.editButton){
 			System.out.println("EDIT Button");
-			this.projectEditView = new ProjectEditView(this, this.composite);
-			setCurrentView(this.projectEditView);
+//			this.projectEditView = new ProjectEditView(this, this.composite);
+//			setCurrentView(this.projectEditView);
 		}
 		
 		if(event.widget == ProjectListView.deleteButton){
@@ -121,10 +129,6 @@ public class ProjectViewController implements Listener {
 			}
 			
 		}
-		
-//		if(event.widget == projectListView.getCancelButton()){
-//			System.out.println("Cancel gedrückt");
-//		}
 		
 	}
 	
