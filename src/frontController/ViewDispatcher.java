@@ -3,6 +3,7 @@ package frontController;
 import java.awt.Color;
 
 import org.eclipse.swt.*;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -14,6 +15,7 @@ public class ViewDispatcher {
 	private FrontController frontController;
 	private Shell shell;
 	private Composite menu, content;
+	private ScrolledComposite sc;
 	private Label label;
 	public Button btnStart, btnProject, btnTicket, btnTeam, btnUser;
 	Menu menuBar, fileMenu, projectMenu, teamMenu, ticketMenu, helpMenu, userMenu;
@@ -147,7 +149,10 @@ public class ViewDispatcher {
 	    btnTeam.addListener(SWT.Selection, this.frontController);
 	    btnUser.addListener(SWT.Selection, this.frontController);
 	
-	    content = new Composite(this.shell, SWT.NONE);
+//	    this.sc = new ScrolledComposite(this.shell, SWT.V_SCROLL | SWT.H_SCROLL);
+//	    content = new Composite(sc, SWT.NONE);
+	    
+	    content = new Composite(shell, SWT.NONE);
 	   
 	    GridLayout layout = new GridLayout();
 	    layout.numColumns = 1;
@@ -162,5 +167,5 @@ public class ViewDispatcher {
 	 public Composite getComposite(){
 		 return this.content;
 	 }
-	
+	 
 }
