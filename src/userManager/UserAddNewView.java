@@ -27,13 +27,12 @@ public class UserAddNewView implements IUserState{
 	private Text userPasswordInput;
 	private Button btnAdd;
 	private Button btnCancel;
-	private Shell shell;
 	
-	public UserAddNewView(final Shell shell,final UserViewController parent){
+	
+	public UserAddNewView(final Composite parentComposite,final UserViewController parent){
 		
-		this.shell = shell;
 		
-		this.composite = new Composite(shell, SWT.NONE);
+		this.composite = new Composite(parentComposite, SWT.NONE);
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 4;
 	    layout.makeColumnsEqualWidth = true;
@@ -47,12 +46,12 @@ public class UserAddNewView implements IUserState{
 					UserDaoMySql userDao = new UserDaoMySql();
 					userDao.addNewUserInDB(userNameInput.getText().trim(),userPasswordInput.getText());
 					composite.dispose();
-					parent.setCurrentView(new UserListView(shell, parent));
+					parent.setCurrentView(new UserListView(parentComposite, parent));
 					
 				}
 				if(event.widget == btnCancel){
 					composite.dispose();
-					parent.setCurrentView(new UserListView(shell, parent));
+					parent.setCurrentView(new UserListView(parentComposite, parent));
 				}
 			}
 		};
@@ -123,9 +122,9 @@ public class UserAddNewView implements IUserState{
 			    this.btnCancel.addListener(SWT.Selection, buttonListener);
 			    this.btnCancel.setLayoutData(data);
 			    
-			    this.shell.layout();	
+			    parentComposite.layout();	
 	}
-	
+	/*
 	public void setComposite(Composite comp) {
 		
 		// get the composite from the current UserController
@@ -133,7 +132,7 @@ public class UserAddNewView implements IUserState{
 		this.uc.setComposite(comp);
 	}
 
-
+*/
 	public Composite getComposite() {
 		
 		// get the composite from the current TicketViewController

@@ -32,33 +32,17 @@ public class UserEditView implements IUserState{
 	private Text userPasswordOutput;
 	private Button btnOk;
 	private Button btnCancel;
-	private final Shell shell; 
+	
 	private UserDaoMySql userDao;
 	private int userID;
 	private String newPassword;
 	
-	public UserEditView(final Shell shell,final UserViewController parent, final int id, final String userName, String pw){
-		/*
-		composite = new Composite(shell, SWT.NONE);
-	
-		GridLayout myLayout = new GridLayout();
-		myLayout.numColumns = 2;
-		myLayout.makeColumnsEqualWidth = true;
-	    composite.setLayout(myLayout);
-	    
-	   // GridData data = new GridData(GridData.FILL_HORIZONTAL);
+	public UserEditView(final Composite parentComposite,final UserViewController parent, final int id, final String userName, String pw){
 		
-		Label blankLabel = new Label(composite, SWT.NONE);
-		blankLabel.setText("UserEditView");
-//		blankLabel.setBounds(0, 0, 200, 200);
-		
-		Color red = new Color (Display.getCurrent(), 255, 230, 0);
-		blankLabel.setBackground(red);	
-		*/
 		/**********************************************************************************/
 		
-		this.shell = shell;
-		this.composite = new Composite(shell, SWT.NONE);
+		
+		this.composite = new Composite(parentComposite, SWT.NONE);
 		userDao = new UserDaoMySql();
 		newPassword = pw;
 		GridLayout layout = new GridLayout();
@@ -154,12 +138,12 @@ public class UserEditView implements IUserState{
 				if (event.widget == btnOk) {
 					//in die db = userNameOutput.getText();
 					userDao.editUserNameInDB(userNameOutput.getText().trim(), id,userPasswordOutput.getText());
-					parent.setCurrentView(new UserListView(shell, parent));
+					parent.setCurrentView(new UserListView(parentComposite, parent));
 					composite.dispose();
 				}
 				if(event.widget == btnCancel){
 					composite.dispose();
-					parent.setCurrentView(new UserDetailView(shell, parent,userName,id,newPassword));
+					parent.setCurrentView(new UserDetailView(parentComposite, parent,userName,id,newPassword));
 				}
 			}
 		};
@@ -177,19 +161,19 @@ public class UserEditView implements IUserState{
 	    this.btnCancel.addListener(SWT.Selection, buttonListener);
 	    this.btnCancel.setLayoutData(data);
 
-	    this.shell.layout();		
+	   parentComposite.layout();		
 		
 		/***********************************************************************************/
 
 	}
-	
+	/*
 	public void setComposite(Composite comp) {
 		
 		// get the composite from the current UserController
 		//this.tlvc.composite = comp;
 		this.uc.setComposite(comp);
 	}
-
+*/
 
 	public Composite getComposite() {
 		
