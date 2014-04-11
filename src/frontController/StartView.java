@@ -36,7 +36,7 @@ public class StartView {
  
         Label imgLabel = new Label(this.composite, SWT.NONE);
         imgLabel.setImage(logo);
-        imgLabel.setSize( imgLabel.computeSize( SWT.DEFAULT, SWT.DEFAULT ));	
+        imgLabel.setSize( imgLabel.computeSize( SWT.DEFAULT, SWT.DEFAULT ));
 	}
 	
 }

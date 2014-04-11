@@ -77,7 +77,7 @@ public class TicketListView {
 	    data.horizontalSpan = 5;
 	    data.heightHint = 250;
 	    
-	    // TABELLE für den LISTVIEW
+	    // TABELLE fÃ¼r den LISTVIEW
 	    this.table = new Table(compgrid, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 //	    this.table.setSize(600, 300);
 	    this.table.setLayoutData(data);	    
