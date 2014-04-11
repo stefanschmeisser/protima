@@ -38,6 +38,7 @@ public class FrontController implements IApplicationState, Listener {
         this.shell.setLayout(new GridLayout());
         
         vd = new ViewDispatcher(this, this.shell);
+        this.composite = vd.getComposite();
 		this.svc = new StartViewController();
 		this.pc = new ProjectController(this.composite);
 		this.tc = new TicketController(this.composite);
@@ -101,12 +102,22 @@ public class FrontController implements IApplicationState, Listener {
 		return this.listener;
 	}
 
-	public void setBlankComposite(Composite composite) {
-		this.composite = composite;
-	}
-	public Composite getComposite(){
-		return this.composite;
-	}
+//	public void setBlankComposite(Composite composite) {
+//		this.composite = composite;
+//	}
+//	public Composite getComposite(){
+//		return this.composite;
+//	}
 	
+	 public void disposeCompositeChildren(Composite currentComposite){
+	    Control[] children = currentComposite.getChildren();
+	      for (int i = 0; i < children.length; i++)
+	      {
+	          if (children[i] instanceof Composite)
+	          {
+	              children[i].dispose();
+	          }
+	      }
+	  }
 
 }
