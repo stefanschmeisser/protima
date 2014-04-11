@@ -127,6 +127,35 @@ public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 	}
 	
 	// ------------------------------------------------------------------------
+	
+	public void insertTicket(Ticket ticket) {
+
+		String values = "";
+		values += "'" + ticket.getTicketTitle() + "', ";
+		values += "'" + ticket.getTicketDescription() + "', ";
+		values += "'" + ticket.getTicketStartDate() + "', ";
+		values += "'" + ticket.getTicketEndDate() + "', ";
+		values += "'" + ticket.getTicketPriorityLevel() + "', ";
+		values += "'" + ticket.getTicketProjectId() + "', ";
+		values += "'" + ticket.getTicketAssignedTeam() + "', ";
+		values += "'" + ticket.getTicketCurrentEditor() + "', ";
+		values += "'" + ticket.getTicketProcessStatus() + "'";
+		
+		String insertStmt = "INSERT INTO `ticket`(`title`, `description`, `startdate`, `enddate`, " +
+							"`priority`, `projectID`, `teamID`, `editorID`, `processStatus`) VALUES ";
+		String qryStr = insertStmt + "(" + values + ")";
+		
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(qryStr);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// ------------------------------------------------------------------------
 
 	public void deleteTicket(String ticketId){
 		

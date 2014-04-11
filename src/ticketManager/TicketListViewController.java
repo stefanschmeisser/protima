@@ -1,6 +1,7 @@
 package ticketManager;
 
 import java.util.*;
+
 import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
 
@@ -135,16 +136,19 @@ public class TicketListViewController implements ITicketState {
 		
 		if(isSelected){
 			
-			MessageBox dialog = new MessageBox(this.msgBoxShell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
+			Shell shell = (Shell) this.composite.getParent();
+			
+			MessageBox dialog = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
 			dialog.setText("Delete Ticket");
 			dialog.setMessage("Are you sure?");
 
 			// open dialog and await user selection
 			int returnCode = dialog.open();
-				
+			
 			if(returnCode == 32){
 				TableItem[] ti = tlv.getTable().getSelection();
-				this.ticketDao.deleteTicket(ti[0].getText(0));
+//				this.ticketDao.deleteTicket(ti[0].getText(0));
+				this.tvc.getTicketController().deleteTicket(ti[0].getText(0));
 				isSelected = false;
 			}
 			else{
@@ -192,14 +196,14 @@ public class TicketListViewController implements ITicketState {
 	
 	public void attachObserver(ITicketObserver obs){
 		observers.addElement(obs);
-		System.out.println("Observer registration");
+//		System.out.println("Observer registration");
 	}
 	
 	// ------------------------------------------------------------------------
 	
 	public void detachObserver(ITicketObserver obs){
 		observers.removeElement(obs);
-		System.out.println("Observer deregistration");
+//		System.out.println("Observer deregistration");
 	}
 	
 	// ------------------------------------------------------------------------

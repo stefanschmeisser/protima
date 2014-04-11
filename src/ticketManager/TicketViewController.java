@@ -4,6 +4,7 @@ import org.eclipse.swt.widgets.*;
 
 public class TicketViewController {
 
+	private TicketController tc;
 	private ITicketState currentView;
 	private Composite composite;
 	private ITicketState tlvc;
@@ -14,8 +15,9 @@ public class TicketViewController {
 
 	// ------------------------------------------------------------------------
 	
-	public TicketViewController(Composite composite, ITicketDao ticketDao){
+	public TicketViewController(TicketController tc, Composite composite, ITicketDao ticketDao){
 
+		this.tc = tc;
 		this.composite = composite;
 		this.ticketDao = ticketDao;
 		
@@ -48,6 +50,10 @@ public class TicketViewController {
 	}
 	
 	// ------------------------------------------------------------------------
+	
+	public TicketController getTicketController(){
+		return this.tc;
+	}
 	
 	public ITicketState getcurrentView(){
 		return this.currentView;

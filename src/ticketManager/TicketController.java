@@ -1,8 +1,8 @@
 package ticketManager;
 
+import java.util.ArrayList;
 import org.eclipse.swt.widgets.*;
 import frontController.IContentState;
-
 
 public class TicketController implements IContentState {
 	
@@ -14,7 +14,25 @@ public class TicketController implements IContentState {
 		
 		this.composite = composite;
 		this.ticketDao = new TicketDaoMySql();
-		this.tvc = new TicketViewController(this.composite, this.ticketDao);	
+		this.tvc = new TicketViewController(this, this.composite, this.ticketDao);	
 	}
 	
+	// ------------------------------------------------------------------------
+	
+	public void createTicket(ArrayList<String> values){
+		
+		
+//		this.ticketDao.insertTicket(values); // the old way without TicketBuilder
+		
+		Ticket ticket = new Ticket.TicketBuilder(values).buildTicket();
+		this.ticketDao.insertTicket(ticket);
+		
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	public void deleteTicket(String ticketId){
+
+		this.ticketDao.deleteTicket(ticketId);
+	}	
 }
