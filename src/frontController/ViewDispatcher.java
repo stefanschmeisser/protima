@@ -149,11 +149,15 @@ public class ViewDispatcher {
 	    btnUser.addListener(SWT.Selection, this.frontController);
 	
 	    content = new Composite(this.shell, SWT.NONE);
-	    
+	   
 	    GridLayout layout = new GridLayout();
 	    layout.numColumns = 1;
 	    layout.makeColumnsEqualWidth = true;
 	    content.setLayout(layout);
+	    
+	    data = new GridData(SWT.FILL, SWT.FILL, true, true);
+	    content.setLayoutData(data);
+	    
 	}
 
 	 public Composite getComposite(){

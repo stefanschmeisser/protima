@@ -36,7 +36,7 @@ public class FrontController implements IApplicationState, Listener {
 		this.svc = new StartViewController(this.composite);
 //		this.tvc = new TeamViewController();
 //		this.uc  = new UserController(this.composite /*, this*/);
-		setCurrentView(this.tc);
+		setCurrentView(this.svc);
 		
 		shell.pack();
 		shell.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());

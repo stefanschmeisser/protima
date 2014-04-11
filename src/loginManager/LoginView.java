@@ -40,7 +40,7 @@ public class LoginView {
 //		text1.setBounds(70,10,200,20);
 		textUser.setTextLimit(30);
 		//FIXME: debug Benutzer!
-//		textUser.setText("marius");
+		textUser.setText("stefan");
 		GridData gd1 = new GridData(GridData.FILL_HORIZONTAL);
 		gd1.widthHint = 150;
 		gd1.horizontalSpan = 2;
@@ -54,7 +54,7 @@ public class LoginView {
 		final Text textPassword = new Text(shell, SWT.NONE);
 		textPassword.setEchoChar('*');
 		//FIXME: debug PW!
-//		textPassword.setText("marius_pw");
+		textPassword.setText("test");
 //		text2.setBounds(70,50,200,20);
 //		text2.setText("Password");
 		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);
