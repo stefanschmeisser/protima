@@ -151,7 +151,7 @@ public class ViewDispatcher {
 	    content = new Composite(this.shell, SWT.NONE);
 	    
 	    GridLayout layout = new GridLayout();
-	    layout.numColumns = 3;
+	    layout.numColumns = 1;
 	    layout.makeColumnsEqualWidth = true;
 	    content.setLayout(layout);
 	}
