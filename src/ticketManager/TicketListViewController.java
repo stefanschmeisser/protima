@@ -38,11 +38,11 @@ public class TicketListViewController implements ITicketState {
 				}
 				if (event.widget == tlv.btnCreate) {
 //					System.out.println("Create");
-					tvc.setCurrentView(tvc.getTicketCreateViewController());
+					tvc.setCurrentView(tvc.getTicketCreateViewController(), false);
 				}
 				if (event.widget == tlv.btnEdit) {
 					System.out.println("Edit");
-					tvc.setCurrentView(tvc.getTicketEditViewController());
+					tvc.setCurrentView(tvc.getTicketEditViewController(), false);
 				}
 				if (event.widget == tlv.btnDelete) {
 //					System.out.println("Delete");
@@ -274,7 +274,7 @@ public class TicketListViewController implements ITicketState {
 		return date;
 	}
 
-	public  ArrayList<Integer> getTicketEndDate(){
+	public ArrayList<Integer> getTicketEndDate(){
 		
 		ArrayList<Integer> date = new ArrayList<Integer>();
 
@@ -289,5 +289,21 @@ public class TicketListViewController implements ITicketState {
 			date.add(01);
 		}
 		return date;
+	}
+	
+	public Table getTable(){
+		return tlv.getTable();
+	}
+	
+	public Button getButtonDelete(){
+		return tlv.btnDelete;
+	}
+	
+	public Button getButtonEdit(){
+		return tlv.btnEdit;
+	}
+	
+	public Button getButtonCreate(){
+		return tlv.btnCreate;
 	}
 }

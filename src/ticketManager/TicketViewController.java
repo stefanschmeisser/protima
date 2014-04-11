@@ -12,6 +12,7 @@ public class TicketViewController {
 	private ITicketState tevc;
 	private ITicketState tcvc;
 	private ITicketDao ticketDao;
+	public String currentTicket;
 
 	// ------------------------------------------------------------------------
 	
@@ -26,27 +27,35 @@ public class TicketViewController {
 		tevc = new TicketEditViewController(this, this.composite, this.ticketDao);
 		tcvc = new TicketCreateViewController(this, this.composite, this.ticketDao);
 		
-		this.setCurrentView(tlvc);
+		this.setCurrentView(tlvc, false);
 	}
 	
 	// ------------------------------------------------------------------------
 	
-	public void setCurrentView(ITicketState currentState){
+	public void setCurrentView(ITicketState currentState, boolean switchToEditView){
 		
-		if(this.currentView != null){
-			this.currentView.getComposite().dispose();
+		if(!switchToEditView){
+			if(this.currentView != null){
+				this.currentView.getComposite().dispose();
+			}
+
+			if(this.currentView == this.tlvc){
+				this.tdvc.getComposite().dispose();
+			}
+
+			this.currentView = currentState;
+			this.currentView.show();
+
+			if(this.currentView == this.tlvc){
+				this.tdvc.show();
+			}
 		}
-		
-		if(this.currentView == this.tlvc){
+		else{
 			this.tdvc.getComposite().dispose();
+			this.currentView = currentState;
+			this.currentView.show();
 		}
-		
-		this.currentView = currentState;
-		this.currentView.show();
-		
-		if(this.currentView == this.tlvc){
-			this.tdvc.show();
-		}
+			
 	}
 	
 	// ------------------------------------------------------------------------

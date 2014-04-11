@@ -183,7 +183,7 @@ public class TicketDetailView {
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    data.heightHint = 5;
-	    data.horizontalSpan = 2;
+	    data.horizontalSpan = 3;
 	    this.compgrid = new Composite(this.composite, SWT.NONE);
 	    this.compgrid.setLayoutData(data);
 	    
@@ -194,12 +194,12 @@ public class TicketDetailView {
 	    this.btnEdit.addListener(SWT.Selection, btnListener);
 	    this.btnEdit.setLayoutData(data);
 	    
-	    data = new GridData(GridData.FILL_HORIZONTAL);
-	    this.btnCancel = new Button(this.composite, SWT.PUSH);
-	    this.btnCancel.setText("Cancel");
-	    this.btnCancel.addListener(SWT.Selection, btnListener);
-	    this.btnCancel.setLayoutData(data);
-	    
+//	    data = new GridData(GridData.FILL_HORIZONTAL);
+//	    this.btnCancel = new Button(this.composite, SWT.PUSH);
+//	    this.btnCancel.setText("Cancel");
+//	    this.btnCancel.addListener(SWT.Selection, btnListener);
+//	    this.btnCancel.setLayoutData(data);
+//	    
 	    this.content.layout();
 
 //		composite = new Composite(shell, SWT.NONE);

@@ -1,5 +1,7 @@
 package ticketManager;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
@@ -103,7 +105,9 @@ public class TicketEditView {
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.ticketPriorityLevelInput = new Combo(this.composite, SWT.DROP_DOWN);
 	    this.ticketPriorityLevelInput.setEnabled(true);
-//	    this.ticketProcessStatusInput.setItem(index, string); // für den Inhalt durch die DB?!
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.IN_TIME.toString());
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.URGENT.toString());
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.CRITICAL.toString());
 	    this.ticketPriorityLevelInput.setLayoutData(data);
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
@@ -113,7 +117,11 @@ public class TicketEditView {
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.ticketProcessStatusInput = new Combo(this.composite, SWT.DROP_DOWN);
-//	    this.ticketProcessStatusInput.setItem(index, string); // für den Inhalt durch die DB?!
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.OPEN.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.IN_PROGRESS.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.WAITING.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.SUSPENDED.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.DONE.toString());
 	    this.ticketProcessStatusInput.setEnabled(true);
 	    this.ticketProcessStatusInput.setLayoutData(data);
 
@@ -207,6 +215,131 @@ public class TicketEditView {
 	public Composite getComposite() {
 		
 		return this.composite;
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	// SETTERS
+	
+	public void setTicketId(String str){
+		this.ticketIDInput.setText(str);
+	}
+	
+	public void setTicketTitle(String str){
+		this.ticketTitleInput.setText(str);
+	}
+	
+	public void setTicketDescription(String str){
+		this.ticketDescInput.setText(str);
+	}
+	
+	public void setTicketStartDate(ArrayList<Integer> dateYMD){
+		int year = dateYMD.get(0);
+		int month = dateYMD.get(1);
+		int day = dateYMD.get(2);
+		this.ticketStartDateInput.setDate(year, month, day);
+	}
+	
+	public void setTicketEndDate(ArrayList<Integer> dateYMD){
+		int year = dateYMD.get(0);
+		int month = dateYMD.get(1);
+		int day = dateYMD.get(2);
+		this.ticketEndDateInput.setDate(year, month, day);
+	}
+	
+	public void setTicketPriorityLevel(String str){
+		this.ticketPriorityLevelInput.setText(str);
+	}
+	
+	public void setTicketAssignedTeam(String str){
+		this.assignedTeamIDInput.setText(str);
+	}
+	
+	public void setTicketProjectId(String str){
+		this.projectIDInput.setText(str);
+	}
+	
+	public void setTicketCurrentEditor(String str){
+		this.currentEditorUIDInput.setText(str);
+	}
+	
+	public void setTicketProcessStatus(String str){
+		this.ticketProcessStatusInput.setText(str);
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	// SETTERS
+	
+	public void setTicketProjectId(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.projectIDInput.add(str.get(i));
+		}
+	}
+	
+	public void setTicketAssignedTeam(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.assignedTeamIDInput.add(str.get(i));
+		}
+	}
+	
+	public void setCurrentEditorUIDInput(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.currentEditorUIDInput.add(str.get(i));
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	// GETTERS
+	
+	public String getTicketId(){
+		return this.ticketIDInput.getText();
+	}
+	
+	public String getTicketTitle(){
+		return this.ticketTitleInput.getText();
+	}
+	
+	public String getTicketDescription(){
+		return this.ticketDescInput.getText();
+	}
+	
+	public String getTicketPriorityLevel(){
+		return this.ticketPriorityLevelInput.getText();
+	}
+	
+	public String getTicketProcessStatus(){
+		return this.ticketProcessStatusInput.getText();
+	}
+	
+	public String getTicketProjectId(){
+		return this.projectIDInput.getText();
+	}
+	
+	public String getTicketCurrentEditorUid(){
+		return this.currentEditorUIDInput.getText();
+	}
+	
+	public String getTicketAssignedTeam(){
+		return this.assignedTeamIDInput.getText();
+	}
+	
+	public String getTicketStartDate(){
+		
+		String date = "";
+		date += this.ticketStartDateInput.getYear() + "-";
+		date += this.ticketStartDateInput.getMonth() + "-";
+		date += this.ticketStartDateInput.getDay();
+		return date;
+	}
+	
+	public String getTicketEndDate(){
+		String date = "";
+		date += this.ticketEndDateInput.getYear() + "-";
+		date += this.ticketEndDateInput.getMonth() + "-";
+		date += this.ticketEndDateInput.getDay();
+		return date;
 	}
 	
 }

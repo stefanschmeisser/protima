@@ -20,13 +20,16 @@ public class TicketController implements IContentState {
 	// ------------------------------------------------------------------------
 	
 	public void createTicket(ArrayList<String> values){
-		
-		
-//		this.ticketDao.insertTicket(values); // the old way without TicketBuilder
-		
+	
+//		this.ticketDao.insertTicket(values); // the old way without TicketBuilder	
 		Ticket ticket = new Ticket.TicketBuilder(values).buildTicket();
-		this.ticketDao.insertTicket(ticket);
-		
+		this.ticketDao.insertTicket(ticket);	
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	public void updateTicket(ArrayList<String> values){
+		this.ticketDao.updateTicket(values);
 	}
 	
 	// ------------------------------------------------------------------------
