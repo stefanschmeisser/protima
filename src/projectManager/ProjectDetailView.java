@@ -20,17 +20,17 @@ public class ProjectDetailView implements IProjectState {
 	
 	private ProjectViewController projectViewController;
 	private Shell shell;
-	private Composite composite;
+	private Composite composite, content;
 	private Button createButton, saveButton, cancelButton;
 	private Label labelProjectID, labelProjectName, labelProjectDescription, labelProjectManager;
 	private Text textProjectID, textProjectName, textProjectDescription;
 	private Combo comboProjectManager;
 	private ProjectManager projectManager;
 
-	public ProjectDetailView(ProjectViewController projectViewController, Shell shell){
+	public ProjectDetailView(ProjectViewController projectViewController, Composite content){
 		this.projectViewController = projectViewController;
-		this.shell = shell;
-		this.composite = new Composite(this.shell, SWT.NONE);
+		this.content = content;
+		this.composite = new Composite(this.content, SWT.NONE);
 		this.composite.setLocation(0,0);
 	}
 	

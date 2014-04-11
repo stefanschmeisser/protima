@@ -13,7 +13,7 @@ public class ViewDispatcher {
 	
 	private FrontController frontController;
 	private Shell shell;
-	private Composite menu;
+	private Composite menu, content;
 	private Label label;
 	public Button btnStart, btnProject, btnTicket, btnTeam, btnUser;
 	Menu menuBar, fileMenu, projectMenu, teamMenu, ticketMenu, helpMenu, userMenu;
@@ -147,9 +147,17 @@ public class ViewDispatcher {
 	    btnTicket.addListener(SWT.Selection, this.frontController);
 	    btnTeam.addListener(SWT.Selection, this.frontController);
 	    btnUser.addListener(SWT.Selection, this.frontController);
-	}
-	public Composite getComposite(){
-		return menu;
+	
+	    content = new Composite(this.shell, SWT.NONE);
+	    
+	    GridLayout layout = new GridLayout();
+	    layout.numColumns = 3;
+	    layout.makeColumnsEqualWidth = true;
+	    content.setLayout(layout);
 	}
 
+	 public Composite getComposite(){
+		 return this.content;
+	 }
+	
 }

@@ -16,7 +16,7 @@ import ticketManager.TicketTableModel;
 
 public class ProjectViewController implements Listener {
 
-	private Shell shell;
+	private Composite composite;
 	private ProjectController projectController; 
 	private IProjectState currentState;
 	private IProjectState projectListView;
@@ -25,11 +25,11 @@ public class ProjectViewController implements Listener {
 	private IProjectState projectCreateView;
 	private ArrayList<Project> projectListData;
 	
-	public ProjectViewController(Shell shell, ProjectController projectController){
-		this.shell = shell;
+	public ProjectViewController(Composite composite, ProjectController projectController){
+		this.composite = composite;
 		this.projectController = projectController;
-		projectListView = new ProjectListView(this, this.shell);
-		projectDetailView = new ProjectDetailView(this, this.shell);
+		projectListView = new ProjectListView(this, this.composite);
+		projectDetailView = new ProjectDetailView(this, this.composite);
 		setCurrentView(projectListView);
 	}
 	
@@ -46,7 +46,7 @@ public class ProjectViewController implements Listener {
 			this.fillTableData(this.projectController.getTableListData());
 			this.projectDetailView.show();
 		}
-		this.shell.layout();
+		this.composite.layout();
 	}
 	
 	public void fillTableData(ArrayList<Project> projectListData){
@@ -75,13 +75,13 @@ public class ProjectViewController implements Listener {
 		 
 		if(event.widget == ProjectListView.createButton){
 			System.out.println("Create Button");
-			this.projectCreateView = new ProjectCreateView(this, this.shell);
+			this.projectCreateView = new ProjectCreateView(this, this.composite);
 			setCurrentView(this.projectCreateView);
 		}
 		
 		if(event.widget == ProjectListView.editButton){
 			System.out.println("EDIT Button");
-			this.projectEditView = new ProjectEditView(this, this.shell);
+			this.projectEditView = new ProjectEditView(this, this.composite);
 			setCurrentView(this.projectEditView);
 		}
 		
@@ -99,14 +99,14 @@ public class ProjectViewController implements Listener {
 			}
 			
 			this.projectController.setProject(ProjectCreateView.textProjectName.getText(), ProjectCreateView.textProjectDescription.getText(), projectManagerID);
-			this.projectListView = new ProjectListView(this, this.shell);
-			this.projectDetailView = new ProjectDetailView(this, this.shell);
+			this.projectListView = new ProjectListView(this, this.composite);
+			this.projectDetailView = new ProjectDetailView(this, this.composite);
 			setCurrentView(this.projectListView);
 		}
 		
 		if(event.widget == ProjectEditView.cancelButton || event.widget == ProjectCreateView.cancelButton ){
-			this.projectListView = new ProjectListView(this, this.shell);
-			this.projectDetailView = new ProjectDetailView(this, this.shell);
+			this.projectListView = new ProjectListView(this, this.composite);
+			this.projectDetailView = new ProjectDetailView(this, this.composite);
 			setCurrentView(this.projectListView);
 		}
 		
