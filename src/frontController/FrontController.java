@@ -62,17 +62,19 @@ public class FrontController implements IApplicationState, Listener {
 		if (event.widget == vd.btnStart) {
 			System.out.println("Btn Start");
 //			svc.setComposite(vd.getContentPanel());
-			
+			disposeCompositeChildren(this.composite);
 			setCurrentView(svc);
 		}
 		if (event.widget == vd.btnProject) {
 			System.out.println("Btn Project");
 //			pc.setComposite(content);
+			disposeCompositeChildren(this.composite);
 			setCurrentView(pc);
 		}
 		if (event.widget == vd.btnTicket) {
 			System.out.println("Btn Ticket");
 //			tc.setComposite(vd.getContentPanel());
+			disposeCompositeChildren(this.composite);
 			setCurrentView(tc);
 		}
 		if(event.widget == vd.btnUser){
