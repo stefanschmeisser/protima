@@ -51,7 +51,7 @@ public class TicketListViewController implements ITicketState {
 				}
 				// Table Listener
 				if(event.widget == tlv.getTable()){
-					getSelectedTableItem();
+					getSelectedTableItem(false);
 				}	
 			}
 		};
@@ -147,7 +147,6 @@ public class TicketListViewController implements ITicketState {
 			
 			if(returnCode == 32){
 				TableItem[] ti = tlv.getTable().getSelection();
-//				this.ticketDao.deleteTicket(ti[0].getText(0));
 				this.tvc.getTicketController().deleteTicket(ti[0].getText(0));
 				isSelected = false;
 			}
@@ -155,41 +154,57 @@ public class TicketListViewController implements ITicketState {
 				System.out.println("Aborted by user.");
 			}
 		}
+		
+		this.getSelectedTableItem(true);
+		
 	}
 
 	// ------------------------------------------------------------------------
 	
-	public void getSelectedTableItem(){
+	public void getSelectedTableItem(boolean isEmpty){
 		
-		TableItem[] ti = tlv.getTable().getSelection();
-		
-		String str = "";
-//		for(int i = 0; i < tlv.getTable().getColumnCount(); i++){
-//			str = str + ti[0].getText(i) + ", ";
-//			
-//			this.ticketId = ti[0].getText(i);
-//		}
-		
-		this.ticketId = ti[0].getText(0);
-		this.ticketTitle = ti[0].getText(1);
-		this.ticketDescription = ti[0].getText(2);
-		this.ticketStartDate = ti[0].getText(3);
-		this.ticketEndeDate = ti[0].getText(4);
-		this.ticketPriorityLevel = ti[0].getText(5);
-		this.ticketProjectId = ti[0].getText(6);
-		this.ticketTeamId = ti[0].getText(7);
-		this.ticketEditorId = ti[0].getText(8);
-		this.ticketProcessStatus = ti[0].getText(9);
-		
-		this.notifyObserver();
+		if(!isEmpty){
+			
+			TableItem[] ti = tlv.getTable().getSelection();
+			
+			this.ticketId = ti[0].getText(0);
+			this.ticketTitle = ti[0].getText(1);
+			this.ticketDescription = ti[0].getText(2);
+			this.ticketStartDate = ti[0].getText(3);
+			this.ticketEndeDate = ti[0].getText(4);
+			this.ticketPriorityLevel = ti[0].getText(5);
+			this.ticketProjectId = ti[0].getText(6);
+			this.ticketTeamId = ti[0].getText(7);
+			this.ticketEditorId = ti[0].getText(8);
+			this.ticketProcessStatus = ti[0].getText(9);
+			
+			this.notifyObserver();
+		}	
+		else{
+			String str = "";
+			this.ticketId = str;
+			this.ticketTitle = str;
+			this.ticketDescription = str;
+			this.ticketStartDate = str;
+			this.ticketEndeDate = str;
+			this.ticketPriorityLevel = str;
+			this.ticketProjectId = str;
+			this.ticketTeamId = str;
+			this.ticketEditorId = str;
+			this.ticketProcessStatus = str;
+			
+			this.notifyObserver();
+		}
 	}
 	
 	// ------------------------------------------------------------------------
 	
 	public void notifyObserver(){
+
 		for (int i=0; i< observers.size(); i++) {
 			((ITicketObserver)(observers.elementAt(i))).update();
 		}
+
 	}
 	
 	// ------------------------------------------------------------------------
@@ -244,22 +259,35 @@ public class TicketListViewController implements ITicketState {
 
 	public ArrayList<Integer> getTicketStartDate(){
 		
-		String[] singleStrings =  this.ticketStartDate.split("-");
-		// cast string to int and add it to the arraylist
 		ArrayList<Integer> date = new ArrayList<Integer>();
-		date.add(Integer.parseInt(singleStrings[0]));
-		date.add(Integer.parseInt(singleStrings[1]));
-		date.add(Integer.parseInt(singleStrings[2]));
+		
+		if(this.ticketStartDate != ""){
+			String[] singleStrings =  this.ticketStartDate.split("-");			
+			date.add(Integer.parseInt(singleStrings[0]));
+			date.add(Integer.parseInt(singleStrings[1]));
+			date.add(Integer.parseInt(singleStrings[2]));
+		}else{
+			date.add(1970);
+			date.add(01);
+			date.add(01);
+		}
 		return date;
 	}
 
 	public  ArrayList<Integer> getTicketEndDate(){
-		String[] singleStrings =  this.ticketStartDate.split("-");
-		// cast string to int and add it to the arraylist
+		
 		ArrayList<Integer> date = new ArrayList<Integer>();
-		date.add(Integer.parseInt(singleStrings[0]));
-		date.add(Integer.parseInt(singleStrings[1]));
-		date.add(Integer.parseInt(singleStrings[2]));
+
+		if(this.ticketEndeDate != ""){
+			String[] singleStrings =  this.ticketEndeDate.split("-");
+			date.add(Integer.parseInt(singleStrings[0]));
+			date.add(Integer.parseInt(singleStrings[1]));
+			date.add(Integer.parseInt(singleStrings[2]));
+		}else{
+			date.add(1970);
+			date.add(01);
+			date.add(01);
+		}
 		return date;
 	}
 }

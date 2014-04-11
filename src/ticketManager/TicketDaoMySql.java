@@ -161,7 +161,7 @@ public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 		
 		String deleteStmt = "DELETE FROM `ticket` WHERE `ticket`.`ticketID` = "+ ticketId +";";
 
-		System.out.println(deleteStmt);
+//		System.out.println(deleteStmt);
 		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(deleteStmt);
@@ -169,8 +169,6 @@ public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
-
 }
