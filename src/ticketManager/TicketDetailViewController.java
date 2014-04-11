@@ -30,13 +30,7 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 			public void handleEvent(Event event) {
 				if (event.widget == tdv.btnEdit) {
 //					System.out.println("Edit");
-					tlvc.getTable().setEnabled(false);
-					tlvc.getButtonCreate().setEnabled(false);
-					tlvc.getButtonDelete().setEnabled(false);
-					tlvc.getButtonEdit().setEnabled(false);
-					tvc.setCurrentView(tvc.getTicketEditViewController(), true);
-					TicketEditViewController tev = (TicketEditViewController)tvc.getTicketEditViewController();
-					tev.setValues(getTicketData());
+					switchToEditView();
 				}
 //				if (event.widget == tdv.btnCancel) {
 //					System.out.println("Cancel");
@@ -75,7 +69,6 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 		tdv.setTicketProjectId(this.tlvc.getTicketProjectId());
 		tdv.setTicketProcessStatus(this.tlvc.getTicketProcessStatus());
 		tdv.setTicketCurrentEditorUid(this.tlvc.getTicketCurrentEditorUid());
-		
 	}
 	
 	// ------------------------------------------------------------------------
@@ -97,8 +90,31 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 		values.add(this.tlvc.getTicketProjectId());
 		values.add(this.tlvc.getTicketAssignedTeam());
 		values.add(this.tlvc.getTicketCurrentEditorUid());
+		values.add(this.tlvc.getTicketProcessStatus());
 
 		return values;
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	private void switchToEditView(){
 		
+		boolean isSelected = false;
+
+		for(int i = 0; i < this.tlvc.getTable().getItemCount(); i++){
+			if(this.tlvc.getTable().isSelected(i)){
+				isSelected = true;
+			}
+		}
+
+		if(isSelected){
+			this.tlvc.getTable().setEnabled(false);
+			this.tlvc.getButtonCreate().setEnabled(false);
+			this.tlvc.getButtonDelete().setEnabled(false);
+			this.tlvc.getButtonEdit().setEnabled(false);
+			this.tvc.setCurrentView(this.tvc.getTicketEditViewController(), true);
+			TicketEditViewController tev = (TicketEditViewController)this.tvc.getTicketEditViewController();
+			tev.setValues(this.getTicketData());
+		}
 	}
 }

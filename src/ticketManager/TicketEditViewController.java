@@ -1,10 +1,8 @@
 package ticketManager;
 
 import java.util.ArrayList;
-
+import java.util.Vector;
 import org.eclipse.swt.widgets.*;
-
-import sun.awt.SunHints.Value;
 
 public class TicketEditViewController implements ITicketState  {
 	
@@ -48,6 +46,10 @@ public class TicketEditViewController implements ITicketState  {
 		};
 		
 		tev = new TicketEditView(this.composite, btnListener);
+		
+		this.setCombobox("team");
+		this.setCombobox("project");
+		this.setCombobox("user");
 	}	
 	
 	// ------------------------------------------------------------------------
@@ -71,7 +73,6 @@ public class TicketEditViewController implements ITicketState  {
 		startDate.add(Integer.parseInt(start[2]));
 		this.tev.setTicketStartDate(startDate);
 		
-		
 		String[] end = values.get(4).split("-");
 		ArrayList<Integer> endDate = new ArrayList<Integer>();
 		endDate.add(Integer.parseInt(end[0]));
@@ -79,11 +80,13 @@ public class TicketEditViewController implements ITicketState  {
 		endDate.add(Integer.parseInt(end[2]));
 		this.tev.setTicketEndDate(endDate);
 
+		System.out.println("JJJJJ: " + values.get(5));
 		
-		this.tev.setTicketPriorityLeven(values.get(5));
+		this.tev.setTicketPriorityLevel(values.get(5));
 		this.tev.setTicketProjectId(values.get(6));
 		this.tev.setTicketAssignedTeam(values.get(7));
 		this.tev.setTicketCurrentEditor(values.get(8));
+		this.tev.setTicketProcessStatus(values.get(9));
 	}
 	
 	// ------------------------------------------------------------------------
@@ -104,6 +107,35 @@ public class TicketEditViewController implements ITicketState  {
 		values.add(this.tev.getTicketProcessStatus());
 		
 		return values;
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	private void setCombobox(String table){
+		
+		TicketTableModel tableModel = this.ticketDao.selectTableModel("*", table, "");
+		ArrayList<String> str = new ArrayList<String>();
+		
+		
+		if(tableModel != null){
+			ArrayList<Vector> rows = tableModel.getRows();
+
+			for(int i = 0; i < rows.size(); i++){
+				Vector v = new Vector();
+				v = rows.get(i);
+				str.add(v.get(0).toString());
+			}
+
+			if(table.equals("team")){
+				this.tev.setTicketAssignedTeam(str);
+			}
+			if(table.equals("project")){
+				this.tev.setTicketProjectId(str);
+			}
+			if(table.equals("user")){
+				this.tev.setCurrentEditorUIDInput(str);
+			}
+		}
 	}
 }
 

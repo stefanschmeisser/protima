@@ -105,7 +105,9 @@ public class TicketEditView {
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.ticketPriorityLevelInput = new Combo(this.composite, SWT.DROP_DOWN);
 	    this.ticketPriorityLevelInput.setEnabled(true);
-//	    this.ticketProcessStatusInput.setItem(index, string); // für den Inhalt durch die DB?!
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.IN_TIME.toString());
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.URGENT.toString());
+	    this.ticketPriorityLevelInput.add(TicketPriorityLevel.CRITICAL.toString());
 	    this.ticketPriorityLevelInput.setLayoutData(data);
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
@@ -115,7 +117,11 @@ public class TicketEditView {
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.ticketProcessStatusInput = new Combo(this.composite, SWT.DROP_DOWN);
-//	    this.ticketProcessStatusInput.setItem(index, string); // für den Inhalt durch die DB?!
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.OPEN.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.IN_PROGRESS.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.WAITING.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.SUSPENDED.toString());
+	    this.ticketProcessStatusInput.add(TicketProcessStatus.DONE.toString());
 	    this.ticketProcessStatusInput.setEnabled(true);
 	    this.ticketProcessStatusInput.setLayoutData(data);
 
@@ -241,7 +247,7 @@ public class TicketEditView {
 		this.ticketEndDateInput.setDate(year, month, day);
 	}
 	
-	public void setTicketPriorityLeven(String str){
+	public void setTicketPriorityLevel(String str){
 		this.ticketPriorityLevelInput.setText(str);
 	}
 	
@@ -255,6 +261,32 @@ public class TicketEditView {
 	
 	public void setTicketCurrentEditor(String str){
 		this.currentEditorUIDInput.setText(str);
+	}
+	
+	public void setTicketProcessStatus(String str){
+		this.ticketProcessStatusInput.setText(str);
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	// SETTERS
+	
+	public void setTicketProjectId(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.projectIDInput.add(str.get(i));
+		}
+	}
+	
+	public void setTicketAssignedTeam(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.assignedTeamIDInput.add(str.get(i));
+		}
+	}
+	
+	public void setCurrentEditorUIDInput(ArrayList<String> str){
+		for(int i = 0; i < str.size(); i++){
+			this.currentEditorUIDInput.add(str.get(i));
+		}
 	}
 	
 	// ------------------------------------------------------------------------
