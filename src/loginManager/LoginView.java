@@ -1,6 +1,7 @@
 package loginManager;
 import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 
@@ -124,7 +125,17 @@ public class LoginView {
 	    textUser.addListener(SWT.Traverse, enterListener);
 	    textPassword.addListener(SWT.Traverse, enterListener);
 
-		shell.pack();
+	    shell.pack();
+	    
+		Monitor primary = disp.getPrimaryMonitor();
+	    Rectangle bounds = primary.getBounds();
+	    Rectangle rect = shell.getBounds();
+	    
+	    int x = bounds.x + (bounds.width - rect.width) / 2;
+	    int y = bounds.y + (bounds.height - rect.height) / 2;
+	    
+	    shell.setLocation(x, y);
+	    
 		shell.open();
 		
 		while (!shell.isDisposed()) {
