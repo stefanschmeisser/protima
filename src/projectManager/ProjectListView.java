@@ -101,13 +101,13 @@ public class ProjectListView implements IProjectState {
 	    Composite tableComposite = new Composite(this.composite, SWT.NONE);
 	    GridData tableGrid = new GridData(GridData.FILL_HORIZONTAL);
 	    tableGrid.horizontalSpan = 12;
-	    tableGrid.widthHint = shell.getSize().x;
+	    tableGrid.widthHint = this.composite.getParent().getSize().x;
 	    tableGrid.grabExcessHorizontalSpace = true;
 	    tableComposite.setLayoutData(tableGrid);
 	    tableComposite.setLayout(new GridLayout(12, true));
 	    
 	    this.table = new Table(tableComposite, SWT.BORDER);
-	    this.table.setSize(this.shell.getSize().x, this.shell.getSize().y);
+	    this.table.setSize(this.composite.getParent().getSize().x, this.composite.getParent().getSize().y);
 	    this.table.setLayoutData(tableGrid);	    
 	    this.table.setHeaderVisible(true);
 	    this.table.addListener(SWT.Selection, this.projectViewController);

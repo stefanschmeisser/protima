@@ -14,7 +14,7 @@ public class TicketListView {
 	
 	public TicketListView(Composite comp, Listener listener){
 		
-		this.content = composite;
+		this.content = comp;
 		composite = new Composite(this.content, SWT.NONE);
 		
 		GridLayout layout = new GridLayout();

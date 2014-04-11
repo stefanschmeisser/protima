@@ -14,7 +14,7 @@ public class TicketController implements IContentState {
 		
 		this.composite = composite;
 		this.ticketDao = new TicketDaoMySql();
-		this.tvc = new TicketViewController(composite, this.ticketDao);	
+		this.tvc = new TicketViewController(this.composite, this.ticketDao);	
 	}
 	
 }

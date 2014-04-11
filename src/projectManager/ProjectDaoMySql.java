@@ -12,7 +12,6 @@ import applicationManager.AbstractDaoMySql;
 
 public class ProjectDaoMySql extends AbstractDaoMySql implements IProjectDAO {
 
-	private Connection connection;
 	private ArrayList<Project> projectList;
 	
 	public ProjectDaoMySql() {

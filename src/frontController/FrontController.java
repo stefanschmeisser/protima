@@ -40,11 +40,11 @@ public class FrontController implements IApplicationState, Listener {
         vd = new ViewDispatcher(this, this.shell);
         this.composite = vd.getComposite();
 		this.svc = new StartViewController();
-		this.pc = new ProjectController(this.composite);
+//		this.pc = new ProjectController(this.composite);
 		this.tc = new TicketController(this.composite);
 //		this.tvc = new TeamViewController();
-		this.uc  = new UserController(this.composite /*, this*/);
-		setCurrentView(this.svc);
+//		this.uc  = new UserController(this.composite /*, this*/);
+		setCurrentView(this.tc);
 		
 		shell.pack();
 		shell.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
@@ -70,12 +70,14 @@ public class FrontController implements IApplicationState, Listener {
 			System.out.println("Btn Project");
 //			pc.setComposite(content);
 			disposeCompositeChildren(this.composite);
+			this.pc = new ProjectController(this.composite);
 			setCurrentView(pc);
 		}
 		if (event.widget == vd.btnTicket) {
 			System.out.println("Btn Ticket");
 //			tc.setComposite(vd.getContentPanel());
 			disposeCompositeChildren(this.composite);
+			this.tc = new TicketController(this.composite);
 			setCurrentView(tc);
 		}
 		if(event.widget == vd.btnUser){
