@@ -12,9 +12,9 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 	private Composite composite;
 	
 	
-	public TicketDetailViewController(TicketViewController tvc, Composite composite, ITicketDao ticketDao){
+	public TicketDetailViewController(TicketViewController ticketViewController, Composite composite, ITicketDao ticketDao){
 
-		this.tvc = tvc;
+		this.tvc = ticketViewController;
 		this.composite = composite;
 		this.ticketDao = ticketDao;
 		
@@ -25,10 +25,11 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 		this.btnListener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == tdv.btnEdit) {
-					System.out.println("Edit");
+//					System.out.println("Edit");
+					tvc.setCurrentView(tvc.getTicketEditViewController(), true);
 				}
 				if (event.widget == tdv.btnCancel) {
-					System.out.println("Cancel");
+//					System.out.println("Cancel");
 				}
 			}
 		};	

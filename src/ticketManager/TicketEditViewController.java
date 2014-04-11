@@ -34,11 +34,11 @@ public class TicketEditViewController implements ITicketState  {
 				}
 				if (event.widget == tev.btnCancel) {
 					System.out.println("Cancel");
-					tvc.setCurrentView(tvc.getTicketListViewController());
+					tvc.getTicketListViewController().getComposite().dispose();
+					tvc.setCurrentView(tvc.getTicketListViewController(), false);
 				}
 			}
 		};
-		
 		
 		tev = new TicketEditView(this.composite, btnListener);
 	}	

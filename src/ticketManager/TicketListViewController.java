@@ -38,11 +38,11 @@ public class TicketListViewController implements ITicketState {
 				}
 				if (event.widget == tlv.btnCreate) {
 //					System.out.println("Create");
-					tvc.setCurrentView(tvc.getTicketCreateViewController());
+					tvc.setCurrentView(tvc.getTicketCreateViewController(), false);
 				}
 				if (event.widget == tlv.btnEdit) {
 					System.out.println("Edit");
-					tvc.setCurrentView(tvc.getTicketEditViewController());
+					tvc.setCurrentView(tvc.getTicketEditViewController(), false);
 				}
 				if (event.widget == tlv.btnDelete) {
 //					System.out.println("Delete");
