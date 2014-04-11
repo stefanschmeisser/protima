@@ -1,10 +1,8 @@
 package ticketManager;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Vector;
+import java.util.*;
+
 import org.eclipse.swt.*;
-import org.eclipse.swt.events.*;
 import org.eclipse.swt.widgets.*;
 
 public class TicketListViewController implements ITicketState {
@@ -18,7 +16,6 @@ public class TicketListViewController implements ITicketState {
 	private Vector observers;
 	private String ticketId, ticketTitle, ticketDescription, ticketStartDate, ticketEndeDate, ticketPriorityLevel, ticketProjectId, ticketTeamId, ticketProcessStatus, ticketEditorId;
 	
-
 	public TicketListViewController(TicketViewController ticketViewController, Composite composite, ITicketDao ticketDao){
 		
 		this.tvc = ticketViewController;
@@ -83,7 +80,7 @@ public class TicketListViewController implements ITicketState {
 		}
 		
 		tlv.getTable().setItemCount(0);
-		tlv.getTable().setRedraw( true );
+		tlv.getTable().setRedraw(true);
 	}
 	
 	// ------------------------------------------------------------------------
@@ -103,7 +100,6 @@ public class TicketListViewController implements ITicketState {
 			for(int i = 0; i < columnNames.size(); i++){
 				TableColumn tc = new TableColumn(tlv.getTable(), SWT.LEFT);
 				tc.setText(columnNames.get(i).toString());
-				//tc.setWidth(100);
 			}
 
 			//set row data
@@ -140,16 +136,19 @@ public class TicketListViewController implements ITicketState {
 		
 		if(isSelected){
 			
-			MessageBox dialog = new MessageBox(this.msgBoxShell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
+			Shell shell = (Shell) this.composite.getParent();
+			
+			MessageBox dialog = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
 			dialog.setText("Delete Ticket");
 			dialog.setMessage("Are you sure?");
 
 			// open dialog and await user selection
 			int returnCode = dialog.open();
-				
+			
 			if(returnCode == 32){
 				TableItem[] ti = tlv.getTable().getSelection();
-				this.ticketDao.deleteTicket(ti[0].getText(0));
+//				this.ticketDao.deleteTicket(ti[0].getText(0));
+				this.tvc.getTicketController().deleteTicket(ti[0].getText(0));
 				isSelected = false;
 			}
 			else{
@@ -182,11 +181,9 @@ public class TicketListViewController implements ITicketState {
 		this.ticketEditorId = ti[0].getText(8);
 		this.ticketProcessStatus = ti[0].getText(9);
 		
-	
 		this.notifyObserver();
 	}
 	
-
 	// ------------------------------------------------------------------------
 	
 	public void notifyObserver(){
@@ -199,14 +196,14 @@ public class TicketListViewController implements ITicketState {
 	
 	public void attachObserver(ITicketObserver obs){
 		observers.addElement(obs);
-		System.out.println("Observer registration");
+//		System.out.println("Observer registration");
 	}
 	
 	// ------------------------------------------------------------------------
 	
 	public void detachObserver(ITicketObserver obs){
 		observers.removeElement(obs);
-		System.out.println("Observer deregistration");
+//		System.out.println("Observer deregistration");
 	}
 	
 	// ------------------------------------------------------------------------

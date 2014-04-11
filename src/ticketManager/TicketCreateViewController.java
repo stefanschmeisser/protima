@@ -2,8 +2,6 @@ package ticketManager;
 
 import java.util.ArrayList;
 import java.util.Vector;
-
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.*;
 
 public class TicketCreateViewController implements ITicketState {
@@ -31,15 +29,15 @@ public class TicketCreateViewController implements ITicketState {
 		this.btnListener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == tcv.btnClear) {
-					System.out.println("Clear");
+//					System.out.println("Clear");
 				}
 				if (event.widget == tcv.btnCreate) {
-					System.out.println("Create");
+//					System.out.println("Create");
 					createTicket();
 					tvc.setCurrentView(tvc.getTicketListViewController());
 				}
 				if (event.widget == tcv.btnCancel) {
-					System.out.println("Cancel");
+//					System.out.println("Cancel");
 					tvc.setCurrentView(tvc.getTicketListViewController());
 				}
 			}
@@ -106,6 +104,7 @@ public class TicketCreateViewController implements ITicketState {
 		values.add(tcv.getTicketCurrentEditorUid());
 		values.add(tcv.getTicketProcessStatus());
 		
-		this.ticketDao.insertTicket(values);
+		this.tvc.getTicketController().createTicket(values);
+//		this.ticketDao.insertTicket(values);
 	}
 }

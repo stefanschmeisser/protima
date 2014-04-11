@@ -1,11 +1,10 @@
 package ticketManager;
 
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.*;
 
 public class TicketViewController {
 
+	private TicketController tc;
 	private ITicketState currentView;
 	private Composite composite;
 	private ITicketState tlvc;
@@ -16,8 +15,9 @@ public class TicketViewController {
 
 	// ------------------------------------------------------------------------
 	
-	public TicketViewController(Composite composite, ITicketDao ticketDao){
+	public TicketViewController(TicketController tc, Composite composite, ITicketDao ticketDao){
 
+		this.tc = tc;
 		this.composite = composite;
 		this.ticketDao = ticketDao;
 		
@@ -47,10 +47,13 @@ public class TicketViewController {
 		if(this.currentView == this.tlvc){
 			this.tdvc.show();
 		}
-//		this.shell.setLayout(new GridLayout());	
 	}
 	
 	// ------------------------------------------------------------------------
+	
+	public TicketController getTicketController(){
+		return this.tc;
+	}
 	
 	public ITicketState getcurrentView(){
 		return this.currentView;
