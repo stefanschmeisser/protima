@@ -26,46 +26,10 @@ public class UserViewController {
 	
 	//private final Button ulvButton, uevButton, uanButton;
 	
-	public UserViewController(/*final Shell shell*/ Composite parentComposite, UserController parent){
-	
-		
-		this.parent = parent;
-		final UserViewController uvc = this;
-		/*
-		GridData datasubMenu = new GridData(GridData.FILL_HORIZONTAL);
-	    datasubMenu.widthHint = composite.getSize().x;
-	    datasubMenu.heightHint = 30;
-	   */
-		//this.userSubMenuComposite.setBackground(shell.getDisplay().getSystemColor(SWT.COLOR_DARK_GRAY));
-		Color blue = new Color (Display.getCurrent(), 0, 200, 255);
-		
-		ulv = new  UserListView(parentComposite, this);
-		/*
-		ulvButton = new Button(this.userSubMenuComposite, SWT.PUSH);
-		uevButton = new Button(this.userSubMenuComposite, SWT.PUSH);
-		uanButton = new Button(this.userSubMenuComposite, SWT.PUSH);
-		
-		ulvButton.setText("UserListView");
-		uevButton.setText("User Edit View");
-		uanButton.setText("Add New User View");
-	
-		Listener buttonListener = new Listener() {
-			
-			public void handleEvent(Event event) {
-				if (event.widget == ulvButton) {
-				
-					if(currentState != ulv){
-					ulv.getComposite().dispose();
-					setCurrentView(new UserListView(shell,uvc));
-					}
-					
-				}
-			}
-		};
-		ulvButton.addListener(SWT.Selection, buttonListener);
-		*/
-		
-		
+	public UserViewController(Composite parentComposite, UserController parent){
+		this.composite = parentComposite;
+		this.parent = parent;	
+		ulv = new  UserListView(parentComposite, this);		
 	}
 
 	
@@ -84,11 +48,6 @@ public class UserViewController {
 	
 		this.currentState = currentState;
 		this.currentState.show();
-		
-//		if(this.currentState == this.ulv){
-//			//
-//		}
-		this.composite.layout();
 	}
 
 	public UserController getParent() {

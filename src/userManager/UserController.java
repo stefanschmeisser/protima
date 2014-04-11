@@ -22,22 +22,16 @@ public class UserController implements IContentState {
 	private Shell shell;
 	private FrontController parent;
 
-	public UserController(Composite parentComposite/*,Shell shell  FrontController parent*/){
-		this.parent = parent;
-		userDAO = new UserDaoMySql();
-		//setComposite(parent.getComposite());
-		
-		//this.shell = shell;
-		uvc = new UserViewController(/*shell*/ parentComposite, this);
-		
+	public UserController(Composite parentComposite){
+		this.composite = parentComposite;
+		this.userDAO = new UserDaoMySql();
+		this.uvc = new UserViewController(parentComposite, this);
 	}
 	
 //	@Override
 	public void setCurrentView(IContentState pCurrentState) {
-		// TODO Auto-generated method stub
 		System.out.println("setcompo");
-		//parent.setBlankComposite(uvc.getComposite());
-		this.shell.layout();
+		this.composite.layout();
 	}
 
 //	@Override

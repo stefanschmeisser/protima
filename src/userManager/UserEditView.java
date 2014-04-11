@@ -138,8 +138,8 @@ public class UserEditView implements IUserState{
 				if (event.widget == btnOk) {
 					//in die db = userNameOutput.getText();
 					userDao.editUserNameInDB(userNameOutput.getText().trim(), id,userPasswordOutput.getText());
-					parent.setCurrentView(new UserListView(parentComposite, parent));
 					composite.dispose();
+					parent.setCurrentView(new UserListView(parentComposite, parent));
 				}
 				if(event.widget == btnCancel){
 					composite.dispose();

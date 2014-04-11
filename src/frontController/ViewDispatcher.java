@@ -37,7 +37,7 @@ public class ViewDispatcher {
 	    this.menu.setLayout(new GridLayout(12, true));
 		this.menu.setBackground(frontController.disp.getSystemColor(SWT.COLOR_DARK_GRAY));
 		
-		// ProMiTa Menü
+		// ProMiTa Menï¿½
 	    fileMenuHeader = new MenuItem(this.menuBar, SWT.CASCADE);
 	    fileMenuHeader.setText("&ProMiTa");	    
 	    fileMenu = new Menu(this.shell, SWT.DROP_DOWN);
@@ -55,9 +55,9 @@ public class ViewDispatcher {
 	    userEditItem = new MenuItem(userMenu,SWT.PUSH);
 	    userEditItem.setText("Benutzer Editieren");
 	    userAddNewUserItem = new MenuItem(userMenu,SWT.PUSH);
-	    userAddNewUserItem.setText("Benutzer hinzufŸgen");
+	    userAddNewUserItem.setText("Benutzer hinzufÃ¼gen");
 
-	    // Projekt Menü
+	    // Projekt Menï¿½
 	    projectMenuHeader = new MenuItem(this.menuBar, SWT.CASCADE);
 	    projectMenuHeader.setText("&Projekt");
 	    projectMenu = new Menu(this.shell, SWT.DROP_DOWN);
@@ -67,9 +67,9 @@ public class ViewDispatcher {
 	    projectEditItem = new MenuItem(projectMenu, SWT.PUSH);
 	    projectEditItem.setText("Projekt editieren");
 	    projectDeleteItem = new MenuItem(projectMenu, SWT.PUSH);
-	    projectDeleteItem.setText("Projekt löschen");
+	    projectDeleteItem.setText("Projekt lÃ¶schen");
 
-	    // Team Menü
+	    // Team Menï¿½
 	    teamMenuHeader = new MenuItem(this.menuBar, SWT.CASCADE);
 	    teamMenuHeader.setText("&Team");
 	    teamMenu = new Menu(this.shell, SWT.DROP_DOWN);
@@ -79,9 +79,9 @@ public class ViewDispatcher {
 	    teamEditItem = new MenuItem(teamMenu, SWT.PUSH);
 	    teamEditItem.setText("Team editieren");
 	    teamDeleteItem = new MenuItem(teamMenu, SWT.PUSH);
-	    teamDeleteItem.setText("Team löschen");
+	    teamDeleteItem.setText("Team lÃ¶schen");
 
-	    // Ticket Menü
+	    // Ticket Menï¿½
 	    ticketMenuHeader = new MenuItem(this.menuBar, SWT.CASCADE);
 	    ticketMenuHeader.setText("&Ticket");
 	    ticketMenu = new Menu(this.shell, SWT.DROP_DOWN);
@@ -91,9 +91,9 @@ public class ViewDispatcher {
 	    ticketEditItem = new MenuItem(ticketMenu, SWT.PUSH);
 	    ticketEditItem.setText("Ticket editieren");
 	    ticketDeleteItem = new MenuItem(ticketMenu, SWT.PUSH);
-	    ticketDeleteItem.setText("Ticket löschen");
+	    ticketDeleteItem.setText("Ticket lÃ¶schen");
 
-	    // Hilfe Menü
+	    // Hilfe MenÃ¼
 	    helpMenuHeader = new MenuItem(this.menuBar, SWT.CASCADE);
 	    helpMenuHeader.setText("&Hilfe");
 	    helpMenu = new Menu(this.shell, SWT.DROP_DOWN);
@@ -108,7 +108,6 @@ public class ViewDispatcher {
 	    this.shell.setMenuBar(this.menuBar);
 	    
         this.btnStart = new Button(this.menu, SWT.PUSH);
-//        this.btnStart.setText("Start");
         Image imageStart = new Image(Display.getCurrent(), "content/menu.png");
         btnStart.setImage(imageStart);
         btnStart.setSize(50, 50);

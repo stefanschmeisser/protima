@@ -35,6 +35,7 @@ public class UserListView implements IUserState{
 	private ArrayList <String> pw;
 	private final Button addNewUserBtn; 
 	private Composite compgrid;
+	private String[][] userList;
 	
 	
 	public UserListView(final Composite parentComposite, final UserViewController parentUVC){
@@ -55,15 +56,14 @@ public class UserListView implements IUserState{
 	    data.horizontalSpan = 0;
 	    this.compgrid = new Composite(this.composite, SWT.NONE);
 	    this.compgrid.setLayoutData(data);
-	    
 	   
-		String[][] userList = parentUVC.getParent().getAllUsers();
+		userList = parentUVC.getParent().getAllUsers();
 		System.out.println("userlist: "+userList[0][0]);
 		
 		//Table: 
 		//shell.setLayout(new GridLayout());
 		data = new GridData(GridData.FILL_HORIZONTAL);
-		final Table table = new Table (composite, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION);
+		final Table table = new Table (composite, SWT.BORDER | SWT.FULL_SELECTION);
 		table.setLinesVisible (true);
 		table.setHeaderVisible (true);
 		//GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
@@ -79,7 +79,7 @@ public class UserListView implements IUserState{
 			TableItem item = new TableItem (table, SWT.NONE);
 			item.setText (0, userList[i][0]); //id
 			item.setText (1, userList[i][1]); //name
-			item.setText (2, "***"); // pw
+			item.setText (2, "*****"); // pw
 
 			pw.add(userList[i][2]);
 		}
@@ -90,21 +90,16 @@ public class UserListView implements IUserState{
 		table.addListener (SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent (Event event) {
-				// hole User aus der Tabelle und gebe diese weiter für Detailansicht
 				
-				TableItem[] tableItems = table.getItems();
-				String string =  event.detail == SWT.CHECK ? "Checked" : tableItems[event.index].getText(0);
-				user = new Editor (Integer.parseInt(tableItems[event.index].getText(0)),tableItems[event.index].getText(1) );
-				String name = tableItems[event.index].getText(1);
-				System.out.println("event index: "+event.index);
-				int id = Integer.parseInt(tableItems[event.index].getText(0));
+				// hole User aus der Tabelle und gebe diese weiter f√ºr Detailansicht
+				TableItem[] tableItems = table.getSelection();
+				//user = new Editor (Integer.parseInt(tableItems[event.index].getText(0)),tableItems[event.index].getText(1) );
+				String name = tableItems[0].getText(1);
+				int id = Integer.parseInt(tableItems[0].getText(0));
 				listBtnActivate = true;
-			//	ulvButton.setEnabled(true);
+				String pw = findPw(tableItems[0].getText(0));
 				composite.dispose();
-				parentUVC.setCurrentView(new UserDetailView(parentComposite, parentUVC,name,id,pw.get(event.index)));
-				
-				System.out.println (event.item + " " + string);
-				//.setCurrentView(new U);
+				parentUVC.setCurrentView(new UserDetailView(parentComposite, parentUVC, name, id, pw));
 			}
 		});
 		
@@ -115,7 +110,7 @@ public class UserListView implements IUserState{
 	    this.compgrid.setLayoutData(data);
 	    
 	    addNewUserBtn = new Button(composite, SWT.PUSH);
-	    addNewUserBtn.setText("Benutzer hinzufügen");
+	    addNewUserBtn.setText("Benutzer hinzuf√ºgen");
 	    Listener buttonListener = new Listener() {
 			
 			public void handleEvent(Event event) {
@@ -128,8 +123,16 @@ public class UserListView implements IUserState{
 		};
 		addNewUserBtn.addListener(SWT.Selection, buttonListener);
 		
-		
-			    
+		parentComposite.layout();
+	}
+	
+	private String findPw(String id) {
+		for (int i=0; i < userList.length; i++) {
+			if (userList[i][0] == id) {
+				return userList[i][2];
+			}
+		}
+		return "";
 	}
 
 	

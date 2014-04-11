@@ -35,7 +35,6 @@ public class UserDetailView implements IUserState{
 	private Button btnCancel;
 	
 	public UserDetailView(final Composite parentComposite, final UserViewController parent, final String userName, final int id, final String pw){
-		//this.shell = shell;
 		
 		Listener buttonListener = new Listener() {
 			
@@ -74,7 +73,7 @@ public class UserDetailView implements IUserState{
 			    this.userIDInput.setEditable(false);
 			    this.userIDInput.setLayoutData(data);
 			    
-			    /* FREIRAUM F†R BESSERE ANORDNUNG*/
+			    /* FREIRAUM Fï¿½R BESSERE ANORDNUNG*/
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    data.horizontalSpan = 2;
 			    this.compgrid = new Composite(this.composite, SWT.NONE);
@@ -107,7 +106,7 @@ public class UserDetailView implements IUserState{
 			    this.userPasswordOutput.setEnabled(false);
 			    this.userPasswordOutput.setLayoutData(data);
 			    
-			    /* FREIRAUM F†R BESSERE ANORDNUNG DER BUTTONS*/
+			    /* FREIRAUM Fï¿½R BESSERE ANORDNUNG DER BUTTONS*/
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    data.horizontalSpan = 2;
 			    this.compgrid = new Composite(this.composite, SWT.NONE);
@@ -126,32 +125,21 @@ public class UserDetailView implements IUserState{
 			    this.btnCancel.addListener(SWT.Selection, buttonListener);
 			    this.btnCancel.setLayoutData(data);
 			    
-//			    this.shell.layout();
 			    parentComposite.layout();
 
-		
 		/*****************************************************************************************/
-		//this.shell.layout();
 	}
 	
-	public void setComposite(Composite comp) {
-		
-		// get the composite from the current UserController
-		//this.tlvc.composite = comp;
-		//this.uc.setComposite(comp);
-		
-	}
-
-
 	public Composite getComposite() {
 		
 		// get the composite from the current TicketViewController
 		return this.composite;
 	}
+
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		//this.shell.layout();
+		
 	}
 
 }

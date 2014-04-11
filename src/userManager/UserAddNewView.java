@@ -72,7 +72,7 @@ public class UserAddNewView implements IUserState{
 			    this.userIDInput.setEditable(false);
 			    this.userIDInput.setLayoutData(data);
 			    
-			    /* FREIRAUM F†R BESSERE ANORDNUNG*/
+			    /* FREIRAUM Fï¿½R BESSERE ANORDNUNG*/
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    data.horizontalSpan = 2;
 			    this.compgrid = new Composite(this.composite, SWT.NONE);
@@ -103,7 +103,7 @@ public class UserAddNewView implements IUserState{
 			    this.userPasswordInput.setEnabled(true);
 			    this.userPasswordInput.setLayoutData(data);
 			    
-			    /* FREIRAUM F†R BESSERE ANORDNUNG DER BUTTONS*/
+			    /* FREIRAUM Fï¿½R BESSERE ANORDNUNG DER BUTTONS*/
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    data.horizontalSpan = 2;
 			    this.compgrid = new Composite(this.composite, SWT.NONE);
@@ -112,7 +112,7 @@ public class UserAddNewView implements IUserState{
 			    // BUTTONS	    
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    this.btnAdd = new Button(this.composite, SWT.PUSH);
-			    this.btnAdd.setText("HinzufŸgen");
+			    this.btnAdd.setText("HinzufÃ¼gen");
 			    this.btnAdd.addListener(SWT.Selection, buttonListener);
 			    this.btnAdd.setLayoutData(data);
 			    
