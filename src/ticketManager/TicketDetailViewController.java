@@ -33,13 +33,16 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 				if (event.widget == tdv.btnEdit) {
 //					System.out.println("Edit");
 					tlvc.getTable().setEnabled(false);
+					tlvc.getButtonCreate().setEnabled(false);
+					tlvc.getButtonDelete().setEnabled(false);
+					tlvc.getButtonEdit().setEnabled(false);
 					tvc.setCurrentView(tvc.getTicketEditViewController(), true);
 					TicketEditViewController tev = (TicketEditViewController)tvc.getTicketEditViewController();
 					tev.setValues(getTicketData());
 				}
-				if (event.widget == tdv.btnCancel) {
+//				if (event.widget == tdv.btnCancel) {
 //					System.out.println("Cancel");
-				}
+//				}
 			}
 		};	
 	}

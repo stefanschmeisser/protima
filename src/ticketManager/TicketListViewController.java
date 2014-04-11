@@ -294,4 +294,16 @@ public class TicketListViewController implements ITicketState {
 	public Table getTable(){
 		return tlv.getTable();
 	}
+	
+	public Button getButtonDelete(){
+		return tlv.btnDelete;
+	}
+	
+	public Button getButtonEdit(){
+		return tlv.btnEdit;
+	}
+	
+	public Button getButtonCreate(){
+		return tlv.btnCreate;
+	}
 }
