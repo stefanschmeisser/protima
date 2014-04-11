@@ -42,31 +42,44 @@ public class ProjectListView implements IProjectState {
 	public void show() {		
 		
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 12;
+		layout.numColumns = 4;
 	    layout.makeColumnsEqualWidth = true;
 	    this.composite.setLayout(layout);
 	    
 //	    GridData header = new GridData(GridData.FILL_HORIZONTAL);
-	    GridData header = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+//	    GridData header = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+
+	    
+//	    Composite compgrid = new Composite(this.composite, SWT.NONE);
+//	    GridData data = new GridData(GridData.FILL_BOTH);
+//	    data.horizontalSpan = 1;
+//	    data.widthHint = this.composite.getSize().x;
+//	    compgrid.setLayoutData(data);
+//	    layout = new GridLayout();
+//	    layout.numColumns = 4;
+//	    layout.marginHeight = 15;
+//	    compgrid.setLayout(layout);
+	    
+	    GridData data = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
 	    Label ticket = new Label(this.composite, SWT.NONE);
-	    ticket.setText("Ticket Overview");
+	    ticket.setText("Project Overview");
+	    ticket.setLayoutData(data);
 	    
-	    Composite compgrid = new Composite(this.composite, SWT.NONE);
-	    GridData data = new GridData(GridData.FILL_BOTH);
-	    data.horizontalSpan = 3;
-	    data.widthHint = this.composite.getSize().x;
-	    compgrid.setLayoutData(data);
-	    layout = new GridLayout();
-	    layout.numColumns = 12;
-	    layout.marginHeight = 15;
-	    compgrid.setLayout(layout);
-	    
-	    data = new GridData();
-	    data.grabExcessHorizontalSpace = true;
-	    data.horizontalAlignment = GridData.END;
+//	    data = new GridData();
+//	    data.grabExcessHorizontalSpace = true;
+//	    data.horizontalAlignment = GridData.END;
 	    
 	    data = new GridData(GridData.HORIZONTAL_ALIGN_END);
-		createButton = new Button(compgrid, SWT.PUSH);
+	    data.horizontalSpan = 3; 
+	    
+	    Composite btncomp = new Composite(this.composite, SWT.NONE);
+	    btncomp.setLayoutData(data);
+	    GridLayout btnlayout = new GridLayout();
+	    btnlayout.numColumns = 3;
+	    btncomp.setLayout(btnlayout);
+	    
+	    data = new GridData(GridData.HORIZONTAL_ALIGN_END);
+		createButton = new Button(btncomp, SWT.PUSH);
 		Image imageCreateProject = new Image(Display.getCurrent(), "content/addItemToList.png");
         createButton.setImage(imageCreateProject);
         createButton.setSize(34,34);
@@ -77,7 +90,7 @@ public class ProjectListView implements IProjectState {
          * noch im Listener chekcne ob der button ausgewählt wurde
          */
         data = new GridData(GridData.HORIZONTAL_ALIGN_END);
-        editButton = new Button(compgrid, SWT.PUSH);
+        editButton = new Button(btncomp, SWT.PUSH);
         Image imageEditProject = new Image(Display.getCurrent(), "content/editListItem.png");
         editButton.setImage(imageEditProject);
         editButton.setSize(34,34);
@@ -85,7 +98,7 @@ public class ProjectListView implements IProjectState {
         editButton.addListener(SWT.Selection, this.projectViewController);  
         
         data = new GridData(GridData.HORIZONTAL_ALIGN_END);
-		deleteButton = new Button(compgrid, SWT.PUSH);
+		deleteButton = new Button(btncomp, SWT.PUSH);
 		Image imageDeleteProject = new Image(Display.getCurrent(), "content/deleteFromList.png");
 		deleteButton.setImage(imageDeleteProject);
 		deleteButton.setSize(34,34);
@@ -94,21 +107,21 @@ public class ProjectListView implements IProjectState {
 	
 		data = new GridData();
 	    data.horizontalAlignment = GridData.FILL;
-	    data.grabExcessHorizontalSpace = true;
-	    data.horizontalSpan = 12;
-	    data.heightHint = 100;
+//	    data.grabExcessHorizontalSpace = true;
+	    data.horizontalSpan = 4;
+//	    data.heightHint = 100;
 	    
-	    Composite tableComposite = new Composite(this.composite, SWT.NONE);
-	    GridData tableGrid = new GridData(GridData.FILL_HORIZONTAL);
-	    tableGrid.horizontalSpan = 12;
-	    tableGrid.widthHint = this.composite.getParent().getSize().x;
-	    tableGrid.grabExcessHorizontalSpace = true;
-	    tableComposite.setLayoutData(tableGrid);
-	    tableComposite.setLayout(new GridLayout(12, true));
+//	    Composite tableComposite = new Composite(this.composite, SWT.NONE);
+//	    GridData tableGrid = new GridData(GridData.FILL_HORIZONTAL);
+//	    tableGrid.horizontalSpan = 4;
+//	    tableGrid.widthHint = this.composite.getParent().getSize().x;
+//	    tableGrid.grabExcessHorizontalSpace = true;
+//	    tableComposite.setLayoutData(tableGrid);
+//	    tableComposite.setLayout(new GridLayout(12, true));
 	    
-	    this.table = new Table(tableComposite, SWT.BORDER);
-	    this.table.setSize(this.composite.getParent().getSize().x, this.composite.getParent().getSize().y);
-	    this.table.setLayoutData(tableGrid);	    
+	    this.table = new Table(this.composite, SWT.BORDER);
+	    //this.table.setSize(this.composite.getParent().getSize().x, this.composite.getParent().getSize().y);
+	    this.table.setLayoutData(data);	    
 	    this.table.setHeaderVisible(true);
 	    this.table.addListener(SWT.Selection, this.projectViewController);
 	}
