@@ -6,16 +6,15 @@ import frontController.IContentState;
 
 public class TicketController implements IContentState {
 	
-	private Shell shell;
 	private Composite composite;
 	private ITicketDao ticketDao;
 	private TicketViewController tvc;
 	
-	public TicketController(Shell shell){
+	public TicketController(Composite composite){
 		
-		this.shell = shell;
+		this.composite = composite;
 		this.ticketDao = new TicketDaoMySql();
-		this.tvc = new TicketViewController(shell, this.ticketDao);	
+		this.tvc = new TicketViewController(composite, this.ticketDao);	
 	}
 	
 }

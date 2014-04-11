@@ -7,13 +7,15 @@ import org.eclipse.swt.widgets.*;
 
 public class TicketListView {
 
+	private Composite content;
 	private Composite composite;
 	public Button btnRefresh, btnCreate, btnEdit, btnDelete;
 	private Table table;
 	
-	public TicketListView(Shell shell, Listener listener){
+	public TicketListView(Composite comp, Listener listener){
 		
-		composite = new Composite(shell, SWT.NONE);
+		this.content = composite;
+		composite = new Composite(this.content, SWT.NONE);
 		
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 3;

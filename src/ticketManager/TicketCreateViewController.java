@@ -10,15 +10,15 @@ public class TicketCreateViewController implements ITicketState {
 
 	private TicketViewController tvc;
 	private TicketCreateView tcv;
-	private Shell shell;
+	private Composite composite;
 	private Listener btnListener;
 	private ITicketDao ticketDao;
 	
 	// ------------------------------------------------------------------------
 	
-	public TicketCreateViewController(TicketViewController ticketViewController, Shell shell, ITicketDao ticketDao){
+	public TicketCreateViewController(TicketViewController ticketViewController, Composite composite, ITicketDao ticketDao){
 		
-		this.shell = shell;
+		this.composite = composite;
 		this.tvc = ticketViewController;
 		this.ticketDao = ticketDao;
 	}
@@ -45,13 +45,13 @@ public class TicketCreateViewController implements ITicketState {
 			}
 		};
 
-		tcv = new TicketCreateView(this.shell, this.btnListener);
+		tcv = new TicketCreateView(this.composite, this.btnListener);
 		
 		this.setCombobox("team");
 		this.setCombobox("project");
 		this.setCombobox("user");
 		
-		this.shell.layout();
+		this.composite.layout();
 	}
 	
 	// ------------------------------------------------------------------------

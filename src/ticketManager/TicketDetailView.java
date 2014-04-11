@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.*;
 
 public class TicketDetailView {
 
-	private Composite composite, compgrid;
+	private Composite content, composite, compgrid;
 	private Label ticketIDLabel, ticketTitleLabel, ticketDescLabel, ticketStartDateLabel, ticketEndDateLabel, projectIDLabel;
 	private Label ticketPriorityLevelLabel, ticketProcessStatusLabel, currentEditorUIDLabel, assignedTeamIDLabel;
 	private Text ticketIDInput, ticketTitleInput, ticketDescInput;
@@ -18,17 +18,16 @@ public class TicketDetailView {
 	private DateTime ticketStartDateInput, ticketEndDateInput;
 	public Button btnEdit, btnCancel;
 	private Listener btnListener;
-	private Shell shell;
-	
+
 	private TicketPriorityLevel ticketPriorityLevel;
 	private TicketProcessStatus ticketProcessStatus;
 
 	
-	public TicketDetailView(Shell shell, Listener btnListener){
+	public TicketDetailView(Composite comp, Listener btnListener){
 		
-		this.shell = shell;
+		this.content = comp;
 		
-		this.composite = new Composite(shell, SWT.NONE);
+		this.composite = new Composite(content, SWT.NONE);
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 4;
 	    layout.makeColumnsEqualWidth = true;
@@ -201,7 +200,7 @@ public class TicketDetailView {
 	    this.btnCancel.addListener(SWT.Selection, btnListener);
 	    this.btnCancel.setLayoutData(data);
 	    
-	    this.shell.layout();
+	    this.content.layout();
 
 //		composite = new Composite(shell, SWT.NONE);
 //

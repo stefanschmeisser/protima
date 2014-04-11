@@ -1,12 +1,13 @@
 package ticketManager;
 
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 public class TicketViewController {
 
 	private ITicketState currentView;
-	private Shell shell;
+	private Composite composite;
 	private ITicketState tlvc;
 	private ITicketState tdvc;
 	private ITicketState tevc;
@@ -15,15 +16,15 @@ public class TicketViewController {
 
 	// ------------------------------------------------------------------------
 	
-	public TicketViewController(Shell shell, ITicketDao ticketDao){
+	public TicketViewController(Composite composite, ITicketDao ticketDao){
 
-		this.shell = shell;
+		this.composite = composite;
 		this.ticketDao = ticketDao;
 		
-		tlvc = new TicketListViewController(this, shell, this.ticketDao);
-		tdvc = new TicketDetailViewController(this, shell, this.ticketDao);
-		tevc = new TicketEditViewController(this, shell, this.ticketDao);
-		tcvc = new TicketCreateViewController(this, shell, this.ticketDao);
+		tlvc = new TicketListViewController(this, this.composite, this.ticketDao);
+		tdvc = new TicketDetailViewController(this, this.composite, this.ticketDao);
+		tevc = new TicketEditViewController(this, this.composite, this.ticketDao);
+		tcvc = new TicketCreateViewController(this, this.composite, this.ticketDao);
 		
 		this.setCurrentView(tlvc);
 	}

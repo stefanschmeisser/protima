@@ -6,16 +6,16 @@ public class TicketEditViewController implements ITicketState  {
 	
 	private TicketEditView tev;
 	private TicketViewController tvc;
-	private Shell shell;
+	private Composite composite;
 	private ITicketDao ticketDao;
 	private Listener btnListener;
 	
 	// ------------------------------------------------------------------------
 	
-	public TicketEditViewController(TicketViewController tvc, Shell shell, ITicketDao ticketDao){
+	public TicketEditViewController(TicketViewController tvc, Composite composite, ITicketDao ticketDao){
 		
 		this.tvc = tvc;
-		this.shell = shell;
+		this.composite = composite;
 		this.ticketDao = ticketDao;
 	}
 
@@ -40,7 +40,7 @@ public class TicketEditViewController implements ITicketState  {
 		};
 		
 		
-		tev = new TicketEditView(shell, btnListener);
+		tev = new TicketEditView(this.composite, btnListener);
 	}	
 	
 	// ------------------------------------------------------------------------

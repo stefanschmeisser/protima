@@ -6,5 +6,5 @@ public interface Protima {
 //	String host = "jdbc:mysql://games.thm.de/sag";
 	String user = "root";
 	String password = "";
-	String host = "jdbc:mysql://localhost/sag";
+	String host = "jdbc:mysql://localhost/sag2";
 }

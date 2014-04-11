@@ -9,13 +9,13 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 	private Listener btnListener;
 	private TicketViewController tvc;
 	private ITicketDao ticketDao;
-	private Shell shell;
+	private Composite composite;
 	
 	
-	public TicketDetailViewController(TicketViewController tvc, Shell shell, ITicketDao ticketDao){
+	public TicketDetailViewController(TicketViewController tvc, Composite composite, ITicketDao ticketDao){
 
 		this.tvc = tvc;
-		this.shell = shell;
+		this.composite = composite;
 		this.ticketDao = ticketDao;
 		
 		// Observer Registration
@@ -40,7 +40,7 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 	
 	@Override
 	public void show() {
-		tdv = new TicketDetailView(shell, btnListener);
+		tdv = new TicketDetailView(this.composite, btnListener);
 	}
 
 	// ------------------------------------------------------------------------

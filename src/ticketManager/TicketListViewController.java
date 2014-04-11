@@ -3,14 +3,14 @@ package ticketManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
-
 import org.eclipse.swt.*;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.widgets.*;
 
 public class TicketListViewController implements ITicketState {
 
-	private Shell shell;
+	private Composite composite;
+	private Shell msgBoxShell;
 	private TicketListView tlv;
 	private TicketViewController tvc;
 	private ITicketDao ticketDao;
@@ -19,10 +19,10 @@ public class TicketListViewController implements ITicketState {
 	private String ticketId, ticketTitle, ticketDescription, ticketStartDate, ticketEndeDate, ticketPriorityLevel, ticketProjectId, ticketTeamId, ticketProcessStatus, ticketEditorId;
 	
 
-	public TicketListViewController(TicketViewController ticketViewController, Shell shell, ITicketDao ticketDao){
+	public TicketListViewController(TicketViewController ticketViewController, Composite composite, ITicketDao ticketDao){
 		
 		this.tvc = ticketViewController;
-		this.shell = shell;
+		this.composite = composite;
 		this.ticketDao = ticketDao;
 		
 		observers = new Vector();
@@ -59,9 +59,9 @@ public class TicketListViewController implements ITicketState {
 			}
 		};
 		
-		tlv = new TicketListView(this.shell, this.listener);
+		tlv = new TicketListView(this.composite, this.listener);
 		this.fillTableData();
-		this.shell.layout();
+		this.composite.layout();
 	}
 
 	// ------------------------------------------------------------------------
@@ -140,7 +140,7 @@ public class TicketListViewController implements ITicketState {
 		
 		if(isSelected){
 			
-			MessageBox dialog = new MessageBox(shell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
+			MessageBox dialog = new MessageBox(this.msgBoxShell, SWT.APPLICATION_MODAL | SWT.OK| SWT.CANCEL);
 			dialog.setText("Delete Ticket");
 			dialog.setMessage("Are you sure?");
 
