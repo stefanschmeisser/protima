@@ -41,9 +41,10 @@ public class FrontController implements IApplicationState, Listener {
         
 		this.svc = new StartViewController();
 //		this.pc = new ProjectController(this.shell);
-		this.tc = new TicketController(this.shell);
+		//this.tc = new TicketController(this.shell);
 		//this.pc = new ProjectController(this.shell);
 //		this.tvc = new TeamViewController();
+		this.uc  = new UserController(this.composite /*, this*/);
 		setCurrentView(this.svc);
 		
 		shell.pack();
@@ -79,7 +80,7 @@ public class FrontController implements IApplicationState, Listener {
 		if(event.widget == vd.btnUser){
 			System.out.println("Btn User");
 			if(uc==null){
-				this.uc = new UserController(this.shell, this);
+				this.uc = new UserController(this.composite/*, this*/);
 				setCurrentView(uc);
 			}
 			else{

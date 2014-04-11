@@ -22,7 +22,7 @@ public class UserDetailView implements IUserState{
 	private Composite composite, menuComposite;
 	private UserController uc;
 	private User user;
-	private Shell shell;
+	
 	//private final Button uevButton;
 	private Label userIDLabel;
 	private Text userIDInput;
@@ -34,20 +34,20 @@ public class UserDetailView implements IUserState{
 	private Button btnEdit;
 	private Button btnCancel;
 	
-	public UserDetailView(final Shell shell, final UserViewController parent, final String userName, final int id, final String pw){
-		this.shell = shell;
+	public UserDetailView(final Composite parentComposite, final UserViewController parent, final String userName, final int id, final String pw){
+		//this.shell = shell;
 		
 		Listener buttonListener = new Listener() {
 			
 		public void handleEvent(Event event) {
 				if (event.widget == btnEdit) {
 					composite.dispose();
-					parent.setCurrentView(new UserEditView(shell, parent, id, userName, pw));
+					parent.setCurrentView(new UserEditView(parentComposite, parent, id, userName, pw));
 	
 				}
 				if(event.widget == btnCancel){
 					composite.dispose();
-					parent.setCurrentView(new UserListView(shell, parent));
+					parent.setCurrentView(new UserListView(parentComposite, parent));
 				}
 			}
 		};
@@ -55,7 +55,7 @@ public class UserDetailView implements IUserState{
 		
 		/*****************************************************************************************/
 					
-				this.composite = new Composite(shell, SWT.NONE);
+				this.composite = new Composite(parentComposite, SWT.NONE);
 				GridLayout layout = new GridLayout();
 				layout.numColumns = 4;
 			    layout.makeColumnsEqualWidth = true;
@@ -126,7 +126,8 @@ public class UserDetailView implements IUserState{
 			    this.btnCancel.addListener(SWT.Selection, buttonListener);
 			    this.btnCancel.setLayoutData(data);
 			    
-			    this.shell.layout();
+//			    this.shell.layout();
+			    parentComposite.layout();
 
 		
 		/*****************************************************************************************/

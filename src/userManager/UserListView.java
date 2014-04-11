@@ -28,23 +28,18 @@ public class UserListView implements IUserState{
 	private final Composite composite;
 	//private User user;
 	private Editor user;
-	private Shell shell;
+
 	private Label userListLabel;
 	private Composite subMenuComposite;
 	private Boolean listBtnActivate = true;
 	private ArrayList <String> pw;
-	 private final Button addNewUserBtn; 
+	private final Button addNewUserBtn; 
 	private Composite compgrid;
 	
 	
-	public UserListView(final Shell shell, final UserViewController parentUVC){
-		
-		this.shell = shell;
-		shell.setMaximized(true);
-		
-		//subMenuComposite = parentUVC.getSubMenuComposite();
-		
-		composite = new Composite(shell, SWT.NONE);
+	public UserListView(final Composite parentComposite, final UserViewController parentUVC){
+
+		composite = new Composite(parentComposite, SWT.NONE);
 		GridLayout myLayout = new GridLayout();
 		myLayout.numColumns = 2;
 		myLayout.makeColumnsEqualWidth = true;
@@ -106,7 +101,7 @@ public class UserListView implements IUserState{
 				listBtnActivate = true;
 			//	ulvButton.setEnabled(true);
 				composite.dispose();
-				parentUVC.setCurrentView(new UserDetailView(shell, parentUVC,name,id,pw.get(event.index)));
+				parentUVC.setCurrentView(new UserDetailView(parentComposite, parentUVC,name,id,pw.get(event.index)));
 				
 				System.out.println (event.item + " " + string);
 				//.setCurrentView(new U);
@@ -126,14 +121,14 @@ public class UserListView implements IUserState{
 			public void handleEvent(Event event) {
 				if (event.widget == addNewUserBtn) {
 					composite.dispose();
-					parentUVC.setCurrentView(new UserAddNewView(shell, parentUVC));
+					parentUVC.setCurrentView(new UserAddNewView(parentComposite, parentUVC));
 					
 				}
 			}
 		};
 		addNewUserBtn.addListener(SWT.Selection, buttonListener);
 		
-		shell.pack ();
+		
 			    
 	}
 
@@ -153,7 +148,8 @@ public class UserListView implements IUserState{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		this.shell.layout();
+		//this.shell.layout();
+		this.composite.layout();
 	}
 	
 

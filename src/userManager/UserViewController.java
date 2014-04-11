@@ -17,30 +17,29 @@ import projectManager.IProjectState;
 
 public class UserViewController {
 	
-	private Shell shell;
+	private Composite composite;
 	private UserController parent;
 	private UserListView ulv;
 	private UserDetailView udv;
 	private IUserState currentState;
 	private String[][] users;
-	private Composite composite, userSubMenuComposite;
 	
 	//private final Button ulvButton, uevButton, uanButton;
 	
-	public UserViewController(final Shell shell, UserController parent){
-		this.shell = shell;
+	public UserViewController(/*final Shell shell*/ Composite parentComposite, UserController parent){
+	
+		
 		this.parent = parent;
 		final UserViewController uvc = this;
-		userSubMenuComposite = new Composite(shell,SWT.NONE);
+		/*
 		GridData datasubMenu = new GridData(GridData.FILL_HORIZONTAL);
-	    datasubMenu.widthHint = shell.getSize().x;
+	    datasubMenu.widthHint = composite.getSize().x;
 	    datasubMenu.heightHint = 30;
-	    this.userSubMenuComposite.setLayoutData(datasubMenu);
-	    this.userSubMenuComposite.setLayout(new GridLayout(10, true));
+	   */
 		//this.userSubMenuComposite.setBackground(shell.getDisplay().getSystemColor(SWT.COLOR_DARK_GRAY));
 		Color blue = new Color (Display.getCurrent(), 0, 200, 255);
-		this.userSubMenuComposite.setBackground(blue);
-		ulv = new  UserListView(this.shell, this);
+		
+		ulv = new  UserListView(parentComposite, this);
 		/*
 		ulvButton = new Button(this.userSubMenuComposite, SWT.PUSH);
 		uevButton = new Button(this.userSubMenuComposite, SWT.PUSH);
@@ -49,9 +48,7 @@ public class UserViewController {
 		ulvButton.setText("UserListView");
 		uevButton.setText("User Edit View");
 		uanButton.setText("Add New User View");
-		
-		
-		
+	
 		Listener buttonListener = new Listener() {
 			
 			public void handleEvent(Event event) {
@@ -68,13 +65,9 @@ public class UserViewController {
 		ulvButton.addListener(SWT.Selection, buttonListener);
 		*/
 		
-		shell.setMaximized(true);
+		
 	}
-	
-	
-	public Composite getSubMenuComposite(){	
-		return userSubMenuComposite;
-	}
+
 	
 	public UserListView getListView(){
 		return ulv;
@@ -95,8 +88,7 @@ public class UserViewController {
 //		if(this.currentState == this.ulv){
 //			//
 //		}
-		shell.setMaximized(true);
-		this.shell.layout();
+		this.composite.layout();
 	}
 
 	public UserController getParent() {
