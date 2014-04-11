@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 
 import applicationManager.Application;
 import userRights.Editor;
@@ -32,6 +33,7 @@ public class UserEditView implements IUserState{
 	private Text userPasswordOutput;
 	private Button btnOk;
 	private Button btnCancel;
+	private Button deleteUserBtn;
 	
 	private UserDaoMySql userDao;
 	private int userID;
@@ -89,7 +91,7 @@ public class UserEditView implements IUserState{
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.userProjektLabel = new Label(this.composite, SWT.RIGHT);
-	    this.userProjektLabel.setText("Projekte");
+	    this.userProjektLabel.setText("Passwort");
 	    this.userProjektLabel.setLayoutData(data);
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
@@ -134,6 +136,8 @@ public class UserEditView implements IUserState{
 	    
 	    Listener buttonListener = new Listener() {
 			
+		
+
 		public void handleEvent(Event event) {
 				if (event.widget == btnOk) {
 					//in die db = userNameOutput.getText();
@@ -141,6 +145,13 @@ public class UserEditView implements IUserState{
 					composite.dispose();
 					parent.setCurrentView(new UserListView(parentComposite, parent));
 				}
+				
+				if(event.widget == deleteUserBtn){
+					userDao.deleteUserFromDB(id);
+					composite.dispose();
+					parent.setCurrentView(new UserListView(parentComposite, parent));
+				}
+				
 				if(event.widget == btnCancel){
 					composite.dispose();
 					parent.setCurrentView(new UserDetailView(parentComposite, parent,userName,id,newPassword));
@@ -148,12 +159,23 @@ public class UserEditView implements IUserState{
 			}
 		};
 	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    data.horizontalSpan = 2;
+	    this.compgrid = new Composite(this.composite, SWT.NONE);
+	    this.compgrid.setLayoutData(data);
+	    
 	    // BUTTONS	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.btnOk = new Button(this.composite, SWT.PUSH);
 	    this.btnOk.setText("Ok");
 	    this.btnOk.addListener(SWT.Selection, buttonListener);
 	    this.btnOk.setLayoutData(data);
+	    
+	    data = new GridData(GridData.FILL_HORIZONTAL);
+	    this.deleteUserBtn = new Button(this.composite, SWT.PUSH);
+	    this.deleteUserBtn.setText("Benutzer entfernen");
+	    this.deleteUserBtn.addListener(SWT.Selection, buttonListener);
+	    this.deleteUserBtn.setLayoutData(data);
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.btnCancel = new Button(this.composite, SWT.PUSH);

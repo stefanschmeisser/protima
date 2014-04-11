@@ -72,6 +72,19 @@ public class UserDaoMySql extends AbstractDaoMySql implements IUserDAO{
 			
 	}
 	
+	public void deleteUserFromDB(int id){
+		String deleteString = "DELETE FROM user WHERE userID= '"+id+"'";
+		
+		try {
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate(deleteString );
+			connection.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void addNewUserInDB(String name, String password){
 		String insertString = "INSERT INTO user (name,password) VALUES('"+name+"','"+password+"')";
 		//openConnection(_user, _password);
