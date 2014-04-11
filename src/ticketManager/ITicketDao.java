@@ -12,5 +12,6 @@ public interface ITicketDao {
 	public TicketTableModel selectTableModel(String column, String table, String condition);
 	public void insertTicket(ArrayList<String> values);
 	public void insertTicket(Ticket ticket);
+	public void updateTicket(ArrayList<String> values);
 	public void deleteTicket(String ticketId);
 }

@@ -12,6 +12,7 @@ public class TicketViewController {
 	private ITicketState tevc;
 	private ITicketState tcvc;
 	private ITicketDao ticketDao;
+	public String currentTicket;
 
 	// ------------------------------------------------------------------------
 	

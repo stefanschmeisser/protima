@@ -274,7 +274,7 @@ public class TicketListViewController implements ITicketState {
 		return date;
 	}
 
-	public  ArrayList<Integer> getTicketEndDate(){
+	public ArrayList<Integer> getTicketEndDate(){
 		
 		ArrayList<Integer> date = new ArrayList<Integer>();
 
@@ -289,5 +289,9 @@ public class TicketListViewController implements ITicketState {
 			date.add(01);
 		}
 		return date;
+	}
+	
+	public Table getTable(){
+		return tlv.getTable();
 	}
 }

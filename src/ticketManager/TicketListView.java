@@ -75,7 +75,7 @@ public class TicketListView {
 	    data.horizontalAlignment = GridData.FILL;
 	    data.grabExcessHorizontalSpace = true;
 	    data.horizontalSpan = 5;
-	    data.heightHint = 250;
+	    data.heightHint = 100;
 	    
 	    // TABELLE für den LISTVIEW
 	    this.table = new Table(compgrid, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);

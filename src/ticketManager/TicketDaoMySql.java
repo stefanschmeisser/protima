@@ -128,6 +128,31 @@ public class TicketDaoMySql extends AbstractDaoMySql implements ITicketDao {
 	
 	// ------------------------------------------------------------------------
 	
+	public void updateTicket(ArrayList<String> values) {
+		
+		String updateStmt = "UPDATE ticket SET title = ?, description = ?, startdate = ?, enddate = ?, priority = ?, projectID = ?, teamID = ?, editorID = ?, processStatus = ? WHERE ticketID = ?";
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(updateStmt);
+			preparedStatement.setString(1, values.get(1).toString());
+			preparedStatement.setString(2, values.get(2).toString());
+			preparedStatement.setString(3, values.get(3).toString());
+			preparedStatement.setString(4, values.get(4).toString());
+			preparedStatement.setString(5, values.get(5).toString());
+			preparedStatement.setString(6, values.get(6).toString());
+			preparedStatement.setString(7, values.get(7).toString());
+			preparedStatement.setString(8, values.get(8).toString());
+			preparedStatement.setString(9, values.get(9).toString());
+			preparedStatement.setString(10, values.get(0).toString());
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	
 	public void insertTicket(Ticket ticket) {
 
 		String values = "";
