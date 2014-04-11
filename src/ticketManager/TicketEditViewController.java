@@ -31,14 +31,16 @@ public class TicketEditViewController implements ITicketState  {
 		this.btnListener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == tev.btnSave) {
-					System.out.println("Save");
+//					System.out.println("Save");
 					tvc.getTicketController().updateTicket(getEditViewValues());
+					tvc.getTicketListViewController().getComposite().dispose();
+					tvc.setCurrentView(tvc.getTicketListViewController(), false);
 				}
 				if (event.widget == tev.btnUndo) {
 					System.out.println("Undo");
 				}
 				if (event.widget == tev.btnCancel) {
-					System.out.println("Cancel");
+//					System.out.println("Cancel");
 					tvc.getTicketListViewController().getComposite().dispose();
 					tvc.setCurrentView(tvc.getTicketListViewController(), false);
 				}

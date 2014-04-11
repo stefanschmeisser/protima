@@ -26,8 +26,6 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 		this.tlvc = (TicketListViewController)this.tvc.getTicketListViewController();
 		tlvc.attachObserver(this);
 		
-		
-
 		this.btnListener = new Listener() {
 			public void handleEvent(Event event) {
 				if (event.widget == tdv.btnEdit) {
