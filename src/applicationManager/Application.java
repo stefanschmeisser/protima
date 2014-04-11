@@ -9,7 +9,7 @@ import frontController.FrontController;
 public class Application {
 	
 	//TODO: alle TODOs / FIXMEs durchgehen
-	//TODO: unnötige Prints am Ende löschen
+	//TODO: unnï¿½tige Prints am Ende lï¿½schen
 	
 	private User currentUser;
 	private IApplicationState currentState;
@@ -20,22 +20,9 @@ public class Application {
 	  
 	protected Application(){
 		disp = new Display();
-		// Standardwert für den Start
-		//FIXME: So kommt leider "GUI" Kram in den Controller, aber ohne gemeinsames Display (mainThread für die GUI) leider nahe zu unmöglich die Shells zu wechseln!
-
-//		setCurrentState(new FrontController(disp));
 		setCurrentState(new LoginController(this, disp));
 	}
-	/*
-	public static Application getInstance() {
-	      if(appInstance == null) {
-	    	  
-	         appInstance = new Application();
-	         
-	      }
-	      return appInstance;
-	}
-	*/
+
 	public void setCurrentState(IApplicationState state) {
 		this.currentState = state;
 	}
@@ -53,7 +40,6 @@ public class Application {
 	}
 	
 	public static void main(String[] args){
-		
 		new Application();
 	}
 
