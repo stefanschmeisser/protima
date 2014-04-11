@@ -18,28 +18,23 @@ import org.eclipse.swt.widgets.Text;
 public class TeamCreateView implements ITeamState {
 	
 	private TeamViewController teamViewController;
-	private Shell shell;
-	private Composite composite;
-	private Label labelTeamID, labelTeamName, labelTeamLeader;
-	public static Text textTeamID, textTeamName, textTeamLeader;
+	private Composite composite, content;
+	private Label labelTeamID, labelTeamName, labelTeamLeader, labelTeamDescription;
+	public static Text textTeamID, textTeamName, textTeamLeader, textTeamDescription;
+	public static Combo comboTeamLeader;
 	public static Button createButton, cancelButton;
 	
-	public TeamCreateView(TeamViewController teamViewController, Shell shell){
+	public TeamCreateView(TeamViewController teamViewController, Composite content){
 		this.teamViewController = teamViewController;
-		this.shell = shell;
-		this.composite = new Composite(this.shell, SWT.NONE);
-	
-		
+		this.content = content;
+		this.composite = new Composite(this.content, SWT.NONE);
 	}
- 
 	
 	@Override
 	public void show() {
 		
-this.composite.setLayout(new GridLayout());
-	    
+		this.composite.setLayout(new GridLayout());
 	    Composite header = new Composite(this.composite, SWT.NONE);
-	    
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 12;
 	    layout.makeColumnsEqualWidth = true;
@@ -55,13 +50,11 @@ this.composite.setLayout(new GridLayout());
 	    content.setLayout(new GridLayout(2, true));
 		
 	    labelTeamID = new Label(content, SWT.NONE);
-		labelTeamID.setText("Projekt ID: ");
+		labelTeamID.setText("Team ID: ");
 		labelTeamID.setLayoutData(new GridData(GridData.BEGINNING));
 		
 		textTeamID = new Text(content, SWT.READ_ONLY | SWT.BORDER);
 		textTeamID.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-	
 		
 		labelTeamName = new Label(content, SWT.NONE);
 		labelTeamName.setText("Name: ");
@@ -69,19 +62,26 @@ this.composite.setLayout(new GridLayout());
 		
 		textTeamName = new Text(content, SWT.NONE);
 		textTeamName.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-		labelTeamLeader= new Label(content, SWT.NONE);
-		labelTeamLeader.setText("Beschreibung: ");
-		labelTeamLeader.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_BEGINNING));
-		
-		textTeamLeader = new Text(content, SWT.MULTI | SWT.WRAP);
-		textTeamLeader.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL));
-		
+//		
+//		labelTeamDescription= new Label(content, SWT.NONE);
+//		labelTeamDescription.setText("Beschreibung: ");
+//		labelTeamDescription.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_BEGINNING));
+//		
+//		textTeamDescription = new Text(content, SWT.MULTI | SWT.WRAP);
+//		textTeamDescription.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL));
+//		
 		Composite buttons = new Composite(this.composite, SWT.NONE);
 	    buttons.setLayout(new GridLayout(2, true));
 		
+	    labelTeamLeader = new Label(content, SWT.NONE);
+	    labelTeamLeader.setText("Teamleiter: ");
+	    labelTeamLeader.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_BEGINNING));
+	    
+	    comboTeamLeader = new Combo(content, SWT.NONE);
+	    comboTeamLeader.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	    
 	    createButton = new Button(buttons, SWT.PUSH);
-	    createButton.setText("Projekt erstellen");
+	    createButton.setText("Team erstellen");
 	    createButton.setLayoutData(new GridData(GridData.BEGINNING));
 	    createButton.addListener(SWT.Selection, this.teamViewController);
 		

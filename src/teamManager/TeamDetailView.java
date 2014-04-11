@@ -19,17 +19,16 @@ import org.eclipse.swt.widgets.Text;
 public class TeamDetailView implements ITeamState {
 	
 	private TeamViewController teamViewController;
-	private Shell shell;
-	private Composite composite;
+	private Composite composite, content;
 	private Button createButton, saveButton, cancelButton;
 	private Label labelTeamID, labelTeamName, labelTeamLeader;
 	private Text textTeamID, textTeamName;
 
 	
-	public TeamDetailView(TeamViewController teamViewController, Shell shell){
+	public TeamDetailView(TeamViewController teamViewController, Composite content){
 		this.teamViewController = teamViewController;
-		this.shell = shell;
-		this.composite = new Composite(this.shell, SWT.NONE);
+		this.content = content;
+		this.composite = new Composite(this.content, SWT.NONE);
 		this.composite.setLocation(0,0);
 	}
 	

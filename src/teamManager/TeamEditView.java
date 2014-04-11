@@ -19,15 +19,15 @@ public class TeamEditView implements ITeamState {
 	
 	private TeamViewController teamViewController;
 	private Shell shell;
-	private Composite composite;
+	private Composite composite, content;
 	private Label labelTeamID, labelTeamName, labelTeamLeader;
 	private Text textTeamID, textTeamName, textTeamLeader;
 	public static Button saveButton, cancelButton;
 	
-	public TeamEditView(TeamViewController teamViewController, Shell shell){
+	public TeamEditView(TeamViewController teamViewController, Composite content){
 		this.teamViewController = teamViewController;
-		this.shell = shell;
-		this.composite = new Composite(this.shell, SWT.NONE);
+		this.content = content;
+		this.composite = new Composite(this.content, SWT.NONE);
 		this.composite.setLocation(0,0);
 	}
 	

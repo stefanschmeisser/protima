@@ -72,11 +72,11 @@ public class FrontController implements IApplicationState, Listener {
 			this.userController = new UserController(this.composite);
 			setCurrentView(userController);
 		}
-//		if (event.widget == viewDispatcher.btnTeam) {
-//			disposeCompositeChildren(this.composite);
-//			this.teamController = new TeamController(this.composite);
-//			setCurrentView(teamController);
-//		}
+		if (event.widget == viewDispatcher.btnTeam) {
+			disposeCompositeChildren(this.composite);
+			this.teamController = new TeamController(this.composite);
+			setCurrentView(teamController);
+		}
 		
 	}
 	

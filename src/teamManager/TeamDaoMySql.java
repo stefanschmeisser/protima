@@ -13,33 +13,9 @@ import java.util.List;
 import applicationManager.AbstractDaoMySql;
 
 
-public class TeamDaoMySql implements ITeamDAO {
+public class TeamDaoMySql extends AbstractDaoMySql implements ITeamDAO {
 	
-	private String _user, _password, _schema;
-	private Connection connection;
 	private ArrayList<Team> teamList;
-	
-	public TeamDaoMySql() {
-		_user = "root";
-		_password = "";
-	}
-	
-	// ------------------------------------------------------------------------
-	
-
-	private void openConnection(String user, String password) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String conString = "jdbc:mysql://localhost/sag";
-			connection = DriverManager.getConnection(conString, _user, _password);
-			connection.setAutoCommit(false);
-		} catch (ClassNotFoundException e) {
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	
 	/**
 	 * returns a List with all teams from the database
@@ -47,16 +23,15 @@ public class TeamDaoMySql implements ITeamDAO {
 	@Override
 	public ArrayList<Team> getTeamList(){
 		this.teamList = new ArrayList<Team>();
-		openConnection(_user,_password);
+		openConnection();
 		try{
 			Statement statement = connection.createStatement(); 
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM project");
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM team");
 			while(resultSet.next()){
 				Team team = new Team();
 				team.setTeamId(resultSet.getInt("teamID"));
-				team.setTeamName(resultSet.getString("teamName"));
-				team.setTeamLeader(resultSet.getInt("teamLeader"));
-			//	team.setTeamMembers(resultSet.getList<int[]>("teamMembers"));
+				team.setTeamName(resultSet.getString("name"));
+				team.setTeamLeader(resultSet.getInt("teamleaderID"));
 				this.teamList.add(team);
 			}
 		}catch(SQLException e){
@@ -72,7 +47,7 @@ public class TeamDaoMySql implements ITeamDAO {
 	@Override
 	public Team getTeam(int teamId){
 		Team team = new Team();
-		openConnection(_user,_password);
+		openConnection();
 		try{
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM team WHERE teamID = ?");
 			preparedStatement.setInt(1, teamId);
@@ -90,26 +65,24 @@ public class TeamDaoMySql implements ITeamDAO {
 	}
 
 	@Override
-	public void createTeam(int teamID,String teamName, int teamLeader) {
+	public void createTeam(String teamName, int teamLeader) {
 		try {
-			openConnection(_user, _password);
-//			Statement stmt = connection.createStatement();
-//			ResultSet rs = stmt.executeQuery("INSERT INTO team(teamID, name, teamLeader, teamMembers) VALUES ()");
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO team(teamID,teamName, teamLeader) VALUES (?,?,?)");
+			System.out.println("Teamname: " + teamName);
+			System.out.println("Teamleader: " + teamLeader);
+			openConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO team(name, teamleaderID) VALUES (?,?)");
 			preparedStatement.setString(1, teamName);
-			preparedStatement.setInt(2, teamID);
-			preparedStatement.setInt(3, teamLeader);
+			preparedStatement.setInt(2, teamLeader);
 			preparedStatement.executeUpdate();
+			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 		
-	
-
 	@Override
 	public void editTeam(int teamID,String teamName, int teamLeader, List <int[]> teamMembers) {
-		openConnection(_user, _password);
+		openConnection();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE team SET teamName = ?, teamLeader = ?, teamMembers = ? WHERE teamID = ?");
 			preparedStatement.setString(1, teamName);
@@ -117,17 +90,16 @@ public class TeamDaoMySql implements ITeamDAO {
 			//preparedStatement.setList(3, teamMember);
 			preparedStatement.setInt(4, teamID);
 			preparedStatement.executeUpdate();
+			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-		
-	
 
 	@Override
 	public void removeTeam(int teamID) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+
 }

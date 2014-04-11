@@ -31,8 +31,7 @@ public class Team {
 
 	
 	public void setTeamName(String teamName) {
-		this.teamName = teamName; 
-		
+		this.teamName = teamName;
 	}
 	
 	
