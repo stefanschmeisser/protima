@@ -1,12 +1,6 @@
 package frontController;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
-import org.eclipse.swt.*;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 
@@ -39,9 +33,7 @@ public class FrontController implements IApplicationState, Listener {
         
         vd = new ViewDispatcher(this, this.shell);
         this.composite = vd.getComposite();
-		this.svc = new StartViewController();
-//		this.pc = new ProjectController(this.composite);
-		this.tc = new TicketController(this.composite);
+		this.svc = new StartViewController(this.composite);
 //		this.tvc = new TeamViewController();
 //		this.uc  = new UserController(this.composite /*, this*/);
 		setCurrentView(this.tc);
@@ -106,13 +98,6 @@ public class FrontController implements IApplicationState, Listener {
 	public Listener getListener() {
 		return this.listener;
 	}
-
-//	public void setBlankComposite(Composite composite) {
-//		this.composite = composite;
-//	}
-//	public Composite getComposite(){
-//		return this.composite;
-//	}
 	
 	 public void disposeCompositeChildren(Composite currentComposite){
 	    Control[] children = currentComposite.getChildren();
