@@ -34,6 +34,7 @@ public class UserDetailView implements IUserState{
 	private Button btnEdit;
 	private Button btnCancel;
 	
+	
 	public UserDetailView(final Composite parentComposite, final UserViewController parent, final String userName, final int id, final String pw){
 		
 		Listener buttonListener = new Listener() {
@@ -44,6 +45,7 @@ public class UserDetailView implements IUserState{
 					parent.setCurrentView(new UserEditView(parentComposite, parent, id, userName, pw));
 	
 				}
+
 				if(event.widget == btnCancel){
 					composite.dispose();
 					parent.setCurrentView(new UserListView(parentComposite, parent));
@@ -102,7 +104,7 @@ public class UserDetailView implements IUserState{
 			    data = new GridData(GridData.FILL_HORIZONTAL);
 			    data.horizontalSpan = 3;
 			    this.userPasswordOutput = new Text(this.composite,  SWT.READ_ONLY | SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-			    this.userPasswordOutput.setText("***");
+			    this.userPasswordOutput.setText("*****");
 			    this.userPasswordOutput.setEnabled(false);
 			    this.userPasswordOutput.setLayoutData(data);
 			    
@@ -128,7 +130,7 @@ public class UserDetailView implements IUserState{
 			    parentComposite.layout();
 
 		/*****************************************************************************************/
-	}
+	} 
 	
 	public Composite getComposite() {
 		

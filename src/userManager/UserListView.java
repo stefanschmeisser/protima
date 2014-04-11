@@ -33,7 +33,7 @@ public class UserListView implements IUserState{
 	private Composite subMenuComposite;
 	private Boolean listBtnActivate = true;
 	private ArrayList <String> pw;
-	private final Button addNewUserBtn; 
+	private final Button addNewUserBtn;
 	private Composite compgrid;
 	private String[][] userList;
 	
@@ -84,6 +84,8 @@ public class UserListView implements IUserState{
 			pw.add(userList[i][2]);
 		}
 		
+		
+		
 		for (int i=0; i<titles.length; i++) {
 			table.getColumn (i).pack ();
 		}
@@ -111,6 +113,8 @@ public class UserListView implements IUserState{
 	    
 	    addNewUserBtn = new Button(composite, SWT.PUSH);
 	    addNewUserBtn.setText("Benutzer hinzufügen");
+	    
+	 
 	    Listener buttonListener = new Listener() {
 			
 			public void handleEvent(Event event) {
