@@ -22,10 +22,10 @@ public class ProjectController implements IContentState {
 	private IProjectDAO projectDAO;
 	private ProjectViewController projectViewController;
 	
-	public ProjectController(Shell shell){
-		this.shell = shell;
+	public ProjectController(Composite composite){
+		this.composite = composite;
 		this.projectDAO = new ProjectDaoMySql();
-		this.projectViewController = new ProjectViewController(shell, this);
+		this.projectViewController = new ProjectViewController(this.composite, this);
 	}
 	
 	public ArrayList<Project> getTableListData(){

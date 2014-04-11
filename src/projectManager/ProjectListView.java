@@ -22,7 +22,7 @@ import userRights.ProjectManager;
 public class ProjectListView implements IProjectState {
 
 	private Shell shell;
-	private Composite composite;
+	private Composite composite, content;
 	private ProjectViewController projectViewController;
 	public static Button createButton, saveButton, cancelButton, editButton, deleteButton;
 	private Label labelProjectID, labelProjectName, labelProjectDescription, labelProjectManager;
@@ -32,10 +32,10 @@ public class ProjectListView implements IProjectState {
 	private ProjectManager projectManager;
 	private Table table;
 	
-	public ProjectListView(ProjectViewController projectViewController, Shell shell){
+	public ProjectListView(ProjectViewController projectViewController, Composite content){
 		this.projectViewController = projectViewController;
-		this.shell = shell;
-		this.composite = new Composite(this.shell, SWT.NONE);
+		this.content = content;
+		this.composite = new Composite(this.content, SWT.NONE);
 	}
 	
 	@Override
