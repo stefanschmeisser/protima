@@ -9,8 +9,7 @@ public class StartViewController implements IContentState {
 	
 	public StartViewController(Composite content){
 		this.content = content;
-		
 		this.startView = new StartView(this.content, this);
-	    
+		this.content.layout();
 	}
 }

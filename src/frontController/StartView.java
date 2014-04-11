@@ -32,13 +32,11 @@ public class StartView {
         
         GridData layoutData = new GridData(GridData.FILL_HORIZONTAL);
         layoutData.horizontalSpan = 1;
-//        layoutData.heightHint = 400;
         this.composite.setLayoutData(layoutData);
  
         Label imgLabel = new Label(this.composite, SWT.NONE);
         imgLabel.setImage(logo);
-        imgLabel.setSize( imgLabel.computeSize( SWT.DEFAULT, SWT.DEFAULT ));
-		
+        imgLabel.setSize( imgLabel.computeSize( SWT.DEFAULT, SWT.DEFAULT ));	
 	}
 	
 }

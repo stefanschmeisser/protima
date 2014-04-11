@@ -5,6 +5,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 
 import applicationManager.IApplicationState;
+import teamManager.TeamController;
 import ticketManager.TicketController;
 import projectManager.ProjectController;
 import userManager.UserController;
@@ -15,11 +16,12 @@ public class FrontController implements IApplicationState, Listener {
 	private Shell shell;
 	private Composite composite;
 	private IContentState currentState;
-	private ViewDispatcher vd;
-	private StartViewController svc;
-	private IContentState pc;
-	private TicketController tc;
-	private UserController uc;
+	private ViewDispatcher viewDispatcher;
+	private IContentState startViewController;
+	private IContentState projectController;
+	private IContentState ticketController;
+	private IContentState userController;
+	private IContentState teamController;
 	public Listener listener;
 	
 	public FrontController(Display disp){
@@ -31,12 +33,10 @@ public class FrontController implements IApplicationState, Listener {
         this.shell.setImage(imageApplicationIcon);
         this.shell.setLayout(new GridLayout());
         
-        vd = new ViewDispatcher(this, this.shell);
-        this.composite = vd.getComposite();
-		this.svc = new StartViewController(this.composite);
-//		this.tvc = new TeamViewController();
-//		this.uc  = new UserController(this.composite /*, this*/);
-		setCurrentView(this.svc);
+        viewDispatcher = new ViewDispatcher(this, this.shell);
+        this.composite = viewDispatcher.getComposite();
+		this.startViewController = new StartViewController(this.composite);
+		setCurrentView(this.startViewController);
 		
 		shell.pack();
 		shell.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
@@ -52,40 +52,30 @@ public class FrontController implements IApplicationState, Listener {
 	
 	public void handleEvent(Event event) {
 		
-		if (event.widget == vd.btnStart) {
-			System.out.println("Btn Start");
-//			svc.setComposite(vd.getContentPanel());
+		if (event.widget == viewDispatcher.btnStart) {
 			disposeCompositeChildren(this.composite);
-			setCurrentView(svc);
+			this.startViewController = new StartViewController(this.composite);
+			setCurrentView(startViewController);
 		}
-		if (event.widget == vd.btnProject) {
-			System.out.println("Btn Project");
-//			pc.setComposite(content);
+		if (event.widget == viewDispatcher.btnProject) {
 			disposeCompositeChildren(this.composite);
-			this.pc = new ProjectController(this.composite);
-			setCurrentView(pc);
+			this.projectController = new ProjectController(this.composite);
+			setCurrentView(projectController);
 		}
-		if (event.widget == vd.btnTicket) {
-			System.out.println("Btn Ticket");
-//			tc.setComposite(vd.getContentPanel());
+		if (event.widget == viewDispatcher.btnTicket) {
 			disposeCompositeChildren(this.composite);
-			this.tc = new TicketController(this.composite);
-			setCurrentView(tc);
+			this.ticketController = new TicketController(this.composite);
+			setCurrentView(ticketController);
 		}
-		if(event.widget == vd.btnUser){
-			System.out.println("Btn User");
-			if(uc==null){
-				this.uc = new UserController(this.composite/*, this*/);
-				setCurrentView(uc);
-			}
-			else{
-				setCurrentView(uc);
-			}
+		if(event.widget == viewDispatcher.btnUser){
+			disposeCompositeChildren(this.composite);
+			this.userController = new UserController(this.composite);
+			setCurrentView(userController);
 		}
-//		if (event.widget == vd.btnTeam) {
-//			System.out.println("Btn Team");
-//			tvc.setContentPane(vd.getContentPanel());
-//			setCurrentView(tvc);
+//		if (event.widget == viewDispatcher.btnTeam) {
+//			disposeCompositeChildren(this.composite);
+//			this.teamController = new TeamController(this.composite);
+//			setCurrentView(teamController);
 //		}
 		
 	}
