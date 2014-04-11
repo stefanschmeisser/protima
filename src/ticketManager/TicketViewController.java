@@ -1,8 +1,6 @@
 package ticketManager;
 
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.*;
 
 public class TicketViewController {
 
@@ -47,7 +45,6 @@ public class TicketViewController {
 		if(this.currentView == this.tlvc){
 			this.tdvc.show();
 		}
-//		this.shell.setLayout(new GridLayout());	
 	}
 	
 	// ------------------------------------------------------------------------

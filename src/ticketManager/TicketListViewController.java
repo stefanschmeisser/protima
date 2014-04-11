@@ -1,10 +1,7 @@
 package ticketManager;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Vector;
+import java.util.*;
 import org.eclipse.swt.*;
-import org.eclipse.swt.events.*;
 import org.eclipse.swt.widgets.*;
 
 public class TicketListViewController implements ITicketState {
@@ -18,7 +15,6 @@ public class TicketListViewController implements ITicketState {
 	private Vector observers;
 	private String ticketId, ticketTitle, ticketDescription, ticketStartDate, ticketEndeDate, ticketPriorityLevel, ticketProjectId, ticketTeamId, ticketProcessStatus, ticketEditorId;
 	
-
 	public TicketListViewController(TicketViewController ticketViewController, Composite composite, ITicketDao ticketDao){
 		
 		this.tvc = ticketViewController;
@@ -83,7 +79,7 @@ public class TicketListViewController implements ITicketState {
 		}
 		
 		tlv.getTable().setItemCount(0);
-		tlv.getTable().setRedraw( true );
+		tlv.getTable().setRedraw(true);
 	}
 	
 	// ------------------------------------------------------------------------
@@ -103,7 +99,6 @@ public class TicketListViewController implements ITicketState {
 			for(int i = 0; i < columnNames.size(); i++){
 				TableColumn tc = new TableColumn(tlv.getTable(), SWT.LEFT);
 				tc.setText(columnNames.get(i).toString());
-				//tc.setWidth(100);
 			}
 
 			//set row data
@@ -182,11 +177,9 @@ public class TicketListViewController implements ITicketState {
 		this.ticketEditorId = ti[0].getText(8);
 		this.ticketProcessStatus = ti[0].getText(9);
 		
-	
 		this.notifyObserver();
 	}
 	
-
 	// ------------------------------------------------------------------------
 	
 	public void notifyObserver(){

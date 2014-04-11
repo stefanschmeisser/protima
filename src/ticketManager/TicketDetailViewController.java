@@ -31,9 +31,7 @@ public class TicketDetailViewController implements ITicketState, ITicketObserver
 					System.out.println("Cancel");
 				}
 			}
-		};
-
-		
+		};	
 	}
 	
 	// ------------------------------------------------------------------------
