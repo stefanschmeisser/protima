@@ -9,10 +9,10 @@ public class LoginView {
 	
 	private Shell shell;
 	
-	// noch alles andere als schön, aber läuft schon mal
-	//TODO: hoffentlich mit Layout erledigt: schöne Abstände um alles
+	// noch alles andere als schï¿½n, aber lï¿½uft schon mal
+	//TODO: hoffentlich mit Layout erledigt: schï¿½ne Abstï¿½nde um alles
 	//TODO: Werteweitergabe an Controller
-	//TODO: EventListener für die Buttons -> bei Cancel Programm beenden
+	//TODO: EventListener fï¿½r die Buttons -> bei Cancel Programm beenden
 	//FIXME: was hats mit response auf sich? Brauch ich das?
 	
 	public LoginView(LoginViewController parent, final Display disp){
@@ -21,7 +21,7 @@ public class LoginView {
 		_isLoggedIn[0] = false;
 		
 //		final Display disp = new Display();
-		// kann minimiert & geschlossen werden, aber nicht vergrößert/verkleinert
+		// kann minimiert & geschlossen werden, aber nicht vergrï¿½ï¿½ert/verkleinert
 		shell = new Shell(disp, SWT.CLOSE | SWT.TITLE | SWT.MIN);
 		shell.setText("Login");
 		Image imageApplicationIcon = new Image(Display.getCurrent(), "content/icon.png");
@@ -41,7 +41,7 @@ public class LoginView {
 //		text1.setBounds(70,10,200,20);
 		textUser.setTextLimit(30);
 		//FIXME: debug Benutzer!
-		textUser.setText("stefan");
+		textUser.setText("oli");
 		GridData gd1 = new GridData(GridData.FILL_HORIZONTAL);
 		gd1.widthHint = 150;
 		gd1.horizontalSpan = 2;
@@ -55,7 +55,7 @@ public class LoginView {
 		final Text textPassword = new Text(shell, SWT.NONE);
 		textPassword.setEchoChar('*');
 		//FIXME: debug PW!
-		textPassword.setText("test");
+		textPassword.setText("pw");
 //		text2.setBounds(70,50,200,20);
 //		text2.setText("Password");
 		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);

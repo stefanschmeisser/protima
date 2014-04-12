@@ -106,6 +106,10 @@ public class TeamCreateView implements ITeamState {
 		// TODO Auto-generated method stub
 	}
 
+	public Combo getCombobox(){
+		return this.comboTeamLeader;
+	}
+	
 }
 
 

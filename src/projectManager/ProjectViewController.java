@@ -101,7 +101,8 @@ public class ProjectViewController implements Listener {
 			System.out.println("create");
 			int projectManagerID;
 			if(ProjectCreateView.comboProjectManager.getSelectionIndex() != -1){
-				projectManagerID = ProjectCreateView.comboProjectManager.getSelectionIndex();
+//				projectManagerID = ProjectCreateView.comboProjectManager.getSelectionIndex();
+				projectManagerID = Integer.parseInt(this.projectCreateView.getCombobox().getText().toString());
 			}else{
 				projectManagerID = 10;
 			}

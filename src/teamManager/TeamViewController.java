@@ -90,7 +90,7 @@ public class TeamViewController implements Listener {
 		}
 		
 		if(event.widget == TeamCreateView.createButton){
-			this.teamController.setTeam(TeamCreateView.textTeamName.getText(), 10);
+			this.teamController.setTeam(TeamCreateView.textTeamName.getText(), Integer.parseInt(this.teamCreateView.getCombobox().getText()));
 			this.teamListView = new TeamListView(this, this.composite);
 			this.teamDetailView = new TeamDetailView(this, this.composite);
 			setCurrentView(this.teamListView);

@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="src/mysql-connector-java-5.1.24-bin.jar"/>
 	<classpathentry kind="lib" path="src/sqljdbc4.jar"/>
 	<classpathentry kind="var" path="SWT_LIB"/>
+	<classpathentry kind="var" path="SWT_LIB_COCOA"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

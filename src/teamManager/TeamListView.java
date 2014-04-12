@@ -66,7 +66,7 @@ public class TeamListView implements ITeamState {
 		createButton = new Button(compgrid, SWT.PUSH);
 		Image imageCreateProject = new Image(Display.getCurrent(), "content/addItemToList.png");
 	    createButton.setImage(imageCreateProject);
-	    createButton.setSize(32,32);
+	    createButton.setSize(34,34);
 	    createButton.setLayoutData(data);
 	    createButton.addListener(SWT.Selection, this.teamViewController);
 	    
@@ -74,7 +74,7 @@ public class TeamListView implements ITeamState {
 	    editButton = new Button(compgrid, SWT.PUSH);
 	    Image imageEditProject = new Image(Display.getCurrent(), "content/editListItem.png");
 	    editButton.setImage(imageEditProject);
-	    editButton.setSize(32,32);
+	    editButton.setSize(34,34);
 	    editButton.setLayoutData(data);
 	    editButton.addListener(SWT.Selection, this.teamViewController);    
 	    
@@ -82,7 +82,7 @@ public class TeamListView implements ITeamState {
 		deleteButton = new Button(compgrid, SWT.PUSH);
 		Image imageDeleteProject = new Image(Display.getCurrent(), "content/deleteFromList.png");
 		deleteButton.setImage(imageDeleteProject);
-		deleteButton.setSize(32,32);
+		deleteButton.setSize(34,34);
 		deleteButton.setLayoutData(data);
 		deleteButton.addListener(SWT.Selection, this.teamViewController);
 	
@@ -147,5 +147,11 @@ public class TeamListView implements ITeamState {
 	public void setComposite(Composite composite) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Combo getCombobox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -109,5 +109,9 @@ public class ProjectCreateView implements IProjectState {
 	public void setComposite(Composite composite) {
 		// TODO Auto-generated method stub
 	}
+	
+	public Combo getCombobox(){
+		return this.comboProjectManager;
+	}
 
 }

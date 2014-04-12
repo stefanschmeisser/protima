@@ -65,5 +65,11 @@ public class TeamDetailView implements ITeamState {
 		return null;
 	}
 
+	@Override
+	public Combo getCombobox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

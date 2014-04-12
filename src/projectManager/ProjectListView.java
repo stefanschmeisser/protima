@@ -87,7 +87,7 @@ public class ProjectListView implements IProjectState {
         createButton.addListener(SWT.Selection, this.projectViewController);
         
         /**
-         * noch im Listener chekcne ob der button ausgewählt wurde
+         * noch im Listener chekcne ob der button ausgewï¿½hlt wurde
          */
         data = new GridData(GridData.HORIZONTAL_ALIGN_END);
         editButton = new Button(btncomp, SWT.PUSH);
@@ -170,6 +170,12 @@ public class ProjectListView implements IProjectState {
 	
 	public void setProjectManager(ProjectManager projectManager){
 		this.projectManager = projectManager;
+	}
+
+	@Override
+	public Combo getCombobox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

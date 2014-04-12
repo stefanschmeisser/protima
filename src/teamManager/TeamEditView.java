@@ -107,6 +107,13 @@ public class TeamEditView implements ITeamState {
 		
 	}
 
+
+	@Override
+	public Combo getCombobox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 

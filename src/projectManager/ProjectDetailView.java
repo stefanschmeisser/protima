@@ -62,5 +62,11 @@ public class ProjectDetailView implements IProjectState {
 		return null;
 	}
 
+	@Override
+	public Combo getCombobox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
