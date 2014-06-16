@@ -42,6 +42,7 @@ public class TicketEditView {
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    data.horizontalSpan = 2;
+	    data.heightHint = 10;
 	    this.compgrid = new Composite(this.composite, SWT.NONE);
 	    this.compgrid.setLayoutData(data);
 	    
@@ -91,11 +92,11 @@ public class TicketEditView {
 	    this.ticketEndDateInput.setEnabled(true);
 	    this.ticketEndDateInput.setLayoutData(data);
 	    
-	    data = new GridData(GridData.FILL_HORIZONTAL);
-	    data.horizontalSpan = 4;
-	    data.heightHint = 10;
-	    this.compgrid = new Composite(this.composite, SWT.NONE);
-	    this.compgrid.setLayoutData(data);
+//	    data = new GridData(GridData.FILL_HORIZONTAL);
+//	    data.horizontalSpan = 4;
+//	    data.heightHint = 10;
+//	    this.compgrid = new Composite(this.composite, SWT.NONE);
+//	    this.compgrid.setLayoutData(data);
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.ticketPriorityLevelLabel = new Label(this.composite, SWT.RIGHT);
@@ -126,12 +127,12 @@ public class TicketEditView {
 	    this.ticketProcessStatusInput.setLayoutData(data);
 
 	    
-	    data = new GridData(GridData.FILL_HORIZONTAL);
-	    data.horizontalSpan = 4;
-	    data.heightHint = 10;
-	    this.compgrid = new Composite(this.composite, SWT.NONE);
-	    this.compgrid.setLayoutData(data);
-	    
+//	    data = new GridData(GridData.FILL_HORIZONTAL);
+//	    data.horizontalSpan = 4;
+//	    data.heightHint = 10;
+//	    this.compgrid = new Composite(this.composite, SWT.NONE);
+//	    this.compgrid.setLayoutData(data);
+    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    this.currentEditorUIDLabel = new Label(this.composite, SWT.RIGHT);
 	    this.currentEditorUIDLabel.setText("Editor ID");
@@ -168,11 +169,11 @@ public class TicketEditView {
 	    this.compgrid = new Composite(this.composite, SWT.NONE);
 	    this.compgrid.setLayoutData(data);
 	    
-	    data = new GridData(GridData.FILL_HORIZONTAL);
-	    data.horizontalSpan = 4;
-	    data.heightHint = 10;
-	    this.compgrid = new Composite(this.composite, SWT.NONE);
-	    this.compgrid.setLayoutData(data);
+//	    data = new GridData(GridData.FILL_HORIZONTAL);
+//	    data.horizontalSpan = 4;
+//	    data.heightHint = 10;
+//	    this.compgrid = new Composite(this.composite, SWT.NONE);
+//	    this.compgrid.setLayoutData(data);
 	    
 	    data = new GridData(GridData.FILL_HORIZONTAL);
 	    data.heightHint = 5;

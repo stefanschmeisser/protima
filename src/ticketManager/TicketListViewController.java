@@ -117,7 +117,13 @@ public class TicketListViewController implements ITicketState {
 
 			// set column width automatically
 			for (int i=0; i<columnNames.size(); i++) {
-				tlv.getTable().getColumn(i).pack ();
+				if(i != 2){
+					tlv.getTable().getColumn(i).pack ();
+				}else{
+					tlv.getTable().getColumn(i).setWidth(240);
+				}
+				
+				
 			}	
 		}
 	}
